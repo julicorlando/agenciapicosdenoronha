@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Contato | Picos de Noronha</title>
+
+  <style>
+    :root {
+      --primary: #0ea5a4;
+      --secondary: #0f172a;
+      --light: #f8fafc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)),
+        url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      min-height: 68vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      flex-direction: column;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      max-width: 900px;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.24);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: .95rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .language-currency {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,.5);
+      padding: 8px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      flex-wrap: wrap;
+      z-index: 5;
+    }
+
+    .language-currency label {
+      color: #fff;
+      font-weight: bold;
+      font-size: .95rem;
+    }
+
+    .language-currency select {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .language-currency img {
+      width: 32px;
+      height: 24px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      object-fit: cover;
+      transition: .25s ease;
+      opacity: .8;
+    }
+
+    .language-currency img:hover,
+    .language-currency img.active {
+      border-color: #fff;
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #0c3b5e;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 35px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-card,
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      padding: 30px;
+    }
+
+    .contact-card h3,
+    .form-card h3 {
+      font-size: 1.5rem;
+      color: #0c3b5e;
+      margin-bottom: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f172a;
+      font-size: 1rem;
+    }
+
+    .contact-item a,
+    .contact-item span {
+      color: #475569;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      color: var(--primary);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #0ea5a4, #0891b2);
+      color: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(14,165,164,.22);
+    }
+
+    .highlight-box h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p {
+      color: rgba(255,255,255,.95);
+      font-size: .98rem;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    input,
+    textarea,
+    select.form-select {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #dbe3ea;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+      transition: .25s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select.form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(14,165,164,.12);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: .92rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+      cursor: pointer;
+      display: inline-block;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: #0891b2;
+      transform: translateY(-2px);
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: #1e293b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--secondary);
+      color: #fff;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .contact-card,
+      .form-card {
+        padding: 22px;
+      }
+
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+
+      .language-currency {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        max-width: calc(100% - 24px);
+      }
+    }
+    .footer-social{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+
+.footer-social a{
+  color:#fff;
+  font-size:22px;
+  transition:.3s;
+}
+
+.footer-social a:hover{
+  transform:translateY(-2px);
+  opacity:.8;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="language-currency">
+      <label id="labelMoeda">Moeda:</label>
+      <select id="moeda" onchange="atualizarMoeda()">
+        <option value="BRL">BRL</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+
+      <img src="https://flagcdn.com/32x24/br.png" alt="Português" title="Português" onclick="alterarIdiomaMoeda('pt')" id="flag-pt">
+      <img src="https://flagcdn.com/32x24/us.png" alt="English" title="English" onclick="alterarIdiomaMoeda('en')" id="flag-en">
+      <img src="https://flagcdn.com/32x24/es.png" alt="Español" title="Español" onclick="alterarIdiomaMoeda('es')" id="flag-es">
+      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('GBP')" id="flag-gbp">
+    </div>
+
+    <span class="hero-badge" data-i18n="heroBadge">Picos de Noronha • Atendimento</span>
+    <h1 data-i18n="heroTitle">Entre em contato conosco</h1>
+    <p data-i18n="heroText">
+      Tire dúvidas, solicite informações sobre passeios e envie sua mensagem de forma rápida.
+      Você também pode falar diretamente pelo WhatsApp ou Instagram.
+    </p>
+    <ul>
+        <a href="index.html" class="btn">Voltar para a página inicial</a>
+        <a href="top10.html" class="btn">Ver os 10 Melhores Passeios</a>
+    </ul>
+  </header>
+
+  <section>
+    <h2 class="section-title" data-i18n="sectionTitle">Fale com a Picos de Noronha</h2>
+    <p class="section-subtitle" data-i18n="sectionSubtitle">
+      Preencha o formulário abaixo para envio automático por e-mail ou utilize um dos canais de atendimento disponíveis.
+    </p>
+
+    <div class="contact-layout">
+      <div class="contact-card">
+        <h3 data-i18n="contactDataTitle">Dados de contato</h3>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <strong data-i18n="responsavelLabel">Responsável</strong>
+            <span>Roberta Karolina</span>
+          </div>
+
+          <div class="contact-item">
+            <strong data-i18n="phoneLabel">Fone / WhatsApp</strong>
+            <a href="https://wa.me/5581991654517" target="_blank">+55 81 99165-4517</a>
+          </div>
+
+          <div class="contact-item">
+            <strong data-i18n="emailLabel">E-mail</strong>
+            <a href="mailto:picosdenoronha@hotmail.com">picosdenoronha@hotmail.com</a>
+          </div>
+
+          <div class="contact-item">
+            <strong data-i18n="instagramLabel">Instagram</strong>
+            <a href="https://instagram.com/picosdenoronha" target="_blank">@picosdenoronha</a>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h4 data-i18n="quickTitle">Atendimento rápido</h4>
+          <p data-i18n="quickText">
+            Para orçamentos, disponibilidade de passeios e dúvidas sobre reservas, o canal mais rápido é o WhatsApp.
+          </p>
+        </div>
+
+        <div class="actions">
+          <a href="https://wa.me/5581991654517" target="_blank" class="btn" data-i18n="whatsBtn">Chamar no WhatsApp</a>
+          <a href="https://instagram.com/picosdenoronha" target="_blank" class="btn btn-secondary" data-i18n="instaBtn">Ver Instagram</a>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 data-i18n="formTitle">Formulário de contato</h3>
+
+        <form action="mailto:picosdenoronha@hotmail.com" method="post" enctype="text/plain">
+          <div class="input-row">
+            <input type="text" name="nome" data-i18n-placeholder="namePlaceholder" placeholder="Seu nome" required>
+            <input type="tel" name="telefone" data-i18n-placeholder="phonePlaceholder" placeholder="Seu telefone / WhatsApp" required>
+          </div>
+
+          <div class="input-row">
+            <input type="email" name="email" data-i18n-placeholder="emailPlaceholder" placeholder="Seu e-mail" required>
+
+            <select name="assunto" class="form-select" required id="assuntoSelect">
+              <option value="" selected disabled data-i18n="subjectDefault">Selecione o assunto</option>
+              <option value="Passeios" data-i18n="subject1">Passeios</option>
+              <option value="Reservas" data-i18n="subject2">Reservas</option>
+              <option value="Orçamento" data-i18n="subject3">Orçamento</option>
+              <option value="Dúvidas gerais" data-i18n="subject4">Dúvidas gerais</option>
+            </select>
+          </div>
+
+          <textarea name="mensagem" data-i18n-placeholder="messagePlaceholder" placeholder="Escreva sua mensagem" required></textarea>
+
+          <p class="form-note" data-i18n="formNote">
+            Ao clicar em enviar, seu aplicativo de e-mail será aberto automaticamente para concluir o envio da mensagem.
+          </p>
+
+          <div class="actions">
+            <button type="submit" class="btn" data-i18n="sendBtn">Enviar mensagem</button>
+            <button type="reset" class="btn btn-secondary" data-i18n="clearBtn">Limpar formulário</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p id="footerText"></p>
+    <div class="footer-social">
+  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+  </footer>
+
+  <script>
+    const anoAtual = new Date().getFullYear();
+
+    const translations = {
+      pt: {
+        pageTitle: "Contato | Picos de Noronha",
+        moedaLabel: "Moeda:",
+        heroBadge: "Picos de Noronha • Atendimento",
+        heroTitle: "Entre em contato conosco",
+        heroText: "Tire dúvidas, solicite informações sobre passeios e envie sua mensagem de forma rápida. Você também pode falar diretamente pelo WhatsApp ou Instagram.",
+        sectionTitle: "Fale com a Picos de Noronha",
+        sectionSubtitle: "Preencha o formulário abaixo para envio automático por e-mail ou utilize um dos canais de atendimento disponíveis.",
+        contactDataTitle: "Dados de contato",
+        responsavelLabel: "Responsável",
+        phoneLabel: "Fone / WhatsApp",
+        emailLabel: "E-mail",
+        instagramLabel: "Instagram",
+        quickTitle: "Atendimento rápido",
+        quickText: "Para orçamentos, disponibilidade de passeios e dúvidas sobre reservas, o canal mais rápido é o WhatsApp.",
+        whatsBtn: "Chamar no WhatsApp",
+        instaBtn: "Ver Instagram",
+        formTitle: "Formulário de contato",
+        namePlaceholder: "Seu nome",
+        phonePlaceholder: "Seu telefone / WhatsApp",
+        emailPlaceholder: "Seu e-mail",
+        subjectDefault: "Selecione o assunto",
+        subject1: "Passeios",
+        subject2: "Reservas",
+        subject3: "Orçamento",
+        subject4: "Dúvidas gerais",
+        messagePlaceholder: "Escreva sua mensagem",
+        formNote: "Ao clicar em enviar, seu aplicativo de e-mail será aberto automaticamente para concluir o envio da mensagem.",
+        sendBtn: "Enviar mensagem",
+        clearBtn: "Limpar formulário",
+        footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos os direitos reservados`
+      },
+
+      en: {
+        pageTitle: "Contact | Picos de Noronha",
+        moedaLabel: "Currency:",
+        heroBadge: "Picos de Noronha • Contact",
+        heroTitle: "Get in touch with us",
+        heroText: "Ask questions, request information about tours and send your message quickly. You can also contact us directly via WhatsApp or Instagram.",
+        sectionTitle: "Talk to Picos de Noronha",
+        sectionSubtitle: "Fill out the form below for automatic email sending or use one of the available service channels.",
+        contactDataTitle: "Contact details",
+        responsavelLabel: "Contact person",
+        phoneLabel: "Phone / WhatsApp",
+        emailLabel: "Email",
+        instagramLabel: "Instagram",
+        quickTitle: "Fast service",
+        quickText: "For quotes, tour availability and booking questions, the fastest channel is WhatsApp.",
+        whatsBtn: "Chat on WhatsApp",
+        instaBtn: "View Instagram",
+        formTitle: "Contact form",
+        namePlaceholder: "Your name",
+        phonePlaceholder: "Your phone / WhatsApp",
+        emailPlaceholder: "Your email",
+        subjectDefault: "Select subject",
+        subject1: "Tours",
+        subject2: "Bookings",
+        subject3: "Quote",
+        subject4: "General questions",
+        messagePlaceholder: "Write your message",
+        formNote: "When you click send, your email application will open automatically to complete the message sending.",
+        sendBtn: "Send message",
+        clearBtn: "Clear form",
+        footerText: `© ${anoAtual} Picos de Noronha Tourism - All rights reserved`
+      },
+
+      es: {
+        pageTitle: "Contacto | Picos de Noronha",
+        moedaLabel: "Moneda:",
+        heroBadge: "Picos de Noronha • Atención",
+        heroTitle: "Ponte en contacto con nosotros",
+        heroText: "Aclara tus dudas, solicita información sobre paseos y envía tu mensaje rápidamente. También puedes hablar directamente por WhatsApp o Instagram.",
+        sectionTitle: "Habla con Picos de Noronha",
+        sectionSubtitle: "Completa el formulario a continuación para envío automático por correo electrónico o utiliza uno de los canales de atención disponibles.",
+        contactDataTitle: "Datos de contacto",
+        responsavelLabel: "Responsable",
+        phoneLabel: "Teléfono / WhatsApp",
+        emailLabel: "Correo electrónico",
+        instagramLabel: "Instagram",
+        quickTitle: "Atención rápida",
+        quickText: "Para presupuestos, disponibilidad de paseos y dudas sobre reservas, el canal más rápido es WhatsApp.",
+        whatsBtn: "Hablar por WhatsApp",
+        instaBtn: "Ver Instagram",
+        formTitle: "Formulario de contacto",
+        namePlaceholder: "Tu nombre",
+        phonePlaceholder: "Tu teléfono / WhatsApp",
+        emailPlaceholder: "Tu correo electrónico",
+        subjectDefault: "Selecciona el asunto",
+        subject1: "Paseos",
+        subject2: "Reservas",
+        subject3: "Presupuesto",
+        subject4: "Dudas generales",
+        messagePlaceholder: "Escribe tu mensaje",
+        formNote: "Al hacer clic en enviar, tu aplicación de correo se abrirá automáticamente para completar el envío del mensaje.",
+        sendBtn: "Enviar mensaje",
+        clearBtn: "Limpiar formulario",
+        footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos los derechos reservados`
+      }
+    };
+
+    function aplicarTraducao(lang) {
+      const dict = translations[lang];
+      if (!dict) return;
+
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+      document.title = dict.pageTitle;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (dict[key] !== undefined) {
+          el.placeholder = dict[key];
+        }
+      });
+
+      document.getElementById("labelMoeda").textContent = dict.moedaLabel;
+      document.getElementById("footerText").textContent = dict.footerText;
+
+      document.querySelectorAll(".language-currency img").forEach(img => {
+        img.classList.remove("active");
+      });
+
+      if (lang === "pt") document.getElementById("flag-pt").classList.add("active");
+      if (lang === "en") document.getElementById("flag-en").classList.add("active");
+      if (lang === "es") document.getElementById("flag-es").classList.add("active");
+
+      localStorage.setItem("siteLanguage", lang);
+    }
+
+    function atualizarMoeda() {
+      const moeda = document.getElementById("moeda").value;
+      localStorage.setItem("siteCurrency", moeda);
+    }
+
+    function alterarIdiomaMoeda(valor) {
+      if (valor === "pt" || valor === "en" || valor === "es") {
+        aplicarTraducao(valor);
+      } else if (valor === "GBP") {
+        document.getElementById("moeda").value = "GBP";
+        aplicarTraducao("en");
+        document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
+        document.getElementById("flag-gbp").classList.add("active");
+      }
+
+      atualizarMoeda();
+    }
+
+    function iniciarSite() {
+      const savedLanguage = localStorage.getItem("siteLanguage") || "pt";
+      const savedCurrency = localStorage.getItem("siteCurrency") || "BRL";
+
+      document.getElementById("moeda").value = savedCurrency;
+      aplicarTraducao(savedLanguage);
+
+      if (savedCurrency === "GBP" && savedLanguage === "en") {
+        document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
+        document.getElementById("flag-gbp").classList.add("active");
+      }
+    }
+
+    iniciarSite();
+  </script>
+</body>
+</html>

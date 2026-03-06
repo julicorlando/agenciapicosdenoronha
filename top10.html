@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>10 coisas interessantes para fazer em Fernando de Noronha</title>
+
+  <style>
+    :root {
+      --primary: #0ea5a4;
+      --secondary: #0f172a;
+      --light: #f8fafc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      flex-direction: column;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      max-width: 900px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      max-width: 760px;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 20px;
+      position: relative;
+      transition: transform .25s ease, box-shadow .25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px rgba(0,0,0,.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px 0;
+      padding: 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      padding: 0 20px;
+      font-size: .95rem;
+      color: #444;
+      flex: 1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .card .destaque {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      background: gold;
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,.3);
+      text-align: center;
+      animation: pulse 1.5s infinite;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #0891b2;
+    }
+
+    .card .btn {
+      margin: 20px auto 0 auto;
+      display: inline-block;
+    }
+
+    .form-section {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(14,165,164,.2);
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, textarea, select {
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 15px;
+      border-radius: 30px;
+      border: none;
+      background: var(--secondary);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    button:hover {
+      opacity: .92;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--secondary);
+      color: #fff;
+    }
+
+    .language-currency {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,.5);
+      padding: 8px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      flex-wrap: wrap;
+      z-index: 5;
+    }
+
+    .language-currency label {
+      color: #fff;
+      font-weight: bold;
+      font-size: .95rem;
+    }
+
+    .language-currency img {
+      width: 32px;
+      height: 24px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      object-fit: cover;
+      transition: .25s ease;
+      opacity: .8;
+    }
+
+    .language-currency img:hover,
+    .language-currency img.active {
+      border-color: #fff;
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .language-currency select {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.24);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: .95rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .meta {
+      margin-top: 12px;
+      opacity: .9;
+      font-size: .95rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #0c3b5e;
+    }
+
+    .about {
+      padding: 80px 20px;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      max-width: 100%;
+    }
+
+    .about__container {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .about__title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #0c3b5e;
+      text-align: center;
+    }
+
+    .about__text {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 16px;
+      text-align: center;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about__highlights {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .about__item {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .about__item span {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #0c3b5e;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 35px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .price-tag {
+      margin: 14px auto 0;
+      display: inline-block;
+      background: #ecfeff;
+      color: #0f172a;
+      border: 1px solid #99f6e4;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: .95rem;
+    }
+
+    @media(max-width:768px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1rem; }
+      .about__title { font-size: 30px; }
+      .about__text { font-size: 16px; }
+
+      .language-currency {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        max-width: calc(100% - 24px);
+      }
+    }
+
+    .footer-social{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+
+.footer-social a{
+  color:#fff;
+  font-size:22px;
+  transition:.3s;
+}
+
+.footer-social a:hover{
+  transform:translateY(-2px);
+  opacity:.8;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="language-currency">
+      <label id="labelMoeda" style="color:#fff;">Moeda:</label>
+      <select id="moeda" onchange="atualizarMoeda()">
+        <option value="BRL">BRL</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+
+      <img src="https://flagcdn.com/32x24/br.png" alt="Português" title="Português" onclick="alterarIdiomaMoeda('pt')" id="flag-pt">
+      <img src="https://flagcdn.com/32x24/us.png" alt="English" title="English" onclick="alterarIdiomaMoeda('en')" id="flag-en">
+      <img src="https://flagcdn.com/32x24/es.png" alt="Español" title="Español" onclick="alterarIdiomaMoeda('es')" id="flag-es">
+      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('GBP')" id="flag-gbp">
+    </div>
+
+    <span class="hero-badge" data-i18n="heroBadge">Guia de Viagem • Fernando de Noronha</span>
+    <h1 data-i18n="heroTitle">10 coisas interessantes para se fazer em Fernando de Noronha</h1>
+    <p data-i18n="heroText">
+      Descubra experiências inesquecíveis entre praias paradisíacas, trilhas ecológicas,
+      mergulho, pôr do sol e sabores únicos no arquipélago mais encantador do Brasil.
+    </p>
+    <ul>
+    <a href="#atividades" class="btn" data-i18n="heroBtn">Explorar atividades</a>
+    <a href="index.html" class="btn" data-i18n="heroBtn2">Voltar para a página inicial</a>
+    </ul>
+    <div class="meta" data-i18n="meta">Experiências incríveis no paraíso brasileiro</div>
+  </header>
+
+  <section class="about">
+    <div class="about__container">
+      <h2 class="about__title" data-i18n="aboutTitle">Sobre Fernando de Noronha</h2>
+      <p class="about__text" data-i18n="aboutText1">
+        Fernando de Noronha é um dos destinos mais desejados do Brasil, conhecido por suas águas cristalinas,
+        vida marinha abundante, trilhas panorâmicas e paisagens que parecem cenário de filme.
+      </p>
+      <p class="about__text" data-i18n="aboutText2">
+        Entre mergulhos, praias famosas, passeios de barco e gastronomia regional, a ilha oferece experiências
+        para quem busca aventura, descanso e contato profundo com a natureza.
+      </p>
+
+      <div class="about__highlights">
+        <div class="about__item"><span>🐠</span><p data-i18n="aboutItem1">Mergulho e vida marinha</p></div>
+        <div class="about__item"><span>🏝️</span><p data-i18n="aboutItem2">Praias mundialmente famosas</p></div>
+        <div class="about__item"><span>🌅</span><p data-i18n="aboutItem3">Pôr do sol inesquecível</p></div>
+        <div class="about__item"><span>🥾</span><p data-i18n="aboutItem4">Trilhas e mirantes</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" id="atividades">
+    <h2 data-i18n="introTitle">As 10 experiências que você precisa viver</h2>
+    <p data-i18n="introText">
+      Essas são apenas algumas das muitas atividades emocionantes e paisagens deslumbrantes que a ilha de
+      Fernando de Noronha tem a oferecer. Confira a seleção abaixo com os destaques mais procurados por visitantes.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-i18n="top10Title">Top 10 atividades em Noronha</h2>
+    <p class="section-subtitle" data-i18n="top10Subtitle">
+      Uma seleção perfeita para montar um roteiro completo entre natureza, aventura, contemplação e cultura local.
+    </p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="destaque">1</span>
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card1Title">Mergulhar nas águas cristalinas</h3>
+        <p data-i18n="card1Text">Explore o mar transparente da ilha e observe peixes, tartarugas, corais e toda a riqueza da vida marinha de Noronha.</p>
+      <!-- <div class="price-tag" data-price="450" data-i18n-price-prefix="startingFrom">A partir de R$ 450,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">2</span>
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card2Title">Visitar praias icônicas</h3>
+        <p data-i18n="card2Text">Conheça cenários inesquecíveis como a Praia do Sancho e a Baía dos Porcos, famosas pela beleza impressionante.</p>
+      <!-- <div class="price-tag" data-price="180" data-i18n-price-prefix="startingFrom">A partir de R$ 180,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">3</span>
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card3Title">Assistir ao nascer e ao pôr do sol</h3>
+        <p data-i18n="card3Text">Viva momentos únicos em pontos como o Forte Nossa Senhora dos Remédios ou a Praia da Conceição.</p>
+       <!-- <div class="price-tag" data-price="120" data-i18n-price-prefix="startingFrom">A partir de R$ 120,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">4</span>
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card4Title">Fazer trilhas panorâmicas</h3>
+        <p data-i18n="card4Text">Percorra rotas como a Trilha do Atalaia e a Trilha do Piquinho para admirar vistas espetaculares da ilha.</p>
+       <!-- <div class="price-tag" data-price="160" data-i18n-price-prefix="startingFrom">A partir de R$ 160,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">5</span>
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card5Title">Conhecer o Projeto Tamar</h3>
+        <p data-i18n="card5Text">Visite o centro de conservação de tartarugas marinhas e descubra ações importantes de educação e preservação ambiental.</p>
+        <!-- <div class="price-tag" data-price="90" data-i18n-price-prefix="startingFrom">A partir de R$ 90,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">6</span>
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card6Title">Visitar o Buraco do Galego</h3>
+        <p data-i18n="card6Text">Conheça essa piscina natural cercada por rochas, um lugar diferenciado para contemplar a força e a beleza do mar.</p>
+       <!-- <div class="price-tag" data-price="110" data-i18n-price-prefix="startingFrom">A partir de R$ 110,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">7</span>
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card7Title">Fazer passeio de barco</h3>
+        <p data-i18n="card7Text">Navegue para conhecer ilhéus, falésias e praias inacessíveis por terra, além de observar golfinhos em alguns roteiros.</p>
+      <!-- <div class="price-tag" data-price="280" data-i18n-price-prefix="startingFrom">A partir de R$ 280,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">8</span>
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card8Title">Praticar esportes aquáticos</h3>
+        <p data-i18n="card8Text">Escolha entre surf, stand-up paddle e caiaque para aproveitar o mar de Noronha com aventura e paisagens incríveis.</p>
+      <!-- <div class="price-tag" data-price="220" data-i18n-price-prefix="startingFrom">A partir de R$ 220,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">9</span>
+        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card9Title">Ir ao Mirante do Boldró</h3>
+        <p data-i18n="card9Text">Observe as ondas quebrando nos rochedos e contemple um dos cenários mais marcantes da ilha, especialmente no fim do dia.</p>
+       <!-- <div class="price-tag" data-price="100" data-i18n-price-prefix="startingFrom">A partir de R$ 100,00</div> -->
+      </article>
+
+      <article class="card">
+        <span class="destaque">10</span>
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="card10Title">Provar a culinária local</h3>
+        <p data-i18n="card10Text">Experimente frutos do mar frescos, tapioca e o famoso bolinho de tubalhau em restaurantes e bistrôs da ilha.</p>
+       <!-- <div class="price-tag" data-price="140" data-i18n-price-prefix="startingFrom">A partir de R$ 140,00</div> -->
+      </article>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <h2 class="section-title" style="color:#fff;" data-i18n="formTitle">Monte seu roteiro em Noronha</h2>
+    <p class="section-subtitle" style="color:#e2e8f0;" data-i18n="formSubtitle">
+      Preencha o formulário e personalize sua experiência com as atividades que mais combinam com você.
+    </p>
+
+    <form>
+      <input type="text" data-i18n-placeholder="namePlaceholder" placeholder="Seu nome" required>
+      <input type="email" data-i18n-placeholder="emailPlaceholder" placeholder="Seu e-mail" required>
+
+      <select>
+        <option selected disabled data-i18n="favoriteOption">Escolha sua atividade favorita</option>
+        <option data-i18n="opt1">Mergulho</option>
+        <option data-i18n="opt2">Praias e mirantes</option>
+        <option data-i18n="opt3">Trilhas ecológicas</option>
+        <option data-i18n="opt4">Passeio de barco</option>
+        <option data-i18n="opt5">Gastronomia</option>
+      </select>
+
+      <textarea rows="5" data-i18n-placeholder="textareaPlaceholder" placeholder="Conte como seria seu passeio ideal em Fernando de Noronha"></textarea>
+      <button type="submit" data-i18n="submitBtn">Enviar interesse</button>
+    </form>
+  </section>
+
+  <section>
+    <h2 class="section-title" data-i18n="infoTitle">Informações Importantes</h2>
+    <p class="section-subtitle" data-i18n="infoSubtitle">
+      Antes de visitar Fernando de Noronha, confira algumas informações essenciais
+      para organizar sua viagem e aproveitar melhor a ilha.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp" alt="">
+        <h3 data-i18n="info1Title">TPA – Taxa de Preservação Ambiental</h3>
+        <p data-i18n="info1Text">
+          A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha.
+          Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.
+        </p>
+        <a href="https://www.noronha.pe.gov.br/" target="_blank" class="btn" data-i18n="info1Btn">Acessar site oficial</a>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="">
+        <h3 data-i18n="info2Title">Agendamento de Trilhas</h3>
+        <p data-i18n="info2Text">
+          Algumas trilhas e piscinas naturais possuem acesso controlado.
+          Faça seu agendamento antecipadamente para garantir sua visita.
+        </p>
+        <a href="https://wa.me/5581987654321?text=Olá,%20quero%20agendar%20uma%20trilha%20em%20Noronha" target="_blank" class="btn" data-i18n="info2Btn">Agendar pelo WhatsApp</a>
+      </div>
+
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlapTRBJe3_4fHQ1UB8gtZHVn9EfREceL-A&s" alt="">
+        <h3 data-i18n="info3Title">Política de Cancelamento</h3>
+        <p data-i18n="info3Text">
+          Consulte nossa política de cancelamentos e reagendamentos
+          antes de reservar seu passeio.
+        </p>
+        <a href="politica-cancelamento.html" class="btn" data-i18n="info3Btn">Ver política</a>
+      </div>
+
+      <div class="card">
+        <img src="https://static.wixstatic.com/media/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png/v1/fit/w_2500,h_1330,al_c/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png" alt="">
+        <h3 data-i18n="info4Title">Parque Nacional Marinho</h3>
+        <p data-i18n="info4Text">
+          O Parque Nacional Marinho protege grande parte do arquipélago.
+          Veja regras de visitação, ingressos e informações oficiais.
+        </p>
+        <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn" data-i18n="info4Btn">Mais informações</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p id="footerText"></p>
+    <div class="footer-social">
+  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+  </footer>
+
+  <script>
+    const anoAtual = new Date().getFullYear();
+
+    const translations = {
+      pt: {
+        pageTitle: "10 coisas interessantes para fazer em Fernando de Noronha",
+        moedaLabel: "Moeda:",
+        heroBadge: "Guia de Viagem • Fernando de Noronha",
+        heroTitle: "10 coisas interessantes para se fazer em Fernando de Noronha",
+        heroText: "Descubra experiências inesquecíveis entre praias paradisíacas, trilhas ecológicas, mergulho, pôr do sol e sabores únicos no arquipélago mais encantador do Brasil.",
+        heroBtn: "Explorar atividades",
+        meta: "Experiências incríveis no paraíso brasileiro",
+
+        aboutTitle: "Sobre Fernando de Noronha",
+        aboutText1: "Fernando de Noronha é um dos destinos mais desejados do Brasil, conhecido por suas águas cristalinas, vida marinha abundante, trilhas panorâmicas e paisagens que parecem cenário de filme.",
+        aboutText2: "Entre mergulhos, praias famosas, passeios de barco e gastronomia regional, a ilha oferece experiências para quem busca aventura, descanso e contato profundo com a natureza.",
+        aboutItem1: "Mergulho e vida marinha",
+        aboutItem2: "Praias mundialmente famosas",
+        aboutItem3: "Pôr do sol inesquecível",
+        aboutItem4: "Trilhas e mirantes",
+
+        introTitle: "As 10 experiências que você precisa viver",
+        introText: "Essas são apenas algumas das muitas atividades emocionantes e paisagens deslumbrantes que a ilha de Fernando de Noronha tem a oferecer. Confira a seleção abaixo com os destaques mais procurados por visitantes.",
+
+        top10Title: "Top 10 atividades em Noronha",
+        top10Subtitle: "Uma seleção perfeita para montar um roteiro completo entre natureza, aventura, contemplação e cultura local.",
+
+        card1Title: "Mergulhar nas águas cristalinas",
+        card1Text: "Explore o mar transparente da ilha e observe peixes, tartarugas, corais e toda a riqueza da vida marinha de Noronha.",
+        card2Title: "Visitar praias icônicas",
+        card2Text: "Conheça cenários inesquecíveis como a Praia do Sancho e a Baía dos Porcos, famosas pela beleza impressionante.",
+        card3Title: "Assistir ao nascer e ao pôr do sol",
+        card3Text: "Viva momentos únicos em pontos como o Forte Nossa Senhora dos Remédios ou a Praia da Conceição.",
+        card4Title: "Fazer trilhas panorâmicas",
+        card4Text: "Percorra rotas como a Trilha do Atalaia e a Trilha do Piquinho para admirar vistas espetaculares da ilha.",
+        card5Title: "Conhecer o Projeto Tamar",
+        card5Text: "Visite o centro de conservação de tartarugas marinhas e descubra ações importantes de educação e preservação ambiental.",
+        card6Title: "Visitar o Buraco do Galego",
+        card6Text: "Conheça essa piscina natural cercada por rochas, um lugar diferenciado para contemplar a força e a beleza do mar.",
+        card7Title: "Fazer passeio de barco",
+        card7Text: "Navegue para conhecer ilhéus, falésias e praias inacessíveis por terra, além de observar golfinhos em alguns roteiros.",
+        card8Title: "Praticar esportes aquáticos",
+        card8Text: "Escolha entre surf, stand-up paddle e caiaque para aproveitar o mar de Noronha com aventura e paisagens incríveis.",
+        card9Title: "Ir ao Mirante do Boldró",
+        card9Text: "Observe as ondas quebrando nos rochedos e contemple um dos cenários mais marcantes da ilha, especialmente no fim do dia.",
+        card10Title: "Provar a culinária local",
+        card10Text: "Experimente frutos do mar frescos, tapioca e o famoso bolinho de tubalhau em restaurantes e bistrôs da ilha.",
+
+        formTitle: "Monte seu roteiro em Noronha",
+        formSubtitle: "Preencha o formulário e personalize sua experiência com as atividades que mais combinam com você.",
+        namePlaceholder: "Seu nome",
+        emailPlaceholder: "Seu e-mail",
+        favoriteOption: "Escolha sua atividade favorita",
+        opt1: "Mergulho",
+        opt2: "Praias e mirantes",
+        opt3: "Trilhas ecológicas",
+        opt4: "Passeio de barco",
+        opt5: "Gastronomia",
+        textareaPlaceholder: "Conte como seria seu passeio ideal em Fernando de Noronha",
+        submitBtn: "Enviar interesse",
+
+        infoTitle: "Informações Importantes",
+        infoSubtitle: "Antes de visitar Fernando de Noronha, confira algumas informações essenciais para organizar sua viagem e aproveitar melhor a ilha.",
+        info1Title: "TPA – Taxa de Preservação Ambiental",
+        info1Text: "A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha. Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.",
+        info1Btn: "Acessar site oficial",
+        info2Title: "Agendamento de Trilhas",
+        info2Text: "Algumas trilhas e piscinas naturais possuem acesso controlado. Faça seu agendamento antecipadamente para garantir sua visita.",
+        info2Btn: "Agendar pelo WhatsApp",
+        info3Title: "Política de Cancelamento",
+        info3Text: "Consulte nossa política de cancelamentos e reagendamentos antes de reservar seu passeio.",
+        info3Btn: "Ver política",
+        info4Title: "Parque Nacional Marinho",
+        info4Text: "O Parque Nacional Marinho protege grande parte do arquipélago. Veja regras de visitação, ingressos e informações oficiais.",
+        info4Btn: "Mais informações",
+
+        startingFrom: "A partir de",
+        footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos os direitos reservados`
+      },
+
+      en: {
+        pageTitle: "10 interesting things to do in Fernando de Noronha",
+        moedaLabel: "Currency:",
+        heroBadge: "Travel Guide • Fernando de Noronha",
+        heroTitle: "10 interesting things to do in Fernando de Noronha",
+        heroText: "Discover unforgettable experiences among paradise beaches, ecological trails, diving, sunsets and unique flavors in Brazil’s most enchanting archipelago.",
+        heroBtn: "Explore activities",
+        meta: "Amazing experiences in the Brazilian paradise",
+
+        aboutTitle: "About Fernando de Noronha",
+        aboutText1: "Fernando de Noronha is one of Brazil’s most desired destinations, known for its crystal-clear waters, abundant marine life, panoramic trails and scenery that looks like a movie set.",
+        aboutText2: "Between diving, famous beaches, boat tours and regional cuisine, the island offers experiences for those seeking adventure, relaxation and deep contact with nature.",
+        aboutItem1: "Diving and marine life",
+        aboutItem2: "World-famous beaches",
+        aboutItem3: "Unforgettable sunsets",
+        aboutItem4: "Trails and viewpoints",
+
+        introTitle: "The 10 experiences you need to live",
+        introText: "These are just some of the many exciting activities and stunning landscapes that Fernando de Noronha has to offer. Check out the selection below with the highlights most sought after by visitors.",
+
+        top10Title: "Top 10 activities in Noronha",
+        top10Subtitle: "A perfect selection to build a complete itinerary among nature, adventure, contemplation and local culture.",
+
+        card1Title: "Dive into crystal-clear waters",
+        card1Text: "Explore the island’s transparent sea and observe fish, turtles, corals and all the richness of Noronha’s marine life.",
+        card2Title: "Visit iconic beaches",
+        card2Text: "Discover unforgettable settings such as Sancho Beach and Baía dos Porcos, famous for their stunning beauty.",
+        card3Title: "Watch the sunrise and sunset",
+        card3Text: "Live unique moments at places such as Forte Nossa Senhora dos Remédios or Conceição Beach.",
+        card4Title: "Take panoramic trails",
+        card4Text: "Follow routes such as Atalaia Trail and Piquinho Trail to admire spectacular views of the island.",
+        card5Title: "Visit Projeto Tamar",
+        card5Text: "Visit the sea turtle conservation center and discover important environmental education and preservation actions.",
+        card6Title: "Visit Buraco do Galego",
+        card6Text: "Discover this natural pool surrounded by rocks, a unique place to contemplate the strength and beauty of the sea.",
+        card7Title: "Take a boat tour",
+        card7Text: "Sail to discover islets, cliffs and beaches inaccessible by land, and also spot dolphins on some routes.",
+        card8Title: "Practice water sports",
+        card8Text: "Choose between surfing, stand-up paddle and kayaking to enjoy Noronha’s sea with adventure and incredible scenery.",
+        card9Title: "Visit Boldró Viewpoint",
+        card9Text: "Watch the waves breaking on the rocks and admire one of the island’s most striking landscapes, especially late in the day.",
+        card10Title: "Taste the local cuisine",
+        card10Text: "Try fresh seafood, tapioca and the famous codfish fritter in the island’s restaurants and bistros.",
+
+        formTitle: "Build your Noronha itinerary",
+        formSubtitle: "Fill out the form and personalize your experience with the activities that suit you best.",
+        namePlaceholder: "Your name",
+        emailPlaceholder: "Your email",
+        favoriteOption: "Choose your favorite activity",
+        opt1: "Diving",
+        opt2: "Beaches and viewpoints",
+        opt3: "Ecological trails",
+        opt4: "Boat tour",
+        opt5: "Gastronomy",
+        textareaPlaceholder: "Tell us what your ideal Fernando de Noronha trip would be like",
+        submitBtn: "Send interest",
+
+        infoTitle: "Important Information",
+        infoSubtitle: "Before visiting Fernando de Noronha, check some essential information to better organize your trip and enjoy the island.",
+        info1Title: "TPA – Environmental Preservation Fee",
+        info1Text: "The Environmental Preservation Fee is mandatory for island visitors. It contributes to the conservation of the archipelago and maintenance of infrastructure.",
+        info1Btn: "Access official website",
+        info2Title: "Trail Scheduling",
+        info2Text: "Some trails and natural pools have controlled access. Schedule in advance to guarantee your visit.",
+        info2Btn: "Book via WhatsApp",
+        info3Title: "Cancellation Policy",
+        info3Text: "Check our cancellation and rescheduling policy before booking your tour.",
+        info3Btn: "View policy",
+        info4Title: "Marine National Park",
+        info4Text: "The Marine National Park protects a large part of the archipelago. See visitation rules, tickets and official information.",
+        info4Btn: "More information",
+
+        startingFrom: "Starting from",
+        footerText: `© ${anoAtual} Picos de Noronha Tourism - All rights reserved`
+      },
+
+      es: {
+        pageTitle: "10 cosas interesantes para hacer en Fernando de Noronha",
+        moedaLabel: "Moneda:",
+        heroBadge: "Guía de Viaje • Fernando de Noronha",
+        heroTitle: "10 cosas interesantes para hacer en Fernando de Noronha",
+        heroText: "Descubre experiencias inolvidables entre playas paradisíacas, senderos ecológicos, buceo, atardeceres y sabores únicos en el archipiélago más encantador de Brasil.",
+        heroBtn: "Explorar actividades",
+        meta: "Experiencias increíbles en el paraíso brasileño",
+
+        aboutTitle: "Sobre Fernando de Noronha",
+        aboutText1: "Fernando de Noronha es uno de los destinos más deseados de Brasil, conocido por sus aguas cristalinas, abundante vida marina, senderos panorámicos y paisajes que parecen de película.",
+        aboutText2: "Entre buceo, playas famosas, paseos en barco y gastronomía regional, la isla ofrece experiencias para quienes buscan aventura, descanso y contacto profundo con la naturaleza.",
+        aboutItem1: "Buceo y vida marina",
+        aboutItem2: "Playas mundialmente famosas",
+        aboutItem3: "Atardeceres inolvidables",
+        aboutItem4: "Senderos y miradores",
+
+        introTitle: "Las 10 experiencias que debes vivir",
+        introText: "Estas son solo algunas de las muchas actividades emocionantes y paisajes deslumbrantes que Fernando de Noronha tiene para ofrecer. Mira la selección a continuación con los destaques más buscados por los visitantes.",
+
+        top10Title: "Top 10 actividades en Noronha",
+        top10Subtitle: "Una selección perfecta para crear un itinerario completo entre naturaleza, aventura, contemplación y cultura local.",
+
+        card1Title: "Bucear en aguas cristalinas",
+        card1Text: "Explora el mar transparente de la isla y observa peces, tortugas, corales y toda la riqueza de la vida marina de Noronha.",
+        card2Title: "Visitar playas icónicas",
+        card2Text: "Conoce escenarios inolvidables como Playa do Sancho y Bahía dos Porcos, famosas por su impresionante belleza.",
+        card3Title: "Ver el amanecer y el atardecer",
+        card3Text: "Vive momentos únicos en lugares como el Fuerte Nossa Senhora dos Remédios o la Playa da Conceição.",
+        card4Title: "Hacer senderos panorámicos",
+        card4Text: "Recorre rutas como el Sendero do Atalaia y el Sendero do Piquinho para admirar vistas espectaculares de la isla.",
+        card5Title: "Conocer el Proyecto Tamar",
+        card5Text: "Visita el centro de conservación de tortugas marinas y descubre importantes acciones de educación y preservación ambiental.",
+        card6Title: "Visitar Buraco do Galego",
+        card6Text: "Conoce esta piscina natural rodeada de rocas, un lugar diferente para contemplar la fuerza y la belleza del mar.",
+        card7Title: "Hacer un paseo en barco",
+        card7Text: "Navega para conocer islotes, acantilados y playas inaccesibles por tierra, además de observar delfines en algunas rutas.",
+        card8Title: "Practicar deportes acuáticos",
+        card8Text: "Elige entre surf, paddle surf y kayak para disfrutar del mar de Noronha con aventura y paisajes increíbles.",
+        card9Title: "Ir al Mirador do Boldró",
+        card9Text: "Observa las olas rompiendo en las rocas y contempla uno de los paisajes más impactantes de la isla, especialmente al final del día.",
+        card10Title: "Probar la gastronomía local",
+        card10Text: "Prueba mariscos frescos, tapioca y el famoso bolinho de tubalhau en restaurantes y bistrós de la isla.",
+
+        formTitle: "Arma tu itinerario en Noronha",
+        formSubtitle: "Completa el formulario y personaliza tu experiencia con las actividades que más combinan contigo.",
+        namePlaceholder: "Tu nombre",
+        emailPlaceholder: "Tu correo electrónico",
+        favoriteOption: "Elige tu actividad favorita",
+        opt1: "Buceo",
+        opt2: "Playas y miradores",
+        opt3: "Senderos ecológicos",
+        opt4: "Paseo en barco",
+        opt5: "Gastronomía",
+        textareaPlaceholder: "Cuéntanos cómo sería tu viaje ideal a Fernando de Noronha",
+        submitBtn: "Enviar interés",
+
+        infoTitle: "Información Importante",
+        infoSubtitle: "Antes de visitar Fernando de Noronha, consulta información esencial para organizar mejor tu viaje y aprovechar la isla.",
+        info1Title: "TPA – Tasa de Preservación Ambiental",
+        info1Text: "La Tasa de Preservación Ambiental es obligatoria para los visitantes de la isla. Contribuye a la conservación del archipiélago y al mantenimiento de la infraestructura.",
+        info1Btn: "Acceder al sitio oficial",
+        info2Title: "Reserva de Senderos",
+        info2Text: "Algunos senderos y piscinas naturales tienen acceso controlado. Haz tu reserva con anticipación para garantizar tu visita.",
+        info2Btn: "Reservar por WhatsApp",
+        info3Title: "Política de Cancelación",
+        info3Text: "Consulta nuestra política de cancelaciones y reprogramaciones antes de reservar tu paseo.",
+        info3Btn: "Ver política",
+        info4Title: "Parque Nacional Marino",
+        info4Text: "El Parque Nacional Marino protege gran parte del archipiélago. Consulta reglas de visita, entradas e información oficial.",
+        info4Btn: "Más información",
+
+        startingFrom: "Desde",
+        footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos los derechos reservados`
+      }
+    };
+
+    const exchangeRates = {
+      BRL: 1,
+      USD: 0.20,
+      EUR: 0.18,
+      GBP: 0.15
+    };
+
+    const currencyLocales = {
+      BRL: "pt-BR",
+      USD: "en-US",
+      EUR: "es-ES",
+      GBP: "en-GB"
+    };
+
+    function formatCurrency(valueInBRL, currency) {
+      const converted = valueInBRL * exchangeRates[currency];
+      return new Intl.NumberFormat(currencyLocales[currency], {
+        style: "currency",
+        currency: currency
+      }).format(converted);
+    }
+
+    function aplicarTraducao(lang) {
+      const dict = translations[lang];
+      if (!dict) return;
+
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+      document.title = dict.pageTitle;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (dict[key] !== undefined) {
+          el.placeholder = dict[key];
+        }
+      });
+
+      document.getElementById("labelMoeda").textContent = dict.moedaLabel;
+      document.getElementById("footerText").textContent = dict.footerText;
+
+      document.querySelectorAll(".language-currency img").forEach(img => {
+        img.classList.remove("active");
+      });
+
+      if (lang === "pt") document.getElementById("flag-pt").classList.add("active");
+      if (lang === "en") document.getElementById("flag-en").classList.add("active");
+      if (lang === "es") document.getElementById("flag-es").classList.add("active");
+
+      localStorage.setItem("siteLanguage", lang);
+    }
+
+    function atualizarMoeda() {
+      const moeda = document.getElementById("moeda").value;
+      const lang = localStorage.getItem("siteLanguage") || "pt";
+      const dict = translations[lang];
+
+      document.querySelectorAll("[data-price]").forEach(el => {
+        const basePrice = Number(el.getAttribute("data-price"));
+        const prefixKey = el.getAttribute("data-i18n-price-prefix");
+        const prefix = dict[prefixKey] || "";
+        el.textContent = `${prefix} ${formatCurrency(basePrice, moeda)}`;
+      });
+
+      localStorage.setItem("siteCurrency", moeda);
+    }
+
+    function alterarIdiomaMoeda(valor) {
+      if (valor === "pt" || valor === "en" || valor === "es") {
+        aplicarTraducao(valor);
+      } else if (valor === "GBP") {
+        document.getElementById("moeda").value = "GBP";
+        aplicarTraducao("en");
+        document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
+        document.getElementById("flag-gbp").classList.add("active");
+      }
+
+      atualizarMoeda();
+    }
+
+    function iniciarSite() {
+      const savedLanguage = localStorage.getItem("siteLanguage") || "pt";
+      const savedCurrency = localStorage.getItem("siteCurrency") || "BRL";
+
+      document.getElementById("moeda").value = savedCurrency;
+      aplicarTraducao(savedLanguage);
+      atualizarMoeda();
+
+      if (savedCurrency === "GBP" && savedLanguage === "en") {
+        document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
+        document.getElementById("flag-gbp").classList.add("active");
+      }
+    }
+
+    iniciarSite();
+  </script>
+</body>
+</html>

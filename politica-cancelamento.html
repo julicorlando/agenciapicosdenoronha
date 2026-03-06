@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Política de Devolução de Valores | Picos de Noronha</title>
+  <style>
+    :root {
+      --primary: #0ea5a4;
+      --secondary: #0f172a;
+      --light: #f8fafc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--secondary);
+      line-height: 1.7;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)),
+        url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      flex-direction: column;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      max-width: 900px;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      margin-bottom: 25px;
+      max-width: 780px;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.24);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: .95rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .meta {
+      margin-top: 12px;
+      opacity: .9;
+      font-size: .95rem;
+    }
+
+    .policy-wrapper {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .policy-card,
+    .info-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      padding: 30px;
+    }
+
+    .policy-title {
+      font-size: 2rem;
+      color: #0c3b5e;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .policy-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .policy-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 18px;
+      border-radius: 14px;
+    }
+
+    .policy-number {
+      min-width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(14,165,164,.25);
+    }
+
+    .policy-item p {
+      color: #334155;
+      font-size: 1rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #0ea5a4, #0891b2);
+      color: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(14,165,164,.22);
+    }
+
+    .highlight-box h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p {
+      font-size: .98rem;
+      color: rgba(255,255,255,.94);
+    }
+
+    .info-card h3 {
+      font-size: 1.4rem;
+      color: #0c3b5e;
+      margin-bottom: 14px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+
+    .info-box p {
+      color: #475569;
+      font-size: .96rem;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #0891b2;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: #1e293b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--secondary);
+      color: #fff;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .policy-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .policy-title {
+        font-size: 1.7rem;
+      }
+
+      .policy-card,
+      .info-card {
+        padding: 22px;
+      }
+
+      .policy-item {
+        padding: 16px;
+      }
+    }
+
+    .footer-social{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
+
+.footer-social a{
+  color:#fff;
+  font-size:22px;
+  transition:.3s;
+}
+
+.footer-social a:hover{
+  transform:translateY(-2px);
+  opacity:.8;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="hero-badge">Picos de Noronha • Informações Oficiais</span>
+    <h1>Política de Devolução de Valores</h1>
+    <p>
+      Consulte as regras de confirmação, cancelamento, reembolso, utilização de voucher,
+      ingresso do parque e pagamento final dos serviços contratados.
+    </p>
+    <div class="meta">Documento informativo para clientes e passageiros</div>
+  </header>
+
+  <section>
+    <h2 class="policy-title">Regras para cancelamentos, alterações e devoluções</h2>
+    <p class="policy-subtitle">
+      Leia atentamente todas as condições abaixo antes da contratação e execução dos passeios e serviços.
+    </p>
+
+    <div class="policy-wrapper">
+      <div class="policy-card">
+        <div class="policy-list">
+          <div class="policy-item">
+            <div class="policy-number">1</div>
+            <p>
+              A confirmação dos serviços está sujeita à confirmação do pagamento de <strong>50% do valor contratado</strong>.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">2</div>
+            <p>
+              Os pedidos de cancelamento ou qualquer alteração dos serviços implicarão na aplicação de <strong>multas e penalidades</strong> aos passageiros.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">3</div>
+            <p>
+              Entende-se por cancelamento a desistência da viagem ou do serviço contratado, a não apresentação para o embarque ou a não realização do serviço. Até <strong>30 dias antes do início do serviço</strong>, será cobrada multa de <strong>20% do valor total</strong>. De <strong>29 a 20 dias</strong>, será cobrada multa de <strong>30% do valor total</strong>. Com <strong>19 dias ou menos</strong> do início do serviço, <strong>não haverá reembolso</strong> em caso de alteração, cancelamento ou não utilização total ou parcial dos serviços.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">4</div>
+            <p>
+              Faz-se necessária a apresentação deste <strong>voucher</strong> antes da realização de todos os serviços contratados. Nenhum passeio inclui material de mergulho livre. Os passageiros podem levar seus próprios materiais ou alugar antes do passeio, bastando informar ao guia no momento do transfer.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">5</div>
+            <p>
+              No dia dos passeios, o cliente já deve estar com o <strong>ticket de ingresso do parque</strong> em mãos. Orientamos que isso seja emitido na sede do <strong>ICMBio</strong> no primeiro dia.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">6</div>
+            <p>
+              Nenhum passeio inclui <strong>refeições ou bebidas</strong>, exceto o passeio do entardecer, que possui <strong>churrasco a bordo</strong>. O churrasco é composto por peixe, pão e salada. As bebidas <strong>não estão incluídas</strong>, mas há disponibilidade para compra na embarcação.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">7</div>
+            <p>
+              Em caso de cancelamento da viagem, será concedido prazo até <strong>08/10/2025</strong> para utilização do voucher. Chegando essa data sem a execução do passeio, será feita a <strong>devolução do valor pago</strong>.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-number">8</div>
+            <p>
+              O <strong>valor restante</strong> deverá ser pago ao chegar na ilha, antes da execução do primeiro serviço contratado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="info-card">
+        <div class="highlight-box">
+          <h3>Atenção</h3>
+          <p>
+            O não comparecimento, a desistência ou a não utilização total ou parcial dos serviços contratados pode gerar perda de valores conforme os prazos descritos nesta política.
+          </p>
+        </div>
+
+        <h3>Resumo rápido</h3>
+        <div class="info-list">
+          <div class="info-box">
+            <strong>Entrada para confirmação</strong>
+            <p>50% do valor contratado.</p>
+          </div>
+
+          <div class="info-box">
+            <strong>Multa até 30 dias</strong>
+            <p>20% do valor total.</p>
+          </div>
+
+          <div class="info-box">
+            <strong>Multa de 29 a 20 dias</strong>
+            <p>30% do valor total.</p>
+          </div>
+
+          <div class="info-box">
+            <strong>19 dias ou menos</strong>
+            <p>Não haverá reembolso.</p>
+          </div>
+
+          <div class="info-box">
+            <strong>Voucher em caso de cancelamento da viagem</strong>
+            <p>Utilização permitida até 08/10/2025.</p>
+          </div>
+
+          <div class="info-box">
+            <strong>Ingresso do parque</strong>
+            <p>O cliente deve apresentar o ticket no dia do passeio.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="index.html" class="btn">Voltar ao site</a>
+          <a href="https://wa.me/5581987654321" target="_blank" class="btn btn-secondary">Falar no WhatsApp</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Picos de Noronha Turismo - Todos os direitos reservados</p>
+    <div class="footer-social">
+  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+  </footer>
+</body>
+</html>

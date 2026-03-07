@@ -6,136 +6,69 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <title>Picos de Noronha Turismo</title>
 <style>
-:root { --primary:#0ea5a4; --secondary:#0f172a; --light:#f8fafc; }
-* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; }
-body { background: var(--light); color: var(--secondary); line-height:1.6; }
-header { background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg'); background-size:cover; background-position:center; color:#fff; min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px; flex-direction:column; position:relative; }
-header h1 { font-size:3rem; margin-bottom:15px; }
-header p { font-size:1.2rem; margin-bottom:25px; }
-section { padding:60px 20px; max-width:1200px; margin:auto; }
-.cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
-.card { background:#fff; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,.1); overflow:hidden; text-align:center; padding-bottom:20px; position:relative; }
-.card img { width:100%; height:180px; object-fit:cover; }
-.card h3 { margin:15px 0 10px 0; }
-.card p { padding:0 15px; font-size:0.95rem; color:#333; }
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-.card .destaque {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  background: gold;
-  color: #fff;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3);
-  text-align: center;
-  animation: pulse 1.5s infinite;
-}
-.btn { background: var(--primary); color:#fff; padding:12px 25px; border-radius:30px; text-decoration:none; font-weight:bold; transition:.3s; cursor:pointer; display:inline-block; margin-top:10px; }
-.btn:hover { background:#0891b2; }
-.form-section { background: var(--primary); color:#fff; border-radius:20px; }
-form { display:grid; gap:15px; max-width:500px; margin:auto; }
-input, textarea, select { padding:15px; border-radius:10px; border:none; outline:none; }
-button { padding:15px; border-radius:30px; border:none; background: var(--secondary); color:#fff; font-size:1rem; cursor:pointer; }
-footer { text-align:center; padding:20px; background: var(--secondary); color:#fff; }
-.valor { display:none; margin:10px 0; font-weight:bold; color:var(--secondary); opacity:0; transform:translateY(-10px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.valor.show { display:block; opacity:1; transform:translateY(0); }
-.language-currency {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0,0,0,0.5);
-  padding: 5px 10px;
-  border-radius: 10px;
-}
-.language-currency img {
-  width: 32px;
-  height: 20px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 4px;
-}
-.language-currency img:hover { border-color:#fff; }
-.language-currency select { padding:5px; border-radius:5px; border:none; outline:none; background:#fff; color:#000; cursor:default; }
-@media(max-width:768px){ header h1{ font-size:2.2rem; } }
-
-.about {
-    padding: 80px 20px;
-    background: #f5f7fa;
-    display: flex;
-    justify-content: center;
+:root{
+  --primary:#0ea5a4;
+  --primary-dark:#0891b2;
+  --secondary:#0f172a;
+  --light:#f8fafc;
+  --whatsapp:#25D366;
+  --whatsapp-dark:#1ebe5d;
 }
 
-.about__container {
-    max-width: 1100px;
-    width: 100%;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-.about__title {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #0c3b5e;
+html{
+  scroll-behavior:smooth;
 }
 
-.about__text {
-    font-size: 18px;
-    line-height: 1.7;
-    color: #444;
-    margin-bottom: 16px;
+body{
+  background:var(--light);
+  color:var(--secondary);
+  line-height:1.6;
 }
 
-.about__highlights {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-}
-
-.about__item {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 16px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-
-.about__item span {
-    font-size: 28px;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.section-title{
+header{
+  background:
+    linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
+    url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  font-size:2.2rem;
-  margin-bottom:10px;
-  color:#0c3b5e;
+  padding:20px;
+  flex-direction:column;
+  position:relative;
 }
 
-.section-subtitle{
-  text-align:center;
-  max-width:750px;
-  margin:0 auto 40px auto;
-  color:#555;
-  font-size:1rem;
+header h1{
+  font-size:3rem;
+  margin-bottom:15px;
+}
+
+header p{
+  font-size:1.2rem;
+  margin-bottom:25px;
+  max-width:800px;
+}
+
+section{
+  padding:60px 20px;
+  max-width:1200px;
+  margin:auto;
 }
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
   gap:25px;
 }
 
@@ -147,6 +80,9 @@ footer { text-align:center; padding:20px; background: var(--secondary); color:#f
   transition:.3s;
   display:flex;
   flex-direction:column;
+  text-align:center;
+  position:relative;
+  padding-bottom:20px;
 }
 
 .card:hover{
@@ -163,6 +99,7 @@ footer { text-align:center; padding:20px; background: var(--secondary); color:#f
 .card h3{
   font-size:1.2rem;
   margin:15px 0 10px 0;
+  padding:0 16px;
 }
 
 .card p{
@@ -172,9 +109,223 @@ footer { text-align:center; padding:20px; background: var(--secondary); color:#f
   flex:1;
 }
 
-.card .btn{
-  margin:20px auto 0 auto;
+.card-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:0 20px;
+  margin-top:18px;
+}
+
+@keyframes pulse{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.2); }
+  100%{ transform:scale(1); }
+}
+
+.card .destaque{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:40px;
+  height:40px;
+  background:gold;
+  color:#fff;
+  font-size:1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  box-shadow:0 2px 6px rgba(0,0,0,.3);
+  text-align:center;
+  animation:pulse 1.5s infinite;
+}
+
+.btn{
+  background:var(--primary);
+  color:#fff;
+  padding:12px 25px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:.3s;
+  cursor:pointer;
   display:inline-block;
+  margin-top:10px;
+  border:none;
+}
+
+.btn:hover{
+  background:var(--primary-dark);
+}
+
+.btn-whatsapp{
+  background:var(--whatsapp);
+}
+
+.btn-whatsapp:hover{
+  background:var(--whatsapp-dark);
+}
+
+.form-section{
+  background:var(--primary);
+  color:#fff;
+  border-radius:20px;
+}
+
+form{
+  display:grid;
+  gap:15px;
+  max-width:500px;
+  margin:auto;
+}
+
+input, textarea, select{
+  padding:15px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  font-size:1rem;
+}
+
+button{
+  padding:15px;
+  border-radius:30px;
+  border:none;
+  background:var(--secondary);
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:var(--secondary);
+  color:#fff;
+}
+
+.valor{
+  display:none;
+  margin:10px 0 0 0;
+  font-weight:bold;
+  color:var(--secondary);
+  opacity:0;
+  transform:translateY(-10px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+
+.valor.show{
+  display:block;
+  opacity:1;
+  transform:translateY(0);
+}
+
+.language-currency{
+  position:absolute;
+  top:20px;
+  left:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(0,0,0,0.5);
+  padding:8px 10px;
+  border-radius:10px;
+  flex-wrap:wrap;
+}
+
+.language-currency img{
+  width:32px;
+  height:20px;
+  cursor:pointer;
+  border:2px solid transparent;
+  border-radius:4px;
+  transition:.2s ease;
+}
+
+.language-currency img:hover,
+.language-currency img.active{
+  border-color:#fff;
+  transform:scale(1.04);
+}
+
+.language-currency select{
+  padding:5px;
+  border-radius:5px;
+  border:none;
+  outline:none;
+  background:#fff;
+  color:#000;
+  cursor:pointer;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+}
+
+.about{
+  padding:80px 20px;
+  background:#f5f7fa;
+  display:flex;
+  justify-content:center;
+}
+
+.about__container{
+  max-width:1100px;
+  width:100%;
+}
+
+.about__title{
+  font-size:36px;
+  margin-bottom:20px;
+  color:#0c3b5e;
+}
+
+.about__text{
+  font-size:18px;
+  line-height:1.7;
+  color:#444;
+  margin-bottom:16px;
+}
+
+.about__highlights{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:20px;
+}
+
+.about__item{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  font-size:16px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.about__item span{
+  font-size:28px;
+  display:block;
+  margin-bottom:10px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:2.2rem;
+  margin-bottom:10px;
+  color:#0c3b5e;
+}
+
+.section-subtitle{
+  text-align:center;
+  max-width:750px;
+  margin:0 auto 40px auto;
+  color:#555;
+  font-size:1rem;
 }
 
 .footer-social{
@@ -194,28 +345,360 @@ footer { text-align:center; padding:20px; background: var(--secondary); color:#f
   transform:translateY(-2px);
   opacity:.8;
 }
+
+.whatsapp-float{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--whatsapp);
+  color:#fff;
+  text-decoration:none;
+  padding:14px 18px;
+  border-radius:999px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  font-weight:700;
+  transition:.3s ease;
+  animation:floatPulse 1.8s infinite;
+}
+
+.whatsapp-float i{
+  font-size:1.5rem;
+}
+
+.whatsapp-float:hover{
+  background:var(--whatsapp-dark);
+  transform:translateY(-3px);
+}
+
+@keyframes floatPulse{
+  0%{ box-shadow:0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70%{ box-shadow:0 0 0 16px rgba(37, 211, 102, 0); }
+  100%{ box-shadow:0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media(max-width:768px){
+  header h1{ font-size:2.2rem; }
+
+  .language-currency{
+    position:static;
+    margin-top:20px;
+    justify-content:center;
+  }
+
+  .whatsapp-float{
+    right:14px;
+    bottom:14px;
+    padding:14px 16px;
+  }
+
+  .whatsapp-float span{
+    display:none;
+  }
+}
 </style>
+
 <script>
-// Cotação
+const WHATSAPP_NUMERO = '5581991654517';
 const cotacao = { BRL:1, USD:0.20, EUR:0.18, GBP:0.16 };
 
-// Textos por idioma
 const textos = {
-  pt: { titulo:'Picos de Noronha Turismo', descricao:'Os melhores passeios turísticos para você viver experiências inesquecíveis', verPasseios:'Ver Passeios', verValor:'Ver Valor', irAventura:'Ir nessa Aventura', solicitarOrcamento:'Solicite um Orçamento', nome:'Seu nome', email:'Seu e-mail', mensagem:'Qual passeio você deseja?', enviar:'Enviar', passeiosDestaque:'Passeios em Destaque' },
-  en: { titulo:'Picos de Noronha Tourism', descricao:'The best tourist tours to live unforgettable experiences', verPasseios:'See Tours', verValor:'See Price', irAventura:'Go on this Adventure', solicitarOrcamento:'Request a Quote', nome:'Your Name', email:'Your Email', mensagem:'Which tour do you want?', enviar:'Send', passeiosDestaque:'Featured Tours' },
-  es: { titulo:'Picos de Noronha Turismo', descricao:'Los mejores tours turísticos para vivir experiencias inolvidables', verPasseios:'Ver Tours', verValor:'Ver Precio', irAventura:'Ir a esta Aventura', solicitarOrcamento:'Solicitar Presupuesto', nome:'Su Nombre', email:'Su Email', mensagem:'¿Qué tour desea?', enviar:'Enviar', passeiosDestaque:'Tours Destacados' }
+  pt: {
+    pageTitle:'Picos de Noronha Turismo',
+    titulo:'Picos de Noronha Turismo',
+    descricao:'Os melhores passeios turísticos para você viver experiências inesquecíveis',
+    verPasseios:'Ver Passeios',
+    verTop10:'Ver os 10 melhores lugares',
+    contato:'Entre em Contato',
+    verValor:'Ver Valor',
+    irAventura:'Reservar no WhatsApp',
+    solicitarOrcamento:'Solicite um Orçamento',
+    nome:'Seu nome',
+    email:'Seu e-mail',
+    mensagem:'Qual passeio você deseja?',
+    enviar:'Enviar',
+    passeiosDestaque:'Passeios em Destaque',
+    whatsappFlutuante:'Fale no WhatsApp',
+    moeda:'Moeda:',
+    sucessoEnvio:'✅ Mensagem enviada com sucesso!',
+    sobreTitulo:'Sobre Nós',
+    sobreTexto1:'Bem-vindos à Picos de Noronha, a agência especializada em passeios em Fernando de Noronha! Somos uma equipe de aventureiros apaixonados pela natureza e por tudo o que essa ilha paradisíaca tem a oferecer.',
+    sobreTexto2:'Nosso objetivo é proporcionar experiências únicas e inesquecíveis, conectando visitantes às paisagens deslumbrantes, à vida marinha e à cultura local do arquipélago. Cada passeio é planejado com atenção aos detalhes, garantindo segurança, conforto e respeito ao meio ambiente.',
+    sobreTexto3:'Na Picos de Noronha acreditamos que explorar a ilha vai muito além de visitar praias — é viver aventuras, descobrir trilhas secretas, mergulhar em águas cristalinas e criar memórias que ficarão para sempre.',
+    destaque1:'Passeios exclusivos',
+    destaque2:'Contato com a natureza',
+    destaque3:'Experiências inesquecíveis',
+    destaque4:'Guias experientes',
+    infoTitulo:'Informações Importantes',
+    infoSub:'Antes de visitar Fernando de Noronha, confira algumas informações essenciais para organizar sua viagem e aproveitar melhor a ilha.',
+    tpaTitulo:'TPA – Taxa de Preservação Ambiental',
+    tpaTexto:'A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha. Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.',
+    tpaBtn:'Acessar site oficial',
+    trilhasTitulo:'Agendamento de Trilhas',
+    trilhasTexto:'Algumas trilhas e piscinas naturais possuem acesso controlado. Faça seu agendamento antecipadamente para garantir sua visita.',
+    trilhasBtn:'Agendar pelo WhatsApp',
+    cancelamentoTitulo:'Política de Cancelamento',
+    cancelamentoTexto:'Consulte nossa política de cancelamentos e reagendamentos antes de reservar seu passeio.',
+    cancelamentoBtn:'Ver política',
+    parqueTitulo:'Parque Nacional Marinho',
+    parqueTexto:'O Parque Nacional Marinho protege grande parte do arquipélago. Veja regras de visitação, ingressos e informações oficiais.',
+    parqueBtn:'Mais informações',
+    footer:'Picos de Noronha Turismo - Todos os direitos reservados',
+    passeios: [
+      { nome:'Passeio pelas Praias', descricao:'Explore as praias paradisíacas da região.' },
+      { nome:'Trilhas Ecológicas', descricao:'Descubra trilhas incríveis com contato com a natureza.' },
+      { nome:'City Tour', descricao:'Explore os pontos turísticos da cidade.' },
+      { nome:'Mergulho', descricao:'Mergulhe nas águas cristalinas e veja a vida marinha.' },
+      { nome:'Passeio de Barco', descricao:'Navegue pela costa e conheça praias escondidas.' },
+      { nome:'Observação de Golfinhos', descricao:'Assista a golfinhos em seu habitat natural.' },
+      { nome:'Snorkeling', descricao:'Explore recifes de corais e peixes coloridos.' },
+      { nome:'Passeio Noturno', descricao:'Conheça a região à noite e desfrute de um jantar local.' },
+      { nome:'Aventuras Off-road', descricao:'Explore trilhas em veículos 4x4.' },
+      { nome:'Caiaque', descricao:'Remada em rios e lagoas da região.' },
+      { nome:'Pesca Esportiva', descricao:'Pesque em alto mar com equipamentos profissionais.' },
+      { nome:'Passeio Histórico', descricao:'Conheça a história local através de museus e monumentos.' },
+      { nome:'Fotografia', descricao:'Sessão de fotos em locais paradisíacos.' },
+      { nome:'Yoga na Praia', descricao:'Pratique yoga ao nascer do sol.' },
+      { nome:'Passeio Gastronômico', descricao:'Deguste pratos típicos da região.' },
+      { nome:'Stand-up Paddle', descricao:'Aventura em águas calmas com SUP.' },
+      { nome:'Caminhada Guiada', descricao:'Trilhas guiadas para todos os níveis.' },
+      { nome:'Passeio Cultural', descricao:'Vivencie a cultura local.' },
+      { nome:'Stand-up Noturno', descricao:'SUP ao entardecer.' },
+      { nome:'Esportes Aquáticos', descricao:'Jet-ski, wakeboard e muito mais.' },
+      { nome:'Passeio de Helicóptero', descricao:'Vista panorâmica da região.' },
+      { nome:'Noite de Luau', descricao:'Jantar e música à beira-mar.' }
+    ]
+  },
+  en: {
+    pageTitle:'Picos de Noronha Tourism',
+    titulo:'Picos de Noronha Tourism',
+    descricao:'The best tourist tours for you to enjoy unforgettable experiences',
+    verPasseios:'See Tours',
+    verTop10:'See the 10 best places',
+    contato:'Contact Us',
+    verValor:'See Price',
+    irAventura:'Book on WhatsApp',
+    solicitarOrcamento:'Request a Quote',
+    nome:'Your name',
+    email:'Your email',
+    mensagem:'Which tour do you want?',
+    enviar:'Send',
+    passeiosDestaque:'Featured Tours',
+    whatsappFlutuante:'Chat on WhatsApp',
+    moeda:'Currency:',
+    sucessoEnvio:'✅ Message sent successfully!',
+    sobreTitulo:'About Us',
+    sobreTexto1:'Welcome to Picos de Noronha, the agency specialized in tours in Fernando de Noronha! We are a team of adventurers passionate about nature and everything this paradise island has to offer.',
+    sobreTexto2:'Our goal is to provide unique and unforgettable experiences, connecting visitors to the archipelago’s stunning landscapes, marine life and local culture. Each tour is planned with attention to detail, ensuring safety, comfort and respect for the environment.',
+    sobreTexto3:'At Picos de Noronha, we believe exploring the island goes far beyond visiting beaches — it is about living adventures, discovering secret trails, diving in crystal-clear waters and creating memories that will last forever.',
+    destaque1:'Exclusive tours',
+    destaque2:'Connection with nature',
+    destaque3:'Unforgettable experiences',
+    destaque4:'Experienced guides',
+    infoTitulo:'Important Information',
+    infoSub:'Before visiting Fernando de Noronha, check some essential information to organize your trip and enjoy the island even more.',
+    tpaTitulo:'Environmental Preservation Fee',
+    tpaTexto:'The Environmental Preservation Fee is mandatory for island visitors. It contributes to the conservation of the archipelago and maintenance of the infrastructure.',
+    tpaBtn:'Visit official website',
+    trilhasTitulo:'Trail Booking',
+    trilhasTexto:'Some trails and natural pools have controlled access. Book in advance to guarantee your visit.',
+    trilhasBtn:'Book via WhatsApp',
+    cancelamentoTitulo:'Cancellation Policy',
+    cancelamentoTexto:'Check our cancellation and rescheduling policy before booking your tour.',
+    cancelamentoBtn:'View policy',
+    parqueTitulo:'Marine National Park',
+    parqueTexto:'The Marine National Park protects a large part of the archipelago. Check visitation rules, tickets and official information.',
+    parqueBtn:'More information',
+    footer:'Picos de Noronha Tourism - All rights reserved',
+    passeios: [
+      { nome:'Beach Tour', descricao:'Explore the region’s paradise beaches.' },
+      { nome:'Ecological Trails', descricao:'Discover incredible trails with contact with nature.' },
+      { nome:'City Tour', descricao:'Explore the city’s tourist attractions.' },
+      { nome:'Diving', descricao:'Dive into crystal-clear waters and discover marine life.' },
+      { nome:'Boat Tour', descricao:'Sail along the coast and discover hidden beaches.' },
+      { nome:'Dolphin Watching', descricao:'Watch dolphins in their natural habitat.' },
+      { nome:'Snorkeling', descricao:'Explore coral reefs and colorful fish.' },
+      { nome:'Night Tour', descricao:'Discover the region at night and enjoy a local dinner.' },
+      { nome:'Off-road Adventures', descricao:'Explore trails in 4x4 vehicles.' },
+      { nome:'Kayaking', descricao:'Paddle on rivers and lagoons in the region.' },
+      { nome:'Sport Fishing', descricao:'Fish in the open sea with professional equipment.' },
+      { nome:'Historical Tour', descricao:'Learn the local history through museums and monuments.' },
+      { nome:'Photography', descricao:'Photo session in paradise locations.' },
+      { nome:'Beach Yoga', descricao:'Practice yoga at sunrise.' },
+      { nome:'Gastronomic Tour', descricao:'Taste the region’s typical dishes.' },
+      { nome:'Stand-up Paddle', descricao:'Adventure in calm waters with SUP.' },
+      { nome:'Guided Hike', descricao:'Guided trails for all levels.' },
+      { nome:'Cultural Tour', descricao:'Experience the local culture.' },
+      { nome:'Night SUP', descricao:'SUP at sunset.' },
+      { nome:'Water Sports', descricao:'Jet ski, wakeboard and much more.' },
+      { nome:'Helicopter Tour', descricao:'Panoramic view of the region.' },
+      { nome:'Luau Night', descricao:'Dinner and music by the sea.' }
+    ]
+  },
+  es: {
+    pageTitle:'Picos de Noronha Turismo',
+    titulo:'Picos de Noronha Turismo',
+    descricao:'Los mejores tours turísticos para que vivas experiencias inolvidables',
+    verPasseios:'Ver Tours',
+    verTop10:'Ver los 10 mejores lugares',
+    contato:'Contáctanos',
+    verValor:'Ver Precio',
+    irAventura:'Reservar por WhatsApp',
+    solicitarOrcamento:'Solicitar Presupuesto',
+    nome:'Su nombre',
+    email:'Su correo',
+    mensagem:'¿Qué tour desea?',
+    enviar:'Enviar',
+    passeiosDestaque:'Tours Destacados',
+    whatsappFlutuante:'Hablar por WhatsApp',
+    moeda:'Moneda:',
+    sucessoEnvio:'✅ ¡Mensaje enviado con éxito!',
+    sobreTitulo:'Sobre Nosotros',
+    sobreTexto1:'Bienvenidos a Picos de Noronha, la agencia especializada en tours en Fernando de Noronha. Somos un equipo de aventureros apasionados por la naturaleza y por todo lo que esta isla paradisíaca tiene para ofrecer.',
+    sobreTexto2:'Nuestro objetivo es brindar experiencias únicas e inolvidables, conectando a los visitantes con los paisajes deslumbrantes, la vida marina y la cultura local del archipiélago. Cada tour se planifica con atención a los detalles, garantizando seguridad, comodidad y respeto por el medio ambiente.',
+    sobreTexto3:'En Picos de Noronha creemos que explorar la isla va mucho más allá de visitar playas: es vivir aventuras, descubrir senderos secretos, bucear en aguas cristalinas y crear recuerdos para siempre.',
+    destaque1:'Tours exclusivos',
+    destaque2:'Contacto con la naturaleza',
+    destaque3:'Experiencias inolvidables',
+    destaque4:'Guías experimentados',
+    infoTitulo:'Información Importante',
+    infoSub:'Antes de visitar Fernando de Noronha, consulte información esencial para organizar su viaje y disfrutar mejor de la isla.',
+    tpaTitulo:'Tasa de Preservación Ambiental',
+    tpaTexto:'La Tasa de Preservación Ambiental es obligatoria para los visitantes de la isla. Contribuye a la conservación del archipiélago y al mantenimiento de la infraestructura.',
+    tpaBtn:'Acceder al sitio oficial',
+    trilhasTitulo:'Reserva de Senderos',
+    trilhasTexto:'Algunos senderos y piscinas naturales tienen acceso controlado. Reserve con anticipación para garantizar su visita.',
+    trilhasBtn:'Reservar por WhatsApp',
+    cancelamentoTitulo:'Política de Cancelación',
+    cancelamentoTexto:'Consulte nuestra política de cancelaciones y reprogramaciones antes de reservar su tour.',
+    cancelamentoBtn:'Ver política',
+    parqueTitulo:'Parque Nacional Marino',
+    parqueTexto:'El Parque Nacional Marino protege gran parte del archipiélago. Consulte reglas de visita, entradas e información oficial.',
+    parqueBtn:'Más información',
+    footer:'Picos de Noronha Turismo - Todos los derechos reservados',
+    passeios: [
+      { nome:'Tour por las Playas', descricao:'Explore las playas paradisíacas de la región.' },
+      { nome:'Senderos Ecológicos', descricao:'Descubra senderos increíbles en contacto con la naturaleza.' },
+      { nome:'City Tour', descricao:'Explore los puntos turísticos de la ciudad.' },
+      { nome:'Buceo', descricao:'Sumérjase en aguas cristalinas y vea la vida marina.' },
+      { nome:'Paseo en Barco', descricao:'Navegue por la costa y conozca playas escondidas.' },
+      { nome:'Avistamiento de Delfines', descricao:'Observe delfines en su hábitat natural.' },
+      { nome:'Snorkeling', descricao:'Explore arrecifes de coral y peces coloridos.' },
+      { nome:'Tour Nocturno', descricao:'Conozca la región por la noche y disfrute de una cena local.' },
+      { nome:'Aventuras Off-road', descricao:'Explore senderos en vehículos 4x4.' },
+      { nome:'Kayak', descricao:'Reme por ríos y lagunas de la región.' },
+      { nome:'Pesca Deportiva', descricao:'Pesque en alta mar con equipo profesional.' },
+      { nome:'Tour Histórico', descricao:'Conozca la historia local a través de museos y monumentos.' },
+      { nome:'Fotografía', descricao:'Sesión de fotos en lugares paradisíacos.' },
+      { nome:'Yoga en la Playa', descricao:'Practique yoga al amanecer.' },
+      { nome:'Tour Gastronómico', descricao:'Deguste platos típicos de la región.' },
+      { nome:'Stand-up Paddle', descricao:'Aventura en aguas tranquilas con SUP.' },
+      { nome:'Caminata Guiada', descricao:'Senderos guiados para todos los niveles.' },
+      { nome:'Tour Cultural', descricao:'Viva la cultura local.' },
+      { nome:'SUP Nocturno', descricao:'SUP al atardecer.' },
+      { nome:'Deportes Acuáticos', descricao:'Jet ski, wakeboard y mucho más.' },
+      { nome:'Paseo en Helicóptero', descricao:'Vista panorámica de la región.' },
+      { nome:'Noche de Luau', descricao:'Cena y música junto al mar.' }
+    ]
+  }
 };
 
 let idiomaAtual = 'pt';
 const moedaPorIdioma = { pt:'BRL', en:'USD', es:'EUR' };
 
-// Funções
+const passeiosBase = [
+  { valor:250, img:'https://blog.atalaianoronha.com.br/assets/uploads/2019/05/istock-1302338129.jpg', destaque:true },
+  { valor:180, img:'https://noronhaguia.com.br/images/capimAcu/capim1.jpg', destaque:false },
+  { valor:150, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/95/f2/7d/igreja-nossa-senhora.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:300, img:'https://images.openai.com/static-rsc-3/T7dhLSiu5Of_dA-lty--LGkFA2yCuZvnI_0ND8oN_KQ5RgFjfKma2tXWDYLoTIJFpDeeoicmvSzx0NV7svF0rCV6KODLoRdmNqmLB-Myhuw?purpose=fullsize&v=1', destaque:true },
+  { valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/21/08/87/caption.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:200, img:'https://alohaspiritmidia.com.br/wp-content/uploads/2021/02/Bruno-gagliasso-861x640.jpg', destaque:false },
+  { valor:180, img:'https://imgmd.net/images/v1/guia/2663146/snorkeling.jpg', destaque:false },
+  { valor:250, img:'https://s2-vogue.glbimg.com/jfjgzWJWh1ATZPDKQyC1GBWSZqE%3D/0x0%3A1200x1600/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_5dfbcf92c1a84b20a5da5024d398ff2f/internal_photos/bs/2024/9/N/FWKoAuQSiVogFLEixoyw/6.-praia-da-conceicao.jpeg', destaque:false },
+  { valor:270, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/0c/18/02/vibe-noronha-canoe-clube.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/a2/83/3e/caption.jpg?h=900&s=1&w=1200', destaque:false },
+  { valor:180, img:'https://images.openai.com/static-rsc-3/tzemLRaQo_yKNCHxevA22gC-7vGghmPhrgl5NJfb1rgG1q8j33izOAdi6XwMaJ8Oa_PWyRYoo5e7R1YPXfeJ6XyJySFBy_bvpDovo1PhBps?purpose=fullsize&v=1', destaque:false },
+  { valor:200, img:'https://storage.alboom.ninja/sites/3673/albuns/511040/fotos_ensaio_casal_fernando_de_noronha_fotografo_guilherme_rodrigues-7.jpg?t=1614797017', destaque:false },
+  { valor:150, img:'https://images.openai.com/static-rsc-3/Wdkatbx_LEHwtKziju3IGBh9TmpUDsWzh2b5ZMNDZAZ8oOZqne0t583o6914z6458otV_xa_bXeqHTJi5MBRhlz9FubEZq5kK8-Xlcgq0QI?purpose=fullsize&v=1', destaque:false },
+  { valor:220, img:'https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/62/32/19/caption.jpg', destaque:false },
+  { valor:180, img:'https://images.openai.com/static-rsc-3/tHPNcboUnpZTFzBc9IWsHAkHhb0g7BZyQJh2XCAH14hyUlcWNq8H7Qp5ASKNs86PPCnf2jh26doUEc62XXmruhEEHhDAb0I214Pg2Pv9bmM?purpose=fullsize&v=1', destaque:false },
+  { valor:160, img:'https://www.civitatis.com/f/brasil/fernando-de-noronha/senderismo-bahia-golfinhos-r32.jpg', destaque:false },
+  { valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/ba/91/78/forte-nossa-senhora-dos.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:210, img:'https://cdn.getyourguide.com/img/tour/5cbeeb9415dbb59f.jpeg/145.jpg', destaque:false },
+  { valor:250, img:'https://cdn.bombarco.com.br/cdn-cgi/image/format%3Dwebp%2Cquality%3D72%2Cdpr%3D1%2Cmetadata%3Dnone/https%3A//cdn.bombarco.com.br/ghost/images/DJI_0024.JPG', destaque:true },
+  { valor:400, img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Fernando_de_Noronha_-_vista_aera.jpg/1280px-Fernando_de_Noronha_-_vista_aera.jpg', destaque:false },
+  { valor:220, img:'https://uploads.montage.com/uploads/sites/5/2022/08/04172651/Torches-1920x1080.jpg', destaque:false }
+];
+
+function getPasseiosTraduzidos(){
+  return passeiosBase.map((base, i) => ({
+    ...base,
+    nome: textos[idiomaAtual].passeios[i].nome,
+    descricao: textos[idiomaAtual].passeios[i].descricao
+  }));
+}
+
+function montarMensagemPasseio(nomePasseio){
+  let mensagem = '';
+
+  if(idiomaAtual === 'en'){
+    mensagem = `Hello! I want to book the tour: ${nomePasseio}`;
+  } else if(idiomaAtual === 'es'){
+    mensagem = `¡Hola! Quiero reservar el tour: ${nomePasseio}`;
+  } else {
+    mensagem = `Olá! Quero reservar o passeio: ${nomePasseio}`;
+  }
+
+  return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
+}
+
 function atualizarIdioma(novoIdioma){
   idiomaAtual = novoIdioma;
-  document.querySelectorAll('[data-text]').forEach(el=>{
+  localStorage.setItem('siteLanguage', idiomaAtual);
+
+  document.documentElement.lang = idiomaAtual === 'pt' ? 'pt-BR' : idiomaAtual;
+  document.title = textos[idiomaAtual].pageTitle;
+
+  document.querySelectorAll('[data-text]').forEach(el => {
     const chave = el.getAttribute('data-text');
-    el.innerText = textos[idiomaAtual][chave];
+    if(textos[idiomaAtual] && textos[idiomaAtual][chave]){
+      el.innerText = textos[idiomaAtual][chave];
+    }
   });
+
+  document.querySelectorAll('[data-placeholder]').forEach(el => {
+    const chave = el.getAttribute('data-placeholder');
+    if(textos[idiomaAtual] && textos[idiomaAtual][chave]){
+      el.placeholder = textos[idiomaAtual][chave];
+    }
+  });
+
+  document.querySelectorAll('.language-currency img').forEach(img => img.classList.remove('active'));
+  const flag = document.getElementById('flag-' + idiomaAtual);
+  if(flag) flag.classList.add('active');
+
+  gerarPasseios();
+  atualizarBotaoFlutuante();
+  atualizarTextoSucesso();
+  atualizarRodape();
+}
+
+function atualizarRodape(){
+  const footer = document.getElementById('footer-copy');
+  if(footer){
+    footer.innerText = `© ${new Date().getFullYear()} ${textos[idiomaAtual].footer}`;
+  }
+}
+
+function atualizarTextoSucesso(){
+  const el = document.getElementById('mensagem-sucesso');
+  if(el){
+    el.innerText = textos[idiomaAtual].sucessoEnvio;
+  }
 }
 
 function alterarIdiomaMoeda(novoIdioma){
@@ -225,247 +708,274 @@ function alterarIdiomaMoeda(novoIdioma){
   atualizarMoeda();
 }
 
-function mostrarValor(id, nomePasseio){
-  const valor = document.getElementById('valor-'+id);
-  const botaoAventura = document.getElementById('btn-aventura-'+id);
-  valor.classList.add('show');
-  botaoAventura.style.display='inline-block';
-  botaoAventura.href='https://wa.me/559999999999?text='+encodeURIComponent('Olá! Quero reservar o passeio: '+nomePasseio);
+function mostrarValor(id){
+  const valor = document.getElementById('valor-' + id);
+  if(valor){
+    valor.classList.add('show');
+  }
   atualizarMoeda();
 }
 
 function atualizarMoeda(){
   const moeda = document.getElementById('moeda').value;
-  for(let i=1;i<=passeios.length;i++){
-    const el = document.getElementById('valor-'+i);
+  localStorage.setItem('siteCurrency', moeda);
+
+  const passeios = getPasseiosTraduzidos();
+  for(let i = 1; i <= passeios.length; i++){
+    const el = document.getElementById('valor-' + i);
     if(el){
-      const valorBRL = passeios[i-1].valor;
-      const valorConvertido = (valorBRL*(cotacao[moeda]||1)).toFixed(2);
-      el.innerText = moeda+' '+valorConvertido;
+      const valorBRL = passeios[i - 1].valor;
+      const valorConvertido = (valorBRL * (cotacao[moeda] || 1)).toFixed(2);
+      el.innerText = moeda + ' ' + valorConvertido;
     }
   }
 }
 
-// 22 passeios
-const passeios = [
-  { nome:'Passeio pelas Praias', descricao:'Explore as praias paradisíacas da região.', valor:250, img:'https://blog.atalaianoronha.com.br/assets/uploads/2019/05/istock-1302338129.jpg', destaque:true },
-  { nome:'Trilhas Ecológicas', descricao:'Descubra trilhas incríveis com contato com a natureza.', valor:180, img:'https://noronhaguia.com.br/images/capimAcu/capim1.jpg', destaque:false },
-  { nome:'City Tour', descricao:'Explore os pontos turísticos da cidade.', valor:150, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/95/f2/7d/igreja-nossa-senhora.jpg?h=-1&s=1&w=1200', destaque:false },
-  { nome:'Mergulho', descricao:'Mergulhe nas águas cristalinas e veja a vida marinha.', valor:300, img:'https://images.openai.com/static-rsc-3/T7dhLSiu5Of_dA-lty--LGkFA2yCuZvnI_0ND8oN_KQ5RgFjfKma2tXWDYLoTIJFpDeeoicmvSzx0NV7svF0rCV6KODLoRdmNqmLB-Myhuw?purpose=fullsize&v=1', destaque:true },
-  { nome:'Passeio de Barco', descricao:'Navegue pela costa e conheça praias escondidas.', valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/21/08/87/caption.jpg?h=-1&s=1&w=1200', destaque:false },
-  { nome:'Observação de Golfinhos', descricao:'Assista a golfinhos em seu habitat natural.', valor:200, img:'https://airial.travel/_next/image?q=70&url=https%3A%2F%2Fwww.tangol.com%2Fblog%2FFotos%2FNotas%2Fasi-son-los-magnificos-delfines-rotadores-de-fernando-de-noronha_15215_202501231612500.JPEG&w=3840', destaque:false },
-  { nome:'Snorkeling', descricao:'Explore recifes de corais e peixes coloridos.', valor:180, img:'https://imgmd.net/images/v1/guia/2663146/snorkeling.jpg', destaque:false },
-  { nome:'Passeio Noturno', descricao:'Conheça a região à noite e desfrute de um jantar local.', valor:250, img:'https://s2-vogue.glbimg.com/jfjgzWJWh1ATZPDKQyC1GBWSZqE%3D/0x0%3A1200x1600/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_5dfbcf92c1a84b20a5da5024d398ff2f/internal_photos/bs/2024/9/N/FWKoAuQSiVogFLEixoyw/6.-praia-da-conceicao.jpeg', destaque:false },
-  { nome:'Aventuras Off-road', descricao:'Explore trilhas em veículos 4x4.', valor:270, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:false },
-  { nome:'Caiaque', descricao:'Remada em rios e lagoas da região.', valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/0c/18/02/vibe-noronha-canoe-clube.jpg?h=-1&s=1&w=1200', destaque:false },
-  { nome:'Pesca Esportiva', descricao:'Pesque em alto mar com equipamentos profissionais.', valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/a2/83/3e/caption.jpg?h=900&s=1&w=1200', destaque:false },
-  { nome:'Passeio Histórico', descricao:'Conheça a história local através de museus e monumentos.', valor:180, img:'https://images.openai.com/static-rsc-3/tzemLRaQo_yKNCHxevA22gC-7vGghmPhrgl5NJfb1rgG1q8j33izOAdi6XwMaJ8Oa_PWyRYoo5e7R1YPXfeJ6XyJySFBy_bvpDovo1PhBps?purpose=fullsize&v=1', destaque:false },
-  { nome:'Fotografia', descricao:'Sessão de fotos em locais paradisíacos.', valor:200, img:'https://storage.alboom.ninja/sites/3673/albuns/511040/fotos_ensaio_casal_fernando_de_noronha_fotografo_guilherme_rodrigues-7.jpg?t=1614797017', destaque:false },
-  { nome:'Yoga na Praia', descricao:'Pratique yoga ao nascer do sol.', valor:150, img:'https://images.openai.com/static-rsc-3/Wdkatbx_LEHwtKziju3IGBh9TmpUDsWzh2b5ZMNDZAZ8oOZqne0t583o6914z6458otV_xa_bXeqHTJi5MBRhlz9FubEZq5kK8-Xlcgq0QI?purpose=fullsize&v=1', destaque:false },
-  { nome:'Passeio Gastronômico', descricao:'Deguste pratos típicos da região.', valor:220, img:'https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/62/32/19/caption.jpg', destaque:false },
-  { nome:'Stand-up Paddle', descricao:'Aventura em águas calmas com SUP.', valor:180, img:'https://images.openai.com/static-rsc-3/tHPNcboUnpZTFzBc9IWsHAkHhb0g7BZyQJh2XCAH14hyUlcWNq8H7Qp5ASKNs86PPCnf2jh26doUEc62XXmruhEEHhDAb0I214Pg2Pv9bmM?purpose=fullsize&v=1', destaque:false },
-  { nome:'Caminhada Guiada', descricao:'Trilhas guiadas para todos os níveis.', valor:160, img:'https://www.civitatis.com/f/brasil/fernando-de-noronha/senderismo-bahia-golfinhos-r32.jpg', destaque:false },
-  { nome:'Passeio Cultural', descricao:'Vivencie a cultura local.', valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/ba/91/78/forte-nossa-senhora-dos.jpg?h=-1&s=1&w=1200', destaque:false },
-  { nome:'Stand-up Noturno', descricao:'SUP ao entardecer.', valor:210, img:'https://cdn.getyourguide.com/img/tour/5cbeeb9415dbb59f.jpeg/145.jpg', destaque:false },
-  { nome:'Esportes Aquáticos', descricao:'Jet-ski, wakeboard e muito mais.', valor:250, img:'https://cdn.bombarco.com.br/cdn-cgi/image/format%3Dwebp%2Cquality%3D72%2Cdpr%3D1%2Cmetadata%3Dnone/https%3A//cdn.bombarco.com.br/ghost/images/DJI_0024.JPG', destaque:true },
-  { nome:'Passeio de Helicóptero', descricao:'Vista panorâmica da região.', valor:400, img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Fernando_de_Noronha_-_vista_aera.jpg/1280px-Fernando_de_Noronha_-_vista_aera.jpg', destaque:false },
-  { nome:'Noite de Luau', descricao:'Jantar e música à beira-mar.', valor:220, img:'https://uploads.montage.com/uploads/sites/5/2022/08/04172651/Torches-1920x1080.jpg', destaque:false }
-];
+function atualizarBotaoFlutuante(){
+  const btnFloat = document.getElementById('whatsapp-float');
+  if(!btnFloat) return;
 
-function gerarPasseios(){
-  const container = document.getElementById('cards-container');
-  passeios.forEach((passeio,i)=>{
-    const card = document.createElement('div');
-    card.className='card';
-    card.innerHTML=`
-      ${passeio.destaque ? "<div class='destaque'>★</div>":""}
-      <img src='${passeio.img}' alt='${passeio.nome}'>
-      <h3>${passeio.nome}</h3>
-      <p>${passeio.descricao}</p>
-      <button class='btn' onclick="mostrarValor(${i+1}, '${passeio.nome}')" data-text='verValor'>Ver Valor</button>
-      <div id='valor-${i+1}' class='valor' data-brl='${passeio.valor}'>R$ ${passeio.valor}</div>
-      <a id='btn-aventura-${i+1}' class='btn' style='display:none;' target='_blank' data-text='irAventura'>Ir nessa Aventura</a>
-    `;
-    container.appendChild(card);
-  });
+  let mensagem = '';
+
+  if(idiomaAtual === 'en'){
+    mensagem = 'Hello! I want more information about tours in Fernando de Noronha.';
+  } else if(idiomaAtual === 'es'){
+    mensagem = '¡Hola! Quiero más información sobre los tours en Fernando de Noronha.';
+  } else {
+    mensagem = 'Olá! Quero mais informações sobre os passeios em Fernando de Noronha.';
+  }
+
+  btnFloat.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
 }
 
-window.onload=()=>{ gerarPasseios(); alterarIdiomaMoeda('pt'); };
+function gerarPasseios(){
+  const passeios = getPasseiosTraduzidos();
+  const container = document.getElementById('cards-container');
+  container.innerHTML = '';
+
+  passeios.forEach((passeio, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+      ${passeio.destaque ? "<div class='destaque'>★</div>" : ""}
+      <img src="${passeio.img}" alt="${passeio.nome}">
+      <h3>${passeio.nome}</h3>
+      <p>${passeio.descricao}</p>
+
+      <div class="card-actions">
+        <button class="btn" onclick="mostrarValor(${i + 1})">${textos[idiomaAtual].verValor}</button>
+        <div id="valor-${i + 1}" class="valor" data-brl="${passeio.valor}">R$ ${passeio.valor}</div>
+        <a
+          id="btn-whatsapp-${i + 1}"
+          class="btn btn-whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="${montarMensagemPasseio(passeio.nome)}"
+        >${textos[idiomaAtual].irAventura}</a>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  atualizarMoeda();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const idiomaSalvo = localStorage.getItem('siteLanguage') || 'pt';
+  const moedaSalva = localStorage.getItem('siteCurrency') || moedaPorIdioma[idiomaSalvo] || 'BRL';
+
+  document.getElementById('moeda').value = moedaSalva;
+  atualizarIdioma(idiomaSalvo);
+  atualizarMoeda();
+});
 </script>
 </head>
 <body>
 
 <?php
-if ($_SERVER['REQUEST_METHOD']==='POST'){
-  $nome=htmlspecialchars($_POST['nome']);
-  $email=htmlspecialchars($_POST['email']);
-  $mensagem=htmlspecialchars($_POST['mensagem']);
-  $to='atendimento@josdev.com.br';
-  $subject='Novo Orçamento';
-  $body="Nome: $nome\nEmail: $email\nMensagem: $mensagem";
-  $headers='From: '.$email;
-  mail($to,$subject,$body,$headers);
-  $sucesso=true;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $nome = htmlspecialchars($_POST['nome']);
+  $email = htmlspecialchars($_POST['email']);
+  $mensagem = htmlspecialchars($_POST['mensagem']);
+  $to = 'atendimento@josdev.com.br';
+  $subject = 'Novo Orçamento';
+  $body = "Nome: $nome\nEmail: $email\nMensagem: $mensagem";
+  $headers = 'From: ' . $email;
+  mail($to, $subject, $body, $headers);
+  $sucesso = true;
 }
 ?>
 
 <header>
-<h1 data-text="titulo">Picos de Noronha Turismo</h1>
-<p data-text="descricao">Os melhores passeios turísticos para você viver experiências inesquecíveis</p>
+  <h1 data-text="titulo">Picos de Noronha Turismo</h1>
+  <p data-text="descricao">Os melhores passeios turísticos para você viver experiências inesquecíveis</p>
 
-<ul>
-<a href="#passeios" class="btn" data-text="verPasseios">Ver Passeios</a>
-<a href="top10.html" class="btn">Ver os 10 melhores lugares</a>
-<a href="contato.html" class="btn">Entre em Contato</a>
-</ul>
+  <div class="hero-actions">
+    <a href="#passeios" class="btn" data-text="verPasseios">Ver Passeios</a>
+    <a href="top10.html" class="btn" data-text="verTop10">Ver os 10 melhores lugares</a>
+    <a href="contato.html" class="btn" data-text="contato">Entre em Contato</a>
+  </div>
 
-<div class="language-currency">
-  <label style="color:#fff;">Moeda:</label>
-  <select id="moeda" onchange="atualizarMoeda()">
-    <option value="BRL">BRL</option>
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="GBP">GBP</option>
-  </select>
-  <img src="https://flagcdn.com/32x24/br.png" alt="Português" onclick="alterarIdiomaMoeda('pt')">
-  <img src="https://flagcdn.com/32x24/us.png" alt="English" onclick="alterarIdiomaMoeda('en')">
-  <img src="https://flagcdn.com/32x24/es.png" alt="Español" onclick="alterarIdiomaMoeda('es')">
-  <img src="https://flagcdn.com/32x24/gb-eng.png" alt="Englaland" onclick="alterarIdiomaMoeda('GBP')">
-</div>
+  <div class="language-currency">
+    <label style="color:#fff;" data-text="moeda">Moeda:</label>
+    <select id="moeda" onchange="atualizarMoeda()">
+      <option value="BRL">BRL</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+    </select>
+
+    <img id="flag-pt" src="https://flagcdn.com/32x24/br.png" alt="Português" onclick="alterarIdiomaMoeda('pt')">
+    <img id="flag-en" src="https://flagcdn.com/32x24/us.png" alt="English" onclick="alterarIdiomaMoeda('en')">
+    <img id="flag-es" src="https://flagcdn.com/32x24/es.png" alt="Español" onclick="alterarIdiomaMoeda('es')">
+  </div>
 </header>
 
 <section id="passeios">
-<h2 style="text-align:center; margin-bottom:40px;" data-text="passeiosDestaque">Passeios em Destaque</h2>
-<div class="cards" id="cards-container"></div>
+  <h2 style="text-align:center; margin-bottom:40px;" data-text="passeiosDestaque">Passeios em Destaque</h2>
+  <div class="cards" id="cards-container"></div>
 </section>
 
 <section id="formulario" class="form-section">
-<h2 style="text-align:center; margin-bottom:30px;" data-text="solicitarOrcamento">Solicite um Orçamento</h2>
+  <h2 style="text-align:center; margin-bottom:30px;" data-text="solicitarOrcamento">Solicite um Orçamento</h2>
 
-<?php if(!empty($sucesso)): ?>
-<p style="text-align:center; margin-bottom:20px;">✅ Mensagem enviada com sucesso!</p>
-<?php endif; ?>
+  <?php if (!empty($sucesso)): ?>
+    <p id="mensagem-sucesso" style="text-align:center; margin-bottom:20px;">✅ Mensagem enviada com sucesso!</p>
+  <?php endif; ?>
 
-<form method="post">
-  <input type="text" name="nome" placeholder="Seu nome" data-text="nome" required>
-  <input type="email" name="email" placeholder="Seu e-mail" data-text="email" required>
-  <textarea name="mensagem" rows="4" placeholder="Qual passeio você deseja?" data-text="mensagem" required></textarea>
-  <button type="submit" data-text="enviar">Enviar</button>
-</form>
+  <form method="post">
+    <input type="text" name="nome" placeholder="Seu nome" data-placeholder="nome" required>
+    <input type="email" name="email" placeholder="Seu e-mail" data-placeholder="email" required>
+    <textarea name="mensagem" rows="4" placeholder="Qual passeio você deseja?" data-placeholder="mensagem" required></textarea>
+    <button type="submit" data-text="enviar">Enviar</button>
+  </form>
 </section>
 
 <section class="about">
-    <div class="about__container">
-        <div class="about__content">
-            <h2 class="about__title">Sobre Nós</h2>
-            <p class="about__text">
-                Bem-vindos à <strong>Picos de Noronha</strong>, a agência especializada em passeios em 
-                <strong>Fernando de Noronha</strong>! Somos uma equipe de aventureiros apaixonados pela natureza 
-                e por tudo o que essa ilha paradisíaca tem a oferecer.
-            </p>
+  <div class="about__container">
+    <div class="about__content">
+      <h2 class="about__title" data-text="sobreTitulo">Sobre Nós</h2>
 
-            <p class="about__text">
-                Nosso objetivo é proporcionar experiências únicas e inesquecíveis, conectando visitantes às 
-                paisagens deslumbrantes, à vida marinha e à cultura local do arquipélago. Cada passeio é planejado 
-                com atenção aos detalhes, garantindo segurança, conforto e respeito ao meio ambiente.
-            </p>
+      <p class="about__text" data-text="sobreTexto1">
+        Bem-vindos à Picos de Noronha, a agência especializada em passeios em Fernando de Noronha! Somos uma equipe de aventureiros apaixonados pela natureza e por tudo o que essa ilha paradisíaca tem a oferecer.
+      </p>
 
-            <p class="about__text">
-                Na Picos de Noronha acreditamos que explorar a ilha vai muito além de visitar praias — é viver 
-                aventuras, descobrir trilhas secretas, mergulhar em águas cristalinas e criar memórias que 
-                ficarão para sempre.
-            </p>
+      <p class="about__text" data-text="sobreTexto2">
+        Nosso objetivo é proporcionar experiências únicas e inesquecíveis, conectando visitantes às paisagens deslumbrantes, à vida marinha e à cultura local do arquipélago. Cada passeio é planejado com atenção aos detalhes, garantindo segurança, conforto e respeito ao meio ambiente.
+      </p>
 
-            <div class="about__highlights">
-                <div class="about__item">
-                    <span>🌊</span>
-                    <p>Passeios exclusivos</p>
-                </div>
-                <div class="about__item">
-                    <span>🐢</span>
-                    <p>Contato com a natureza</p>
-                </div>
-                <div class="about__item">
-                    <span>🏝</span>
-                    <p>Experiências inesquecíveis</p>
-                </div>
-                <div class="about__item">
-                    <span>🧭</span>
-                    <p>Guias experientes</p>
-                </div>
-            </div>
+      <p class="about__text" data-text="sobreTexto3">
+        Na Picos de Noronha acreditamos que explorar a ilha vai muito além de visitar praias — é viver aventuras, descobrir trilhas secretas, mergulhar em águas cristalinas e criar memórias que ficarão para sempre.
+      </p>
+
+      <div class="about__highlights">
+        <div class="about__item">
+          <span>🌊</span>
+          <p data-text="destaque1">Passeios exclusivos</p>
         </div>
+        <div class="about__item">
+          <span>🐢</span>
+          <p data-text="destaque2">Contato com a natureza</p>
+        </div>
+        <div class="about__item">
+          <span>🏝</span>
+          <p data-text="destaque3">Experiências inesquecíveis</p>
+        </div>
+        <div class="about__item">
+          <span>🧭</span>
+          <p data-text="destaque4">Guias experientes</p>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-    <section>
-    <h2 class="section-title">Informações Importantes</h2>
-    <p class="section-subtitle">
-        Antes de visitar Fernando de Noronha, confira algumas informações essenciais
-        para organizar sua viagem e aproveitar melhor a ilha.
-    </p>
+<section>
+  <h2 class="section-title" data-text="infoTitulo">Informações Importantes</h2>
+  <p class="section-subtitle" data-text="infoSub">
+    Antes de visitar Fernando de Noronha, confira algumas informações essenciais para organizar sua viagem e aproveitar melhor a ilha.
+  </p>
 
-    <div class="cards">
+  <div class="cards">
 
-        <div class="card">
-        <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp">
-        <h3>TPA – Taxa de Preservação Ambiental</h3>
-        <p>
-            A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha.
-            Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.
-        </p>
-        <a href="https://www.noronha.pe.gov.br/" target="_blank" class="btn">Acessar site oficial</a>
-        </div>
-
-        <div class="card">
-        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80">
-        <h3>Agendamento de Trilhas</h3>
-        <p>
-            Algumas trilhas e piscinas naturais possuem acesso controlado.
-            Faça seu agendamento antecipadamente para garantir sua visita.
-        </p>
-        <a href="https://wa.me/5581987654321?text=Olá,%20quero%20agendar%20uma%20trilha%20em%20Noronha" target="_blank" class="btn">Agendar pelo WhatsApp</a>
-        </div>
-
-        <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlapTRBJe3_4fHQ1UB8gtZHVn9EfREceL-A&s">
-        <h3>Política de Cancelamento</h3>
-        <p>
-            Consulte nossa política de cancelamentos e reagendamentos
-            antes de reservar seu passeio.
-        </p>
-        <a href="politica-cancelamento.html" class="btn">Ver política</a>
-        </div>
-
-        <div class="card">
-        <img src="https://static.wixstatic.com/media/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png/v1/fit/w_2500,h_1330,al_c/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png">
-        <h3>Parque Nacional Marinho</h3>
-        <p>
-            O Parque Nacional Marinho protege grande parte do arquipélago.
-            Veja regras de visitação, ingressos e informações oficiais.
-        </p>
-        <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn">Mais informações</a>
-        </div>
-
+    <div class="card">
+      <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp" alt="TPA">
+      <h3 data-text="tpaTitulo">TPA – Taxa de Preservação Ambiental</h3>
+      <p data-text="tpaTexto">
+        A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha. Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.
+      </p>
+      <div class="card-actions">
+        <a href="https://www.noronha.pe.gov.br/" target="_blank" class="btn" rel="noopener noreferrer" data-text="tpaBtn">Acessar site oficial</a>
+      </div>
     </div>
-    </section>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="Agendamento de Trilhas">
+      <h3 data-text="trilhasTitulo">Agendamento de Trilhas</h3>
+      <p data-text="trilhasTexto">
+        Algumas trilhas e piscinas naturais possuem acesso controlado. Faça seu agendamento antecipadamente para garantir sua visita.
+      </p>
+      <div class="card-actions">
+        <a href="https://wa.me/5581991654517?text=Olá,%20quero%20agendar%20uma%20trilha%20em%20Noronha" class="btn" rel="noopener noreferrer" data-text="trilhasBtn">Agendar pelo WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlapTRBJe3_4fHQ1UB8gtZHVn9EfREceL-A&s" alt="Política de Cancelamento">
+      <h3 data-text="cancelamentoTitulo">Política de Cancelamento</h3>
+      <p data-text="cancelamentoTexto">
+        Consulte nossa política de cancelamentos e reagendamentos antes de reservar seu passeio.
+      </p>
+      <div class="card-actions">
+        <a href="politica-cancelamento.html" class="btn" data-text="cancelamentoBtn">Ver política</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://static.wixstatic.com/media/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png/v1/fit/w_2500,h_1330,al_c/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png" alt="Parque Nacional Marinho">
+      <h3 data-text="parqueTitulo">Parque Nacional Marinho</h3>
+      <p data-text="parqueTexto">
+        O Parque Nacional Marinho protege grande parte do arquipélago. Veja regras de visitação, ingressos e informações oficiais.
+      </p>
+      <div class="card-actions">
+        <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn" rel="noopener noreferrer" data-text="parqueBtn">Mais informações</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <footer>
-<p>© <?php echo date('Y'); ?> Picos de Noronha Turismo - Todos os direitos reservados</p>
-<div class="footer-social">
-  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
+  <p id="footer-copy">© <?php echo date('Y'); ?> Picos de Noronha Turismo - Todos os direitos reservados</p>
 
-  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
-    <i class="fas fa-envelope"></i>
-  </a>
+  <div class="footer-social">
+    <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>
+    </a>
 
-  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-</div>
+    <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+
+    <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
 </footer>
+
+<a
+  id="whatsapp-float"
+  class="whatsapp-float"
+  href="https://wa.me/5581991654517?text=Olá!%20Quero%20mais%20informações%20sobre%20os%20passeios%20em%20Fernando%20de%20Noronha."
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Fale no WhatsApp"
+>
+  <i class="fab fa-whatsapp"></i>
+  <span data-text="whatsappFlutuante">Fale no WhatsApp</span>
+</a>
 
 </body>
 </html>

@@ -9,8 +9,11 @@
   <style>
     :root {
       --primary: #0ea5a4;
+      --primary-dark: #0891b2;
       --secondary: #0f172a;
       --light: #f8fafc;
+      --whatsapp: #25D366;
+      --whatsapp-dark: #1ebe5d;
     }
 
     * {
@@ -18,6 +21,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -60,6 +67,14 @@
       max-width: 1200px;
       margin: auto;
       width: 100%;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
     }
 
     .cards {
@@ -105,6 +120,14 @@
       flex: 1;
     }
 
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 20px;
+      margin-top: 18px;
+    }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); }
@@ -141,15 +164,24 @@
       cursor: pointer;
       display: inline-block;
       margin-top: 10px;
+      border: none;
     }
 
     .btn:hover {
-      background: #0891b2;
+      background: var(--primary-dark);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-dark);
     }
 
     .card .btn {
-      margin: 20px auto 0 auto;
-      display: inline-block;
+      margin: 0;
+      width: 100%;
     }
 
     .form-section {
@@ -355,6 +387,58 @@
       font-size: .95rem;
     }
 
+    .footer-social {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .footer-social a {
+      color: #fff;
+      font-size: 22px;
+      transition: .3s;
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-2px);
+      opacity: .8;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      font-weight: 700;
+      transition: .3s ease;
+      animation: floatPulse 1.8s infinite;
+    }
+
+    .whatsapp-float i {
+      font-size: 1.5rem;
+    }
+
+    .whatsapp-float:hover {
+      background: var(--whatsapp-dark);
+      transform: translateY(-3px);
+    }
+
+    @keyframes floatPulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
     @media(max-width:768px) {
       header h1 { font-size: 2.2rem; }
       header p { font-size: 1rem; }
@@ -367,32 +451,24 @@
         right: 12px;
         max-width: calc(100% - 24px);
       }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        padding: 14px 16px;
+      }
+
+      .whatsapp-float span {
+        display: none;
+      }
     }
-
-    .footer-social{
-  margin-top:10px;
-  display:flex;
-  justify-content:center;
-  gap:18px;
-}
-
-.footer-social a{
-  color:#fff;
-  font-size:22px;
-  transition:.3s;
-}
-
-.footer-social a:hover{
-  transform:translateY(-2px);
-  opacity:.8;
-}
   </style>
 </head>
 <body>
 
   <header>
     <div class="language-currency">
-      <label id="labelMoeda" style="color:#fff;">Moeda:</label>
+      <label id="labelMoeda">Moeda:</label>
       <select id="moeda" onchange="atualizarMoeda()">
         <option value="BRL">BRL</option>
         <option value="USD">USD</option>
@@ -403,7 +479,7 @@
       <img src="https://flagcdn.com/32x24/br.png" alt="Português" title="Português" onclick="alterarIdiomaMoeda('pt')" id="flag-pt">
       <img src="https://flagcdn.com/32x24/us.png" alt="English" title="English" onclick="alterarIdiomaMoeda('en')" id="flag-en">
       <img src="https://flagcdn.com/32x24/es.png" alt="Español" title="Español" onclick="alterarIdiomaMoeda('es')" id="flag-es">
-      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('GBP')" id="flag-gbp">
+      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('gbp')" id="flag-gbp">
     </div>
 
     <span class="hero-badge" data-i18n="heroBadge">Guia de Viagem • Fernando de Noronha</span>
@@ -412,10 +488,13 @@
       Descubra experiências inesquecíveis entre praias paradisíacas, trilhas ecológicas,
       mergulho, pôr do sol e sabores únicos no arquipélago mais encantador do Brasil.
     </p>
-    <ul>
-    <a href="#atividades" class="btn" data-i18n="heroBtn">Explorar atividades</a>
-    <a href="index.html" class="btn" data-i18n="heroBtn2">Voltar para a página inicial</a>
-    </ul>
+
+    <div class="hero-actions">
+      <a href="#atividades" class="btn" data-i18n="heroBtn">Explorar atividades</a>
+      <a href="index.html" class="btn" data-i18n="heroBtn2">Voltar para a página inicial</a>
+      <a id="heroWhatsappBtn" href="https://wa.me/5581991654517?text=Olá!%20Quero%20planejar%20meu%20roteiro%20em%20Fernando%20de%20Noronha." target="_blank" class="btn btn-whatsapp" data-i18n="heroWhatsappBtn">Falar no WhatsApp</a>
+    </div>
+
     <div class="meta" data-i18n="meta">Experiências incríveis no paraíso brasileiro</div>
   </header>
 
@@ -457,82 +536,102 @@
     <div class="cards">
       <article class="card">
         <span class="destaque">1</span>
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="Mergulho em Fernando de Noronha">
         <h3 data-i18n="card1Title">Mergulhar nas águas cristalinas</h3>
         <p data-i18n="card1Text">Explore o mar transparente da ilha e observe peixes, tartarugas, corais e toda a riqueza da vida marinha de Noronha.</p>
-      <!-- <div class="price-tag" data-price="450" data-i18n-price-prefix="startingFrom">A partir de R$ 450,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Mergulho nas águas cristalinas" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">2</span>
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Praias icônicas em Fernando de Noronha">
         <h3 data-i18n="card2Title">Visitar praias icônicas</h3>
         <p data-i18n="card2Text">Conheça cenários inesquecíveis como a Praia do Sancho e a Baía dos Porcos, famosas pela beleza impressionante.</p>
-      <!-- <div class="price-tag" data-price="180" data-i18n-price-prefix="startingFrom">A partir de R$ 180,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Visitar praias icônicas" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">3</span>
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Nascer e pôr do sol em Fernando de Noronha">
         <h3 data-i18n="card3Title">Assistir ao nascer e ao pôr do sol</h3>
         <p data-i18n="card3Text">Viva momentos únicos em pontos como o Forte Nossa Senhora dos Remédios ou a Praia da Conceição.</p>
-       <!-- <div class="price-tag" data-price="120" data-i18n-price-prefix="startingFrom">A partir de R$ 120,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Nascer e pôr do sol" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">4</span>
-        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="Trilhas panorâmicas em Fernando de Noronha">
         <h3 data-i18n="card4Title">Fazer trilhas panorâmicas</h3>
         <p data-i18n="card4Text">Percorra rotas como a Trilha do Atalaia e a Trilha do Piquinho para admirar vistas espetaculares da ilha.</p>
-       <!-- <div class="price-tag" data-price="160" data-i18n-price-prefix="startingFrom">A partir de R$ 160,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Trilhas panorâmicas" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">5</span>
-        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1200&q=80" alt="Projeto Tamar">
         <h3 data-i18n="card5Title">Conhecer o Projeto Tamar</h3>
         <p data-i18n="card5Text">Visite o centro de conservação de tartarugas marinhas e descubra ações importantes de educação e preservação ambiental.</p>
-        <!-- <div class="price-tag" data-price="90" data-i18n-price-prefix="startingFrom">A partir de R$ 90,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Projeto Tamar" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">6</span>
-        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="Buraco do Galego">
         <h3 data-i18n="card6Title">Visitar o Buraco do Galego</h3>
         <p data-i18n="card6Text">Conheça essa piscina natural cercada por rochas, um lugar diferenciado para contemplar a força e a beleza do mar.</p>
-       <!-- <div class="price-tag" data-price="110" data-i18n-price-prefix="startingFrom">A partir de R$ 110,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Buraco do Galego" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">7</span>
-        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80" alt="Passeio de barco">
         <h3 data-i18n="card7Title">Fazer passeio de barco</h3>
         <p data-i18n="card7Text">Navegue para conhecer ilhéus, falésias e praias inacessíveis por terra, além de observar golfinhos em alguns roteiros.</p>
-      <!-- <div class="price-tag" data-price="280" data-i18n-price-prefix="startingFrom">A partir de R$ 280,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Passeio de barco" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">8</span>
-        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80" alt="Esportes aquáticos">
         <h3 data-i18n="card8Title">Praticar esportes aquáticos</h3>
         <p data-i18n="card8Text">Escolha entre surf, stand-up paddle e caiaque para aproveitar o mar de Noronha com aventura e paisagens incríveis.</p>
-      <!-- <div class="price-tag" data-price="220" data-i18n-price-prefix="startingFrom">A partir de R$ 220,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Esportes aquáticos" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">9</span>
-        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80" alt="Mirante do Boldró">
         <h3 data-i18n="card9Title">Ir ao Mirante do Boldró</h3>
         <p data-i18n="card9Text">Observe as ondas quebrando nos rochedos e contemple um dos cenários mais marcantes da ilha, especialmente no fim do dia.</p>
-       <!-- <div class="price-tag" data-price="100" data-i18n-price-prefix="startingFrom">A partir de R$ 100,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Mirante do Boldró" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
 
       <article class="card">
         <span class="destaque">10</span>
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Gastronomia local">
         <h3 data-i18n="card10Title">Provar a culinária local</h3>
         <p data-i18n="card10Text">Experimente frutos do mar frescos, tapioca e o famoso bolinho de tubalhau em restaurantes e bistrôs da ilha.</p>
-       <!-- <div class="price-tag" data-price="140" data-i18n-price-prefix="startingFrom">A partir de R$ 140,00</div> -->
+        <div class="card-actions">
+          <a class="btn btn-whatsapp activity-whatsapp" target="_blank" data-activity="Culinária local" data-i18n="bookWhatsapp">Reservar no WhatsApp</a>
+        </div>
       </article>
     </div>
   </section>
@@ -570,43 +669,51 @@
 
     <div class="cards">
       <div class="card">
-        <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp" alt="">
+        <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp" alt="TPA">
         <h3 data-i18n="info1Title">TPA – Taxa de Preservação Ambiental</h3>
         <p data-i18n="info1Text">
           A Taxa de Preservação Ambiental é obrigatória para visitantes da ilha.
           Ela contribui para a conservação do arquipélago e manutenção da infraestrutura.
         </p>
-        <a href="https://www.noronha.pe.gov.br/" target="_blank" class="btn" data-i18n="info1Btn">Acessar site oficial</a>
+        <div class="card-actions">
+          <a href="https://www.noronha.pe.gov.br/" target="_blank" class="btn" data-i18n="info1Btn">Acessar site oficial</a>
+        </div>
       </div>
 
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80" alt="Agendamento de Trilhas">
         <h3 data-i18n="info2Title">Agendamento de Trilhas</h3>
         <p data-i18n="info2Text">
           Algumas trilhas e piscinas naturais possuem acesso controlado.
           Faça seu agendamento antecipadamente para garantir sua visita.
         </p>
-        <a href="https://wa.me/5581987654321?text=Olá,%20quero%20agendar%20uma%20trilha%20em%20Noronha" target="_blank" class="btn" data-i18n="info2Btn">Agendar pelo WhatsApp</a>
+        <div class="card-actions">
+          <a href="https://wa.me/5581991654517?text=Olá,%20quero%20agendar%20uma%20trilha%20em%20Noronha" class="btn" data-i18n="info2Btn">Agendar pelo WhatsApp</a>
+        </div>
       </div>
 
       <div class="card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlapTRBJe3_4fHQ1UB8gtZHVn9EfREceL-A&s" alt="">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlapTRBJe3_4fHQ1UB8gtZHVn9EfREceL-A&s" alt="Política de Cancelamento">
         <h3 data-i18n="info3Title">Política de Cancelamento</h3>
         <p data-i18n="info3Text">
           Consulte nossa política de cancelamentos e reagendamentos
           antes de reservar seu passeio.
         </p>
-        <a href="politica-cancelamento.html" class="btn" data-i18n="info3Btn">Ver política</a>
+        <div class="card-actions">
+          <a href="politica-cancelamento.html" class="btn" data-i18n="info3Btn">Ver política</a>
+        </div>
       </div>
 
       <div class="card">
-        <img src="https://static.wixstatic.com/media/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png/v1/fit/w_2500,h_1330,al_c/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png" alt="">
+        <img src="https://static.wixstatic.com/media/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png/v1/fit/w_2500,h_1330,al_c/2b2627_06b0174690b649b2b15455c2295d812a~mv2.png" alt="Parque Nacional Marinho">
         <h3 data-i18n="info4Title">Parque Nacional Marinho</h3>
         <p data-i18n="info4Text">
           O Parque Nacional Marinho protege grande parte do arquipélago.
           Veja regras de visitação, ingressos e informações oficiais.
         </p>
-        <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn" data-i18n="info4Btn">Mais informações</a>
+        <div class="card-actions">
+          <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn" data-i18n="info4Btn">Mais informações</a>
+        </div>
       </div>
     </div>
   </section>
@@ -614,22 +721,34 @@
   <footer>
     <p id="footerText"></p>
     <div class="footer-social">
-  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
+      <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
 
-  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
-    <i class="fas fa-envelope"></i>
-  </a>
+      <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
 
-  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-</div>
+      <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
   </footer>
+
+  <a
+    id="whatsappFloat"
+    class="whatsapp-float"
+    href="https://wa.me/5581991654517?text=Olá!%20Quero%20mais%20informações%20sobre%20Fernando%20de%20Noronha."
+    target="_blank"
+    aria-label="Fale no WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+    <span data-i18n="floatWhatsapp">Fale no WhatsApp</span>
+  </a>
 
   <script>
     const anoAtual = new Date().getFullYear();
+    const WHATSAPP_NUMBER = "5581991654517";
 
     const translations = {
       pt: {
@@ -639,7 +758,11 @@
         heroTitle: "10 coisas interessantes para se fazer em Fernando de Noronha",
         heroText: "Descubra experiências inesquecíveis entre praias paradisíacas, trilhas ecológicas, mergulho, pôr do sol e sabores únicos no arquipélago mais encantador do Brasil.",
         heroBtn: "Explorar atividades",
+        heroBtn2: "Voltar para a página inicial",
+        heroWhatsappBtn: "Falar no WhatsApp",
         meta: "Experiências incríveis no paraíso brasileiro",
+        bookWhatsapp: "Reservar no WhatsApp",
+        floatWhatsapp: "Fale no WhatsApp",
 
         aboutTitle: "Sobre Fernando de Noronha",
         aboutText1: "Fernando de Noronha é um dos destinos mais desejados do Brasil, conhecido por suas águas cristalinas, vida marinha abundante, trilhas panorâmicas e paisagens que parecem cenário de filme.",
@@ -715,7 +838,11 @@
         heroTitle: "10 interesting things to do in Fernando de Noronha",
         heroText: "Discover unforgettable experiences among paradise beaches, ecological trails, diving, sunsets and unique flavors in Brazil’s most enchanting archipelago.",
         heroBtn: "Explore activities",
+        heroBtn2: "Back to home page",
+        heroWhatsappBtn: "Chat on WhatsApp",
         meta: "Amazing experiences in the Brazilian paradise",
+        bookWhatsapp: "Book on WhatsApp",
+        floatWhatsapp: "Chat on WhatsApp",
 
         aboutTitle: "About Fernando de Noronha",
         aboutText1: "Fernando de Noronha is one of Brazil’s most desired destinations, known for its crystal-clear waters, abundant marine life, panoramic trails and scenery that looks like a movie set.",
@@ -791,7 +918,11 @@
         heroTitle: "10 cosas interesantes para hacer en Fernando de Noronha",
         heroText: "Descubre experiencias inolvidables entre playas paradisíacas, senderos ecológicos, buceo, atardeceres y sabores únicos en el archipiélago más encantador de Brasil.",
         heroBtn: "Explorar actividades",
+        heroBtn2: "Volver a la página principal",
+        heroWhatsappBtn: "Hablar por WhatsApp",
         meta: "Experiencias increíbles en el paraíso brasileño",
+        bookWhatsapp: "Reservar por WhatsApp",
+        floatWhatsapp: "Hablar por WhatsApp",
 
         aboutTitle: "Sobre Fernando de Noronha",
         aboutText1: "Fernando de Noronha es uno de los destinos más deseados de Brasil, conocido por sus aguas cristalinas, abundante vida marina, senderos panorámicos y paisajes que parecen de película.",
@@ -883,6 +1014,42 @@
       }).format(converted);
     }
 
+    function buildWhatsappMessage(activity, lang) {
+      if (lang === "en") {
+        return `Hello! I want more information about: ${activity} in Fernando de Noronha.`;
+      }
+      if (lang === "es") {
+        return `¡Hola! Quiero más información sobre: ${activity} en Fernando de Noronha.`;
+      }
+      return `Olá! Quero mais informações sobre: ${activity} em Fernando de Noronha.`;
+    }
+
+    function updateWhatsappLinks(lang) {
+      document.querySelectorAll(".activity-whatsapp").forEach(btn => {
+        const activity = btn.getAttribute("data-activity");
+        const message = buildWhatsappMessage(activity, lang);
+        btn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      });
+
+      const heroMessages = {
+        pt: "Olá! Quero planejar meu roteiro em Fernando de Noronha.",
+        en: "Hello! I want to plan my itinerary in Fernando de Noronha.",
+        es: "¡Hola! Quiero planear mi itinerario en Fernando de Noronha."
+      };
+
+      const floatMessages = {
+        pt: "Olá! Quero mais informações sobre Fernando de Noronha.",
+        en: "Hello! I want more information about Fernando de Noronha.",
+        es: "¡Hola! Quiero más información sobre Fernando de Noronha."
+      };
+
+      document.getElementById("heroWhatsappBtn").href =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(heroMessages[lang])}`;
+
+      document.getElementById("whatsappFloat").href =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(floatMessages[lang])}`;
+    }
+
     function aplicarTraducao(lang) {
       const dict = translations[lang];
       if (!dict) return;
@@ -915,6 +1082,7 @@
       if (lang === "en") document.getElementById("flag-en").classList.add("active");
       if (lang === "es") document.getElementById("flag-es").classList.add("active");
 
+      updateWhatsappLinks(lang);
       localStorage.setItem("siteLanguage", lang);
     }
 
@@ -936,7 +1104,17 @@
     function alterarIdiomaMoeda(valor) {
       if (valor === "pt" || valor === "en" || valor === "es") {
         aplicarTraducao(valor);
-      } else if (valor === "GBP") {
+
+        const moedaPorIdioma = {
+          pt: "BRL",
+          en: "USD",
+          es: "EUR"
+        };
+
+        if (valor !== "en" || document.getElementById("moeda").value !== "GBP") {
+          document.getElementById("moeda").value = moedaPorIdioma[valor];
+        }
+      } else if (valor === "gbp") {
         document.getElementById("moeda").value = "GBP";
         aplicarTraducao("en");
         document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
@@ -958,9 +1136,11 @@
         document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
         document.getElementById("flag-gbp").classList.add("active");
       }
+
+      updateWhatsappLinks(savedLanguage);
     }
 
-    iniciarSite();
+    document.addEventListener("DOMContentLoaded", iniciarSite);
   </script>
 </body>
 </html>

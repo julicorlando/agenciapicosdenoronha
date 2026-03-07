@@ -9,8 +9,11 @@
   <style>
     :root {
       --primary: #0ea5a4;
+      --primary-dark: #0891b2;
       --secondary: #0f172a;
       --light: #f8fafc;
+      --whatsapp: #25D366;
+      --whatsapp-dark: #1ebe5d;
     }
 
     * {
@@ -18,6 +21,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -64,6 +71,14 @@
       margin-bottom: 18px;
       font-size: .95rem;
       backdrop-filter: blur(6px);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
     }
 
     .language-currency {
@@ -265,7 +280,7 @@
     }
 
     .btn:hover {
-      background: #0891b2;
+      background: var(--primary-dark);
       transform: translateY(-2px);
     }
 
@@ -284,12 +299,72 @@
       background: #1e293b;
     }
 
+    .btn-whatsapp {
+      background: var(--whatsapp);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-dark);
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       background: var(--secondary);
       color: #fff;
       margin-top: 30px;
+    }
+
+    .footer-social {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .footer-social a {
+      color: #fff;
+      font-size: 22px;
+      transition: .3s;
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-2px);
+      opacity: .8;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      font-weight: 700;
+      transition: .3s ease;
+      animation: floatPulse 1.8s infinite;
+    }
+
+    .whatsapp-float i {
+      font-size: 1.5rem;
+    }
+
+    .whatsapp-float:hover {
+      background: var(--whatsapp-dark);
+      transform: translateY(-3px);
+    }
+
+    @keyframes floatPulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
     @media (max-width: 900px) {
@@ -326,24 +401,17 @@
         right: 12px;
         max-width: calc(100% - 24px);
       }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        padding: 14px 16px;
+      }
+
+      .whatsapp-float span {
+        display: none;
+      }
     }
-    .footer-social{
-  margin-top:10px;
-  display:flex;
-  justify-content:center;
-  gap:18px;
-}
-
-.footer-social a{
-  color:#fff;
-  font-size:22px;
-  transition:.3s;
-}
-
-.footer-social a:hover{
-  transform:translateY(-2px);
-  opacity:.8;
-}
   </style>
 </head>
 <body>
@@ -361,7 +429,7 @@
       <img src="https://flagcdn.com/32x24/br.png" alt="Português" title="Português" onclick="alterarIdiomaMoeda('pt')" id="flag-pt">
       <img src="https://flagcdn.com/32x24/us.png" alt="English" title="English" onclick="alterarIdiomaMoeda('en')" id="flag-en">
       <img src="https://flagcdn.com/32x24/es.png" alt="Español" title="Español" onclick="alterarIdiomaMoeda('es')" id="flag-es">
-      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('GBP')" id="flag-gbp">
+      <img src="https://flagcdn.com/32x24/gb.png" alt="English / GBP" title="English / GBP" onclick="alterarIdiomaMoeda('gbp')" id="flag-gbp">
     </div>
 
     <span class="hero-badge" data-i18n="heroBadge">Picos de Noronha • Atendimento</span>
@@ -370,10 +438,12 @@
       Tire dúvidas, solicite informações sobre passeios e envie sua mensagem de forma rápida.
       Você também pode falar diretamente pelo WhatsApp ou Instagram.
     </p>
-    <ul>
-        <a href="index.html" class="btn">Voltar para a página inicial</a>
-        <a href="top10.html" class="btn">Ver os 10 Melhores Passeios</a>
-    </ul>
+
+    <div class="hero-actions">
+      <a href="index.html" class="btn" data-i18n="heroBtnHome">Voltar para a página inicial</a>
+      <a href="top10.html" class="btn" data-i18n="heroBtnTop10">Ver os 10 Melhores Passeios</a>
+      <a id="heroWhatsappBtn" href="https://wa.me/5581991654517?text=Olá!%20Quero%20mais%20informações%20sobre%20os%20passeios%20em%20Fernando%20de%20Noronha." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" data-i18n="heroBtnWhatsapp">Chamar no WhatsApp</a>
+    </div>
   </header>
 
   <section>
@@ -394,7 +464,7 @@
 
           <div class="contact-item">
             <strong data-i18n="phoneLabel">Fone / WhatsApp</strong>
-            <a href="https://wa.me/5581991654517" target="_blank">+55 81 99165-4517</a>
+            <a href="https://wa.me/5581991654517" target="_blank" rel="noopener noreferrer">+55 81 99165-4517</a>
           </div>
 
           <div class="contact-item">
@@ -404,7 +474,7 @@
 
           <div class="contact-item">
             <strong data-i18n="instagramLabel">Instagram</strong>
-            <a href="https://instagram.com/picosdenoronha" target="_blank">@picosdenoronha</a>
+            <a href="https://instagram.com/picosdenoronha" target="_blank" rel="noopener noreferrer">@picosdenoronha</a>
           </div>
         </div>
 
@@ -416,8 +486,8 @@
         </div>
 
         <div class="actions">
-          <a href="https://wa.me/5581991654517" target="_blank" class="btn" data-i18n="whatsBtn">Chamar no WhatsApp</a>
-          <a href="https://instagram.com/picosdenoronha" target="_blank" class="btn btn-secondary" data-i18n="instaBtn">Ver Instagram</a>
+          <a id="whatsBtnLink" href="https://wa.me/5581991654517" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" data-i18n="whatsBtn">Chamar no WhatsApp</a>
+          <a href="https://instagram.com/picosdenoronha" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-i18n="instaBtn">Ver Instagram</a>
         </div>
       </div>
 
@@ -460,19 +530,31 @@
   <footer>
     <p id="footerText"></p>
     <div class="footer-social">
-  <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
+      <a href="https://instagram.com/picosdenoronha" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
 
-  <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
-    <i class="fas fa-envelope"></i>
-  </a>
+      <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
 
-  <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-</div>
+      <a href="https://wa.me/5581991654517" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
   </footer>
+
+  <a
+    id="whatsappFloat"
+    class="whatsapp-float"
+    href="https://wa.me/5581991654517?text=Olá!%20Quero%20mais%20informações%20sobre%20os%20passeios%20em%20Fernando%20de%20Noronha."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Fale no WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+    <span data-i18n="floatWhatsapp">Fale no WhatsApp</span>
+  </a>
 
   <script>
     const anoAtual = new Date().getFullYear();
@@ -484,6 +566,9 @@
         heroBadge: "Picos de Noronha • Atendimento",
         heroTitle: "Entre em contato conosco",
         heroText: "Tire dúvidas, solicite informações sobre passeios e envie sua mensagem de forma rápida. Você também pode falar diretamente pelo WhatsApp ou Instagram.",
+        heroBtnHome: "Voltar para a página inicial",
+        heroBtnTop10: "Ver os 10 Melhores Passeios",
+        heroBtnWhatsapp: "Chamar no WhatsApp",
         sectionTitle: "Fale com a Picos de Noronha",
         sectionSubtitle: "Preencha o formulário abaixo para envio automático por e-mail ou utilize um dos canais de atendimento disponíveis.",
         contactDataTitle: "Dados de contato",
@@ -508,6 +593,7 @@
         formNote: "Ao clicar em enviar, seu aplicativo de e-mail será aberto automaticamente para concluir o envio da mensagem.",
         sendBtn: "Enviar mensagem",
         clearBtn: "Limpar formulário",
+        floatWhatsapp: "Fale no WhatsApp",
         footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos os direitos reservados`
       },
 
@@ -517,6 +603,9 @@
         heroBadge: "Picos de Noronha • Contact",
         heroTitle: "Get in touch with us",
         heroText: "Ask questions, request information about tours and send your message quickly. You can also contact us directly via WhatsApp or Instagram.",
+        heroBtnHome: "Back to home page",
+        heroBtnTop10: "See the Top 10 Tours",
+        heroBtnWhatsapp: "Chat on WhatsApp",
         sectionTitle: "Talk to Picos de Noronha",
         sectionSubtitle: "Fill out the form below for automatic email sending or use one of the available service channels.",
         contactDataTitle: "Contact details",
@@ -541,6 +630,7 @@
         formNote: "When you click send, your email application will open automatically to complete the message sending.",
         sendBtn: "Send message",
         clearBtn: "Clear form",
+        floatWhatsapp: "Chat on WhatsApp",
         footerText: `© ${anoAtual} Picos de Noronha Tourism - All rights reserved`
       },
 
@@ -550,6 +640,9 @@
         heroBadge: "Picos de Noronha • Atención",
         heroTitle: "Ponte en contacto con nosotros",
         heroText: "Aclara tus dudas, solicita información sobre paseos y envía tu mensaje rápidamente. También puedes hablar directamente por WhatsApp o Instagram.",
+        heroBtnHome: "Volver a la página principal",
+        heroBtnTop10: "Ver los 10 Mejores Paseos",
+        heroBtnWhatsapp: "Hablar por WhatsApp",
         sectionTitle: "Habla con Picos de Noronha",
         sectionSubtitle: "Completa el formulario a continuación para envío automático por correo electrónico o utiliza uno de los canales de atención disponibles.",
         contactDataTitle: "Datos de contacto",
@@ -574,9 +667,39 @@
         formNote: "Al hacer clic en enviar, tu aplicación de correo se abrirá automáticamente para completar el envío del mensaje.",
         sendBtn: "Enviar mensaje",
         clearBtn: "Limpiar formulario",
+        floatWhatsapp: "Hablar por WhatsApp",
         footerText: `© ${anoAtual} Picos de Noronha Turismo - Todos los derechos reservados`
       }
     };
+
+    function updateWhatsappLinks(lang) {
+      const messages = {
+        pt: {
+          hero: "Olá! Quero mais informações sobre os passeios em Fernando de Noronha.",
+          card: "Olá! Quero falar com a Picos de Noronha sobre passeios e reservas.",
+          float: "Olá! Quero mais informações sobre os passeios em Fernando de Noronha."
+        },
+        en: {
+          hero: "Hello! I want more information about tours in Fernando de Noronha.",
+          card: "Hello! I want to talk to Picos de Noronha about tours and bookings.",
+          float: "Hello! I want more information about tours in Fernando de Noronha."
+        },
+        es: {
+          hero: "¡Hola! Quiero más información sobre los tours en Fernando de Noronha.",
+          card: "¡Hola! Quiero hablar con Picos de Noronha sobre tours y reservas.",
+          float: "¡Hola! Quiero más información sobre los tours en Fernando de Noronha."
+        }
+      };
+
+      document.getElementById("heroWhatsappBtn").href =
+        `https://wa.me/5581991654517?text=${encodeURIComponent(messages[lang].hero)}`;
+
+      document.getElementById("whatsBtnLink").href =
+        `https://wa.me/5581991654517?text=${encodeURIComponent(messages[lang].card)}`;
+
+      document.getElementById("whatsappFloat").href =
+        `https://wa.me/5581991654517?text=${encodeURIComponent(messages[lang].float)}`;
+    }
 
     function aplicarTraducao(lang) {
       const dict = translations[lang];
@@ -610,6 +733,7 @@
       if (lang === "en") document.getElementById("flag-en").classList.add("active");
       if (lang === "es") document.getElementById("flag-es").classList.add("active");
 
+      updateWhatsappLinks(lang);
       localStorage.setItem("siteLanguage", lang);
     }
 
@@ -621,7 +745,17 @@
     function alterarIdiomaMoeda(valor) {
       if (valor === "pt" || valor === "en" || valor === "es") {
         aplicarTraducao(valor);
-      } else if (valor === "GBP") {
+
+        const moedaPorIdioma = {
+          pt: "BRL",
+          en: "USD",
+          es: "EUR"
+        };
+
+        if (valor !== "en" || document.getElementById("moeda").value !== "GBP") {
+          document.getElementById("moeda").value = moedaPorIdioma[valor];
+        }
+      } else if (valor === "gbp") {
         document.getElementById("moeda").value = "GBP";
         aplicarTraducao("en");
         document.querySelectorAll(".language-currency img").forEach(img => img.classList.remove("active"));
@@ -644,7 +778,7 @@
       }
     }
 
-    iniciarSite();
+    document.addEventListener("DOMContentLoaded", iniciarSite);
   </script>
 </body>
 </html>

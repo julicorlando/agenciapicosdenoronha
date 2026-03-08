@@ -199,10 +199,9 @@ button{
 }
 
 footer{
-  text-align:center;
-  padding:20px;
   background:var(--secondary);
   color:#fff;
+  padding:22px 20px;
 }
 
 .valor{
@@ -271,6 +270,7 @@ footer{
   background:#f5f7fa;
   display:flex;
   justify-content:center;
+  max-width:100%;
 }
 
 .about__container{
@@ -328,10 +328,35 @@ footer{
   font-size:1rem;
 }
 
-.footer-social{
-  margin-top:10px;
+.footer-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  align-items:center;
+  gap:20px;
+}
+
+.footer-logo{
   display:flex;
-  justify-content:center;
+  justify-content:flex-start;
+  align-items:center;
+}
+
+.footer-logo img{
+  height:52px;
+  width:auto;
+  display:block;
+}
+
+.footer-copy{
+  text-align:center;
+  font-size:.95rem;
+}
+
+.footer-social{
+  display:flex;
+  justify-content:flex-end;
   gap:18px;
 }
 
@@ -398,6 +423,20 @@ footer{
   .whatsapp-float span{
     display:none;
   }
+
+  .footer-container{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .footer-logo,
+  .footer-social{
+    justify-content:center;
+  }
+
+  .footer-copy{
+    order:2;
+  }
 }
 </style>
 
@@ -420,7 +459,7 @@ const textos = {
     email:'Seu e-mail',
     mensagem:'Qual passeio você deseja?',
     enviar:'Enviar',
-    passeiosDestaque:'Passeios em Destaque',
+    passeiosDestaque:'Passeios Disponíveis',
     whatsappFlutuante:'Fale no WhatsApp',
     moeda:'Moeda:',
     sucessoEnvio:'✅ Mensagem enviada com sucesso!',
@@ -448,28 +487,22 @@ const textos = {
     parqueBtn:'Mais informações',
     footer:'Picos de Noronha Turismo - Todos os direitos reservados',
     passeios: [
-      { nome:'Passeio pelas Praias', descricao:'Explore as praias paradisíacas da região.' },
-      { nome:'Trilhas Ecológicas', descricao:'Descubra trilhas incríveis com contato com a natureza.' },
-      { nome:'City Tour', descricao:'Explore os pontos turísticos da cidade.' },
-      { nome:'Mergulho', descricao:'Mergulhe nas águas cristalinas e veja a vida marinha.' },
-      { nome:'Passeio de Barco', descricao:'Navegue pela costa e conheça praias escondidas.' },
-      { nome:'Observação de Golfinhos', descricao:'Assista a golfinhos em seu habitat natural.' },
-      { nome:'Snorkeling', descricao:'Explore recifes de corais e peixes coloridos.' },
-      { nome:'Passeio Noturno', descricao:'Conheça a região à noite e desfrute de um jantar local.' },
-      { nome:'Aventuras Off-road', descricao:'Explore trilhas em veículos 4x4.' },
-      { nome:'Caiaque', descricao:'Remada em rios e lagoas da região.' },
-      { nome:'Pesca Esportiva', descricao:'Pesque em alto mar com equipamentos profissionais.' },
-      { nome:'Passeio Histórico', descricao:'Conheça a história local através de museus e monumentos.' },
-      { nome:'Fotografia', descricao:'Sessão de fotos em locais paradisíacos.' },
-      { nome:'Yoga na Praia', descricao:'Pratique yoga ao nascer do sol.' },
-      { nome:'Passeio Gastronômico', descricao:'Deguste pratos típicos da região.' },
-      { nome:'Stand-up Paddle', descricao:'Aventura em águas calmas com SUP.' },
-      { nome:'Caminhada Guiada', descricao:'Trilhas guiadas para todos os níveis.' },
-      { nome:'Passeio Cultural', descricao:'Vivencie a cultura local.' },
-      { nome:'Stand-up Noturno', descricao:'SUP ao entardecer.' },
-      { nome:'Esportes Aquáticos', descricao:'Jet-ski, wakeboard e muito mais.' },
-      { nome:'Passeio de Helicóptero', descricao:'Vista panorâmica da região.' },
-      { nome:'Noite de Luau', descricao:'Jantar e música à beira-mar.' }
+      { nome:'Bike aquática no amanhecer', descricao:'Passeio ao amanhecer sobre o mar em bike aquática, com visual inesquecível da ilha.' },
+      { nome:'Canoa Havaiana', descricao:'Experiência no mar em canoa havaiana com remada guiada e paisagens incríveis.' },
+      { nome:'Trilha do Piquinho', descricao:'Trilha com vista panorâmica espetacular para contemplar Fernando de Noronha do alto.' },
+      { nome:'Barco Tradicional', descricao:'Passeio clássico de barco pela ilha. A observação dos golfinhos é permitida apenas neste passeio tradicional.' },
+      { nome:'Entardecer VIP', descricao:'Experiência especial no fim de tarde com visual privilegiado e clima exclusivo.' },
+      { nome:'Trilha Capim Açu', descricao:'Trilha mais intensa e aventureira, ideal para quem busca natureza e vistas impressionantes.' },
+      { nome:'Lancha Privativa', descricao:'Passeio exclusivo em lancha privativa para viver a ilha com mais conforto e liberdade.' },
+      { nome:'Ilha Tour privativo no Buggy', descricao:'Tour privativo de buggy pelos principais pontos da ilha com exclusividade.' },
+      { nome:'Mergulho de batismo – naufrágio', descricao:'Primeira experiência de mergulho em cenário de naufrágio, com acompanhamento especializado.' },
+      { nome:'Visita às piscinas naturais', descricao:'Conheça piscinas naturais em águas cristalinas com paisagens únicas.' },
+      { nome:'Abreu', descricao:'Passeio para conhecer uma das áreas naturais mais procuradas da ilha.' },
+      { nome:'Bike aquática', descricao:'Passeio de bike aquática em águas calmas com visual paradisíaco.' },
+      { nome:'Caiaque transparente', descricao:'Experiência diferenciada em caiaque transparente para observar o mar de forma única.' },
+      { nome:'Mergulho embarcado', descricao:'Mergulho embarcado com estrutura completa para explorar a vida marinha da ilha.' },
+      { nome:'Morro de São José', descricao:'Passeio para um dos cenários mais marcantes de Noronha, com experiência diferenciada.' },
+      { nome:'Ilha tour em grupo', descricao:'Passeio em grupo pelos principais atrativos da ilha, ideal para conhecer Noronha em roteiro completo.' }
     ]
   },
   en: {
@@ -486,7 +519,7 @@ const textos = {
     email:'Your email',
     mensagem:'Which tour do you want?',
     enviar:'Send',
-    passeiosDestaque:'Featured Tours',
+    passeiosDestaque:'Available Tours',
     whatsappFlutuante:'Chat on WhatsApp',
     moeda:'Currency:',
     sucessoEnvio:'✅ Message sent successfully!',
@@ -514,28 +547,22 @@ const textos = {
     parqueBtn:'More information',
     footer:'Picos de Noronha Tourism - All rights reserved',
     passeios: [
-      { nome:'Beach Tour', descricao:'Explore the region’s paradise beaches.' },
-      { nome:'Ecological Trails', descricao:'Discover incredible trails with contact with nature.' },
-      { nome:'City Tour', descricao:'Explore the city’s tourist attractions.' },
-      { nome:'Diving', descricao:'Dive into crystal-clear waters and discover marine life.' },
-      { nome:'Boat Tour', descricao:'Sail along the coast and discover hidden beaches.' },
-      { nome:'Dolphin Watching', descricao:'Watch dolphins in their natural habitat.' },
-      { nome:'Snorkeling', descricao:'Explore coral reefs and colorful fish.' },
-      { nome:'Night Tour', descricao:'Discover the region at night and enjoy a local dinner.' },
-      { nome:'Off-road Adventures', descricao:'Explore trails in 4x4 vehicles.' },
-      { nome:'Kayaking', descricao:'Paddle on rivers and lagoons in the region.' },
-      { nome:'Sport Fishing', descricao:'Fish in the open sea with professional equipment.' },
-      { nome:'Historical Tour', descricao:'Learn the local history through museums and monuments.' },
-      { nome:'Photography', descricao:'Photo session in paradise locations.' },
-      { nome:'Beach Yoga', descricao:'Practice yoga at sunrise.' },
-      { nome:'Gastronomic Tour', descricao:'Taste the region’s typical dishes.' },
-      { nome:'Stand-up Paddle', descricao:'Adventure in calm waters with SUP.' },
-      { nome:'Guided Hike', descricao:'Guided trails for all levels.' },
-      { nome:'Cultural Tour', descricao:'Experience the local culture.' },
-      { nome:'Night SUP', descricao:'SUP at sunset.' },
-      { nome:'Water Sports', descricao:'Jet ski, wakeboard and much more.' },
-      { nome:'Helicopter Tour', descricao:'Panoramic view of the region.' },
-      { nome:'Luau Night', descricao:'Dinner and music by the sea.' }
+      { nome:'Water Bike at Sunrise', descricao:'Sunrise tour over the sea on a water bike, with unforgettable island views.' },
+      { nome:'Hawaiian Canoe', descricao:'Sea experience in a Hawaiian canoe with guided paddling and incredible scenery.' },
+      { nome:'Piquinho Trail', descricao:'Trail with spectacular panoramic views to admire Fernando de Noronha from above.' },
+      { nome:'Traditional Boat Tour', descricao:'Classic boat tour around the island. Dolphin watching is only allowed on this traditional boat tour.' },
+      { nome:'VIP Sunset', descricao:'Special late-afternoon experience with privileged views and an exclusive atmosphere.' },
+      { nome:'Capim Açu Trail', descricao:'A more intense and adventurous trail, ideal for those seeking nature and impressive views.' },
+      { nome:'Private Speedboat', descricao:'Exclusive private speedboat experience to enjoy the island with more comfort and freedom.' },
+      { nome:'Private Island Tour by Buggy', descricao:'Private buggy tour through the island’s main attractions with exclusivity.' },
+      { nome:'Discovery Dive – Shipwreck', descricao:'First diving experience in a shipwreck setting, with specialized guidance.' },
+      { nome:'Visit to Natural Pools', descricao:'Discover natural pools in crystal-clear waters with unique landscapes.' },
+      { nome:'Abreu', descricao:'Tour to visit one of the island’s most sought-after natural areas.' },
+      { nome:'Water Bike', descricao:'Water bike ride in calm waters with paradise scenery.' },
+      { nome:'Transparent Kayak', descricao:'Unique transparent kayak experience to observe the sea in a special way.' },
+      { nome:'Boat Diving', descricao:'Boat diving with full structure to explore the island’s marine life.' },
+      { nome:'Morro de São José', descricao:'Tour to one of Noronha’s most striking landscapes, with a unique experience.' },
+      { nome:'Group Island Tour', descricao:'Group tour through the island’s main attractions, ideal for discovering Noronha on a complete itinerary.' }
     ]
   },
   es: {
@@ -552,7 +579,7 @@ const textos = {
     email:'Su correo',
     mensagem:'¿Qué tour desea?',
     enviar:'Enviar',
-    passeiosDestaque:'Tours Destacados',
+    passeiosDestaque:'Tours Disponibles',
     whatsappFlutuante:'Hablar por WhatsApp',
     moeda:'Moneda:',
     sucessoEnvio:'✅ ¡Mensaje enviado con éxito!',
@@ -580,28 +607,22 @@ const textos = {
     parqueBtn:'Más información',
     footer:'Picos de Noronha Turismo - Todos los derechos reservados',
     passeios: [
-      { nome:'Tour por las Playas', descricao:'Explore las playas paradisíacas de la región.' },
-      { nome:'Senderos Ecológicos', descricao:'Descubra senderos increíbles en contacto con la naturaleza.' },
-      { nome:'City Tour', descricao:'Explore los puntos turísticos de la ciudad.' },
-      { nome:'Buceo', descricao:'Sumérjase en aguas cristalinas y vea la vida marina.' },
-      { nome:'Paseo en Barco', descricao:'Navegue por la costa y conozca playas escondidas.' },
-      { nome:'Avistamiento de Delfines', descricao:'Observe delfines en su hábitat natural.' },
-      { nome:'Snorkeling', descricao:'Explore arrecifes de coral y peces coloridos.' },
-      { nome:'Tour Nocturno', descricao:'Conozca la región por la noche y disfrute de una cena local.' },
-      { nome:'Aventuras Off-road', descricao:'Explore senderos en vehículos 4x4.' },
-      { nome:'Kayak', descricao:'Reme por ríos y lagunas de la región.' },
-      { nome:'Pesca Deportiva', descricao:'Pesque en alta mar con equipo profesional.' },
-      { nome:'Tour Histórico', descricao:'Conozca la historia local a través de museos y monumentos.' },
-      { nome:'Fotografía', descricao:'Sesión de fotos en lugares paradisíacos.' },
-      { nome:'Yoga en la Playa', descricao:'Practique yoga al amanecer.' },
-      { nome:'Tour Gastronómico', descricao:'Deguste platos típicos de la región.' },
-      { nome:'Stand-up Paddle', descricao:'Aventura en aguas tranquilas con SUP.' },
-      { nome:'Caminata Guiada', descricao:'Senderos guiados para todos los niveles.' },
-      { nome:'Tour Cultural', descricao:'Viva la cultura local.' },
-      { nome:'SUP Nocturno', descricao:'SUP al atardecer.' },
-      { nome:'Deportes Acuáticos', descricao:'Jet ski, wakeboard y mucho más.' },
-      { nome:'Paseo en Helicóptero', descricao:'Vista panorámica de la región.' },
-      { nome:'Noche de Luau', descricao:'Cena y música junto al mar.' }
+      { nome:'Bike acuática al amanecer', descricao:'Paseo al amanecer sobre el mar en bike acuática, con una vista inolvidable de la isla.' },
+      { nome:'Canoa Hawaiana', descricao:'Experiencia en el mar en canoa hawaiana con remada guiada y paisajes increíbles.' },
+      { nome:'Trilha do Piquinho', descricao:'Sendero con vista panorámica espectacular para contemplar Fernando de Noronha desde arriba.' },
+      { nome:'Barco Tradicional', descricao:'Paseo clásico en barco por la isla. La observación de delfines solo está permitida en este paseo tradicional.' },
+      { nome:'Atardecer VIP', descricao:'Experiencia especial al final de la tarde con vista privilegiada y ambiente exclusivo.' },
+      { nome:'Trilha Capim Açu', descricao:'Sendero más intenso y aventurero, ideal para quienes buscan naturaleza y vistas impresionantes.' },
+      { nome:'Lancha Privativa', descricao:'Paseo exclusivo en lancha privada para disfrutar la isla con más comodidad y libertad.' },
+      { nome:'Tour privado por la isla en Buggy', descricao:'Tour privado en buggy por los principales puntos de la isla con exclusividad.' },
+      { nome:'Buceo de bautismo – naufragio', descricao:'Primera experiencia de buceo en un escenario de naufragio, con acompañamiento especializado.' },
+      { nome:'Visita a las piscinas naturales', descricao:'Conozca piscinas naturales en aguas cristalinas con paisajes únicos.' },
+      { nome:'Abreu', descricao:'Paseo para conocer una de las áreas naturales más buscadas de la isla.' },
+      { nome:'Bike acuática', descricao:'Paseo de bike acuática en aguas tranquilas con paisaje paradisíaco.' },
+      { nome:'Kayak transparente', descricao:'Experiencia diferente en kayak transparente para observar el mar de una forma única.' },
+      { nome:'Buceo embarcado', descricao:'Buceo embarcado con estructura completa para explorar la vida marina de la isla.' },
+      { nome:'Morro de São José', descricao:'Paseo a uno de los escenarios más marcantes de Noronha, con una experiencia diferenciada.' },
+      { nome:'Tour por la isla en grupo', descricao:'Paseo en grupo por los principales atractivos de la isla, ideal para conocer Noronha en un recorrido completo.' }
     ]
   }
 };
@@ -610,28 +631,22 @@ let idiomaAtual = 'pt';
 const moedaPorIdioma = { pt:'BRL', en:'USD', es:'EUR' };
 
 const passeiosBase = [
-  { valor:250, img:'https://blog.atalaianoronha.com.br/assets/uploads/2019/05/istock-1302338129.jpg', destaque:true },
-  { valor:180, img:'https://noronhaguia.com.br/images/capimAcu/capim1.jpg', destaque:false },
-  { valor:150, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/95/f2/7d/igreja-nossa-senhora.jpg?h=-1&s=1&w=1200', destaque:false },
-  { valor:300, img:'https://images.openai.com/static-rsc-3/T7dhLSiu5Of_dA-lty--LGkFA2yCuZvnI_0ND8oN_KQ5RgFjfKma2tXWDYLoTIJFpDeeoicmvSzx0NV7svF0rCV6KODLoRdmNqmLB-Myhuw?purpose=fullsize&v=1', destaque:true },
-  { valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/21/08/87/caption.jpg?h=-1&s=1&w=1200', destaque:false },
-  { valor:200, img:'https://blog.atalaianoronha.com.br/assets/uploads/2022/02/golfinho-seguindo-o-barco-1.jpg', destaque:false },
-  { valor:180, img:'https://imgmd.net/images/v1/guia/2663146/snorkeling.jpg', destaque:false },
-  { valor:250, img:'https://s2-vogue.glbimg.com/jfjgzWJWh1ATZPDKQyC1GBWSZqE%3D/0x0%3A1200x1600/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_5dfbcf92c1a84b20a5da5024d398ff2f/internal_photos/bs/2024/9/N/FWKoAuQSiVogFLEixoyw/6.-praia-da-conceicao.jpeg', destaque:false },
-  { valor:270, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:false },
-  { valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/0c/18/02/vibe-noronha-canoe-clube.jpg?h=-1&s=1&w=1200', destaque:false },
-  { valor:220, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/a2/83/3e/caption.jpg?h=900&s=1&w=1200', destaque:false },
-  { valor:180, img:'https://images.openai.com/static-rsc-3/tzemLRaQo_yKNCHxevA22gC-7vGghmPhrgl5NJfb1rgG1q8j33izOAdi6XwMaJ8Oa_PWyRYoo5e7R1YPXfeJ6XyJySFBy_bvpDovo1PhBps?purpose=fullsize&v=1', destaque:false },
-  { valor:200, img:'https://storage.alboom.ninja/sites/3673/albuns/511040/fotos_ensaio_casal_fernando_de_noronha_fotografo_guilherme_rodrigues-7.jpg?t=1614797017', destaque:false },
-  { valor:150, img:'https://images.openai.com/static-rsc-3/Wdkatbx_LEHwtKziju3IGBh9TmpUDsWzh2b5ZMNDZAZ8oOZqne0t583o6914z6458otV_xa_bXeqHTJi5MBRhlz9FubEZq5kK8-Xlcgq0QI?purpose=fullsize&v=1', destaque:false },
-  { valor:220, img:'https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/62/32/19/caption.jpg', destaque:false },
-  { valor:180, img:'https://images.openai.com/static-rsc-3/tHPNcboUnpZTFzBc9IWsHAkHhb0g7BZyQJh2XCAH14hyUlcWNq8H7Qp5ASKNs86PPCnf2jh26doUEc62XXmruhEEHhDAb0I214Pg2Pv9bmM?purpose=fullsize&v=1', destaque:false },
-  { valor:160, img:'https://www.civitatis.com/f/brasil/fernando-de-noronha/senderismo-bahia-golfinhos-r32.jpg', destaque:false },
-  { valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/ba/91/78/forte-nossa-senhora-dos.jpg?h=-1&s=1&w=1200', destaque:false },
-  { valor:210, img:'https://cdn.getyourguide.com/img/tour/5cbeeb9415dbb59f.jpeg/145.jpg', destaque:false },
-  { valor:250, img:'https://cdn.bombarco.com.br/cdn-cgi/image/format%3Dwebp%2Cquality%3D72%2Cdpr%3D1%2Cmetadata%3Dnone/https%3A//cdn.bombarco.com.br/ghost/images/DJI_0024.JPG', destaque:true },
-  { valor:400, img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Fernando_de_Noronha_-_vista_aera.jpg/1280px-Fernando_de_Noronha_-_vista_aera.jpg', destaque:false },
-  { valor:220, img:'https://uploads.montage.com/uploads/sites/5/2022/08/04172651/Torches-1920x1080.jpg', destaque:false }
+  { valor:200, img:'https://tse1.mm.bing.net/th/id/OIP.fjjB3bTSDTAwNy8mWf692QHaFj?pid=Api', destaque:false },
+  { valor:220, img:'https://media-cdn.tripadvisor.com/media/photo-s/13/87/12/06/nascer-do-sol-da-canoa.jpg', destaque:false },
+  { valor:200, img:'https://images.openai.com/static-rsc-3/8-OqYcYi2D1aWhAI4XgwCeQcN-gQhKHPdhrLXINe5_Q501Ie1LstlldifCaSOGLKPI1oPIWSzyDJqB1d5MZ-GRUVeSpmzeJJa1zzYvhECjM?purpose=fullsize&v=1', destaque:false },
+  { valor:275, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/21/08/87/caption.jpg?h=-1&s=1&w=1200', destaque:true },
+  { valor:285, img:'https://cdn2.veltra.com/ptr/20250327024644_1779657117_1253_0.jpg?impolicy=custom&imwidth=550', destaque:true },
+  { valor:350, img:'https://noronhaguia.com.br/images/capimAcu/capim1.jpg', destaque:false },
+  { valor:1700, img:'https://cdn.bombarco.com.br/cdn-cgi/image/format%3Dwebp%2Cquality%3D72%2Cdpr%3D1%2Cmetadata%3Dnone/https%3A//cdn.bombarco.com.br/ghost/images/DJI_0024.JPG', destaque:true },
+  { valor:1300, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:true },
+  { valor:500, img:'https://images.openai.com/static-rsc-3/T7dhLSiu5Of_dA-lty--LGkFA2yCuZvnI_0ND8oN_KQ5RgFjfKma2tXWDYLoTIJFpDeeoicmvSzx0NV7svF0rCV6KODLoRdmNqmLB-Myhuw?purpose=fullsize&v=1', destaque:true },
+  { valor:190, img:'https://imgmd.net/images/v1/guia/2663146/snorkeling.jpg', destaque:false },
+  { valor:185, img:'https://freeway.tur.br/userfiles/roteiro-2390.jpg', destaque:false },
+  { valor:155, img:'https://images3.motor-reserva.com.br/curl/motor_reserva/images/pagina_generica/cliente_3995/202309041693847694BIKE1.jpg', destaque:false },
+  { valor:205, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/af/c3/b6/caption.jpg?h=-1&s=1&w=1200', destaque:false },
+  { valor:1100.50, img:'https://static.wixstatic.com/media/100f51_42e0973e1e02443e9d0a24a3e4733222~mv2.jpeg/v1/fill/w_375%2Ch_250%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01/100f51_42e0973e1e02443e9d0a24a3e4733222~mv2.jpeg', destaque:true },
+  { valor:180, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/02/77/25/18.jpg?h=500&s=1&w=900', destaque:false },
+  { valor:200, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:false }
 ];
 
 function getPasseiosTraduzidos(){
@@ -726,7 +741,7 @@ function atualizarMoeda(){
     if(el){
       const valorBRL = passeios[i - 1].valor;
       const valorConvertido = (valorBRL * (cotacao[moeda] || 1)).toFixed(2);
-      el.innerText = moeda + ' ' + valorConvertido;
+      el.innerText = moeda + ' ' + valorConvertido.replace('.', ',');
     }
   }
 }
@@ -765,7 +780,7 @@ function gerarPasseios(){
 
       <div class="card-actions">
         <button class="btn" onclick="mostrarValor(${i + 1})">${textos[idiomaAtual].verValor}</button>
-        <div id="valor-${i + 1}" class="valor" data-brl="${passeio.valor}">R$ ${passeio.valor}</div>
+        <div id="valor-${i + 1}" class="valor" data-brl="${passeio.valor}">R$ ${String(passeio.valor).replace('.', ',')}</div>
         <a
           id="btn-whatsapp-${i + 1}"
           class="btn btn-whatsapp"
@@ -834,7 +849,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </header>
 
 <section id="passeios">
-  <h2 style="text-align:center; margin-bottom:40px;" data-text="passeiosDestaque">Passeios em Destaque</h2>
+  <h2 style="text-align:center; margin-bottom:40px;" data-text="passeiosDestaque">Passeios Disponíveis</h2>
   <div class="cards" id="cards-container"></div>
 </section>
 
@@ -899,7 +914,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </p>
 
   <div class="cards">
-
     <div class="card">
       <img src="https://www.umviajante.com.br/wp-content/uploads/2024/08/taxas-noronha-2026-1024x799.jpg.webp" alt="TPA">
       <h3 data-text="tpaTitulo">TPA – Taxa de Preservação Ambiental</h3>
@@ -943,25 +957,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="https://www.parnanoronha.com.br/visitante" target="_blank" class="btn" rel="noopener noreferrer" data-text="parqueBtn">Mais informações</a>
       </div>
     </div>
-
   </div>
 </section>
 
 <footer>
-  <p id="footer-copy">© <?php echo date('Y'); ?> Picos de Noronha Turismo - Todos os direitos reservados</p>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="assets/logo.png" alt="Picos de Noronha">
+    </div>
 
-  <div class="footer-social">
-    <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-      <i class="fab fa-instagram"></i>
-    </a>
+    <p id="footer-copy" class="footer-copy">© <?php echo date('Y'); ?> Picos de Noronha Turismo - Todos os direitos reservados</p>
 
-    <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
-      <i class="fas fa-envelope"></i>
-    </a>
+    <div class="footer-social">
+      <a href="https://instagram.com/picosdenoronha" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+      </a>
 
-    <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-      <i class="fab fa-whatsapp"></i>
-    </a>
+      <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+
+      <a href="https://wa.me/5581991654517" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
   </div>
 </footer>
 

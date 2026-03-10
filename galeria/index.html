@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria | Picos de Noronha</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --primary:#0ea5a4;
+      --primary-dark:#0891b2;
+      --secondary:#0f172a;
+      --light:#f8fafc;
+      --white:#ffffff;
+      --muted:#64748b;
+      --border:#e2e8f0;
+      --shadow:0 10px 30px rgba(15, 23, 42, .10);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:var(--light);
+      color:var(--secondary);
+      line-height:1.6;
+    }
+
+    body.modal-open{
+      overflow:hidden;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    header{
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('https://static.wixstatic.com/media/5bba91_c4137faf64594ef4891dba8a26acad1d~mv2.jpg/v1/fill/w_3000%2Ch_1344%2Cal_c%2Cq_90/Fernando%20de%20Noronha.jpg');
+      background-size:cover;
+      background-position:center;
+      color:#fff;
+      min-height:60vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      flex-direction:column;
+      position:relative;
+    }
+
+    header h1{
+      font-size:3rem;
+      margin-bottom:14px;
+    }
+
+    header p{
+      max-width:780px;
+      font-size:1.1rem;
+      opacity:.95;
+      margin-bottom:24px;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.24);
+      padding:8px 14px;
+      border-radius:999px;
+      margin-bottom:16px;
+      font-size:.95rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:12px;
+      margin-top:8px;
+    }
+
+    .btn{
+      background:var(--primary);
+      color:#fff;
+      padding:12px 22px;
+      border-radius:30px;
+      font-weight:bold;
+      transition:.25s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      background:var(--primary-dark);
+      transform:translateY(-2px);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.25);
+      backdrop-filter:blur(6px);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.22);
+    }
+
+    main{
+      max-width:1280px;
+      margin:auto;
+      padding:50px 20px 70px;
+    }
+
+    .section-head{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .section-head h2{
+      font-size:2rem;
+      color:#0c3b5e;
+      margin-bottom:10px;
+    }
+
+    .section-head p{
+      max-width:760px;
+      margin:auto;
+      color:var(--muted);
+    }
+
+    .gallery-stats{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin:24px 0 34px;
+    }
+
+    .stat{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 18px;
+      box-shadow:var(--shadow);
+      color:#334155;
+      font-weight:600;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:22px;
+    }
+
+    .gallery-card{
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid #edf2f7;
+      transition:.25s ease;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .gallery-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 40px rgba(15, 23, 42, .16);
+    }
+
+    .gallery-media{
+      position:relative;
+      width:100%;
+      height:240px;
+      background:#e2e8f0;
+      overflow:hidden;
+    }
+
+    .gallery-media img,
+    .gallery-media video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .gallery-badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      background:rgba(15,23,42,.78);
+      color:#fff;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:.85rem;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      z-index:2;
+    }
+
+    .video-placeholder{
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, #0f172a, #1e293b);
+      color:#fff;
+      font-size:3rem;
+    }
+
+    .gallery-content{
+      padding:16px 16px 18px;
+      text-align:center;
+    }
+
+    .gallery-content h3{
+      font-size:1rem;
+      color:#0f172a;
+      margin-bottom:6px;
+      word-break:break-word;
+    }
+
+    .gallery-content p{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .empty-state{
+      background:#fff;
+      border-radius:20px;
+      padding:40px 24px;
+      text-align:center;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+    }
+
+    .empty-state i{
+      font-size:3rem;
+      color:var(--primary);
+      margin-bottom:14px;
+    }
+
+    .empty-state p{
+      color:var(--muted);
+      max-width:680px;
+      margin:8px auto 0;
+    }
+
+    footer{
+      background:var(--secondary);
+      color:#fff;
+      padding:22px 20px;
+      margin-top:50px;
+    }
+
+    .footer-container{
+      max-width:1200px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+
+    .footer-logo{
+      display:flex;
+      align-items:center;
+    }
+
+    .footer-logo img{
+      height:50px;
+    }
+
+    .footer-copy{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-size:.95rem;
+      text-align:center;
+      flex-wrap:wrap;
+    }
+
+    .footer-copy img{
+      height:25px;
+    }
+
+    .footer-social{
+      display:flex;
+      justify-content:flex-end;
+      gap:18px;
+    }
+
+    .footer-social a{
+      color:#fff;
+      font-size:22px;
+      transition:.3s;
+    }
+
+    .footer-social a:hover{
+      transform:translateY(-2px);
+      opacity:.8;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:99999;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-content{
+      position:relative;
+      width:min(1100px, 100%);
+      max-height:92vh;
+      background:#000;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .modal-content img,
+    .modal-content video{
+      width:100%;
+      max-height:92vh;
+      object-fit:contain;
+      background:#000;
+      display:block;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+      color:#fff;
+      cursor:pointer;
+      font-size:1.1rem;
+      z-index:3;
+      backdrop-filter:blur(8px);
+    }
+
+    .modal-caption{
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:16px;
+      background:rgba(15,23,42,.70);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      text-align:center;
+      font-size:.95rem;
+      backdrop-filter:blur(8px);
+      z-index:3;
+    }
+
+    @media(max-width:768px){
+      header h1{
+        font-size:2.2rem;
+      }
+
+      header p{
+        font-size:1rem;
+      }
+
+      .gallery-media{
+        height:210px;
+      }
+
+      .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:15px;
+      }
+
+      .footer-logo,
+      .footer-social{
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="hero-badge">Picos de Noronha • Galeria</span>
+  <h1>Galeria de Fotos e Vídeos</h1>
+  <p>
+    Explore os registros dos passeios, paisagens e experiências em Fernando de Noronha.
+    Clique em qualquer item para visualizar em destaque.
+  </p>
+
+  <div class="nav-buttons">
+    <a href="../" class="btn"><i class="fas fa-house"></i> Início</a>
+    <a href="../top10/" class="btn btn-secondary"><i class="fas fa-star"></i> Ver os 10 melhores lugares</a>
+    <a href="../contato/" class="btn btn-secondary"><i class="fas fa-envelope"></i> Entre em contato</a>
+    <a href="../politica-cancelamento/" class="btn btn-secondary"><i class="fas fa-file-lines"></i> Política de cancelamento</a>
+    <a id="heroWhatsappBtn" href="https://wa.me/5581991654517?text=Olá!%20Quero%20tirar%20dúvidas%20sobre%20a%20política%20de%20devolução%20de%20valores." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" data-i18n="heroBtnWhatsapp">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<main>
+  <div class="section-head">
+    <h2>Galeria organizada</h2>
+    <p>
+      Adicione ou remova itens diretamente no array JavaScript da página.
+      Cada item pode ser uma imagem ou um vídeo.
+    </p>
+  </div>
+
+  <div class="gallery-stats" id="galleryStats"></div>
+
+  <div class="gallery-grid" id="galleryGrid"></div>
+
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <i class="fas fa-photo-film"></i>
+    <h3>Nenhum item na galeria</h3>
+    <p>Adicione imagens e vídeos no array <strong>galleryItems</strong> para exibir aqui.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <a href="https://instagram.com/picosdenoronha" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/logo.png" alt="Picos de Noronha">
+      </a>
+    </div>
+
+    <div class="footer-copy">
+      <span>© 2026 Picos de Noronha Turismo - Desenvolvido por</span>
+      <a href="https://josdev.com.br" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/axion-logo.png" alt="Axion">
+      </a>
+    </div>
+
+    <div class="footer-social">
+      <a href="https://instagram.com/picosdenoronha" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="mailto:picosdenoronha@hotmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://wa.me/5581991654517" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="mediaModal" onclick="if(event.target === this){ closeMedia(); }">
+  <div class="modal-content">
+    <button class="modal-close" type="button" onclick="closeMedia()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div id="modalMediaContainer"></div>
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+</div>
+
+<script>
+  const galleryItems = [
+
+{ type:"image", src:"../assets/galeria/1 (1).jpeg", title:"Noronha 1" },
+{ type:"image", src:"../assets/galeria/1 (2).jpeg", title:"Noronha 2" },
+{ type:"video", src:"../assets/galeria/1 (3).mp4", title:"Noronha 3" },
+{ type:"image", src:"../assets/galeria/1 (4).jpeg", title:"Noronha 4" },
+{ type:"video", src:"../assets/galeria/1 (5).mp4", title:"Noronha 5" },
+
+{ type:"image", src:"../assets/galeria/1 (6).jpeg", title:"Noronha 6" },
+{ type:"image", src:"../assets/galeria/1 (7).jpeg", title:"Noronha 7" },
+{ type:"image", src:"../assets/galeria/1 (8).jpeg", title:"Noronha 8" },
+{ type:"image", src:"../assets/galeria/1 (9).jpeg", title:"Noronha 9" },
+{ type:"image", src:"../assets/galeria/1 (10).jpeg", title:"Noronha 10" },
+
+{ type:"image", src:"../assets/galeria/1 (11).jpeg", title:"Noronha 11" },
+{ type:"image", src:"../assets/galeria/1 (12).jpeg", title:"Noronha 12" },
+{ type:"image", src:"../assets/galeria/1 (13).jpeg", title:"Noronha 13" },
+{ type:"image", src:"../assets/galeria/1 (14).jpeg", title:"Noronha 14" },
+{ type:"image", src:"../assets/galeria/1 (15).jpeg", title:"Noronha 15" },
+
+{ type:"image", src:"../assets/galeria/1 (16).jpeg", title:"Noronha 16" },
+{ type:"image", src:"../assets/galeria/1 (17).jpeg", title:"Noronha 17" },
+{ type:"image", src:"../assets/galeria/1 (18).jpeg", title:"Noronha 18" },
+{ type:"image", src:"../assets/galeria/1 (19).jpeg", title:"Noronha 19" },
+{ type:"image", src:"../assets/galeria/1 (20).jpeg", title:"Noronha 20" },
+
+{ type:"image", src:"../assets/galeria/1 (21).jpeg", title:"Noronha 21" },
+{ type:"image", src:"../assets/galeria/1 (22).jpeg", title:"Noronha 22" },
+{ type:"image", src:"../assets/galeria/1 (23).jpeg", title:"Noronha 23" },
+{ type:"image", src:"../assets/galeria/1 (24).jpeg", title:"Noronha 24" },
+{ type:"image", src:"../assets/galeria/1 (25).jpeg", title:"Noronha 25" },
+
+{ type:"image", src:"../assets/galeria/1 (26).jpeg", title:"Noronha 26" },
+{ type:"image", src:"../assets/galeria/1 (27).jpeg", title:"Noronha 27" },
+{ type:"image", src:"../assets/galeria/1 (28).jpeg", title:"Noronha 28" },
+{ type:"image", src:"../assets/galeria/1 (29).jpeg", title:"Noronha 29" },
+{ type:"image", src:"../assets/galeria/1 (30).jpeg", title:"Noronha 30" },
+
+{ type:"image", src:"../assets/galeria/1 (31).jpeg", title:"Noronha 31" },
+{ type:"image", src:"../assets/galeria/1 (32).jpeg", title:"Noronha 32" },
+{ type:"image", src:"../assets/galeria/1 (33).jpeg", title:"Noronha 33" },
+{ type:"image", src:"../assets/galeria/1 (34).jpeg", title:"Noronha 34" },
+{ type:"image", src:"../assets/galeria/1 (35).jpeg", title:"Noronha 35" },
+{ type:"image", src:"../assets/galeria/1 (36).jpeg", title:"Noronha 36" }
+
+];
+
+
+  function renderGallery() {
+    const grid = document.getElementById("galleryGrid");
+    const stats = document.getElementById("galleryStats");
+    const emptyState = document.getElementById("emptyState");
+
+    grid.innerHTML = "";
+    stats.innerHTML = "";
+
+    if (!galleryItems.length) {
+      emptyState.style.display = "block";
+      return;
+    }
+
+    emptyState.style.display = "none";
+
+    const totalImages = galleryItems.filter(item => item.type === "image").length;
+    const totalVideos = galleryItems.filter(item => item.type === "video").length;
+
+    stats.innerHTML = `
+      <div class="stat"><i class="fas fa-photo-film"></i> Total: ${galleryItems.length} itens</div>
+      <div class="stat"><i class="fas fa-image"></i> Imagens: ${totalImages}</div>
+      <div class="stat"><i class="fas fa-video"></i> Vídeos: ${totalVideos}</div>
+    `;
+
+    galleryItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "gallery-card";
+      card.onclick = () => openMedia(item.type, item.src, item.title);
+
+      card.innerHTML = `
+        <div class="gallery-media">
+          <div class="gallery-badge">
+            ${item.type === "image"
+              ? '<i class="fas fa-image"></i> Imagem'
+              : '<i class="fas fa-video"></i> Vídeo'}
+          </div>
+
+          ${
+            item.type === "image"
+              ? `<img src="${item.src}" alt="${item.title}">`
+              : `<div class="video-placeholder"><i class="fas fa-circle-play"></i></div>`
+          }
+        </div>
+
+        <div class="gallery-content">
+          <h3>${item.title}</h3>
+          <p>${item.type === "image" ? "Clique para ampliar" : "Clique para assistir"}</p>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  function openMedia(type, src, title) {
+    const modal = document.getElementById("mediaModal");
+    const container = document.getElementById("modalMediaContainer");
+    const caption = document.getElementById("modalCaption");
+
+    if (type === "image") {
+      container.innerHTML = `<img src="${src}" alt="${title}">`;
+    } else {
+      container.innerHTML = `
+        <video controls autoplay playsinline>
+          <source src="${src}">
+          Seu navegador não suporta vídeo.
+        </video>
+      `;
+    }
+
+    caption.textContent = title;
+    modal.classList.add("show");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeMedia() {
+    const modal = document.getElementById("mediaModal");
+    const container = document.getElementById("modalMediaContainer");
+
+    modal.classList.remove("show");
+    container.innerHTML = "";
+    document.body.classList.remove("modal-open");
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeMedia();
+    }
+  });
+
+  renderGallery();
+</script>
+
+</body>
+</html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <title>Picos de Noronha Turismo</title>
 <style>
@@ -30,6 +31,10 @@ body{
   background:var(--light);
   color:var(--secondary);
   line-height:1.6;
+}
+
+body.modal-open{
+  overflow:hidden;
 }
 
 header{
@@ -159,6 +164,17 @@ section{
   background:var(--primary-dark);
 }
 
+.btn-outline{
+  background:#fff;
+  color:var(--primary);
+  border:2px solid var(--primary);
+}
+
+.btn-outline:hover{
+  background:var(--primary);
+  color:#fff;
+}
+
 .btn-whatsapp{
   background:var(--whatsapp);
 }
@@ -196,12 +212,6 @@ button{
   color:#fff;
   font-size:1rem;
   cursor:pointer;
-}
-
-footer{
-  background:var(--secondary);
-  color:#fff;
-  padding:22px 20px;
 }
 
 .valor{
@@ -382,21 +392,6 @@ footer{
   opacity:.8;
 }
 
-@media(max-width:768px){
-
-  .footer-container{
-    grid-template-columns:1fr;
-    text-align:center;
-    gap:15px;
-  }
-
-  .footer-logo,
-  .footer-social{
-    justify-content:center;
-  }
-
-}
-
 .whatsapp-float{
   position:fixed;
   right:18px;
@@ -412,7 +407,6 @@ footer{
   border-radius:999px;
   box-shadow:0 12px 30px rgba(0,0,0,.25);
   font-weight:700;
-  transition:.3s ease;
   animation:floatPulse 1.8s infinite;
   transition:opacity .3s ease, transform .3s ease, background .3s ease;
 }
@@ -439,6 +433,110 @@ footer{
   100%{ box-shadow:0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
+/* MODAL */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.72);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10000;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(900px, 100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+  position:relative;
+}
+
+.modal-header{
+  padding:24px 26px 10px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.modal-title{
+  font-size:1.7rem;
+  color:#0c3b5e;
+  line-height:1.2;
+}
+
+.modal-close{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:#eef2f7;
+  color:#0f172a;
+  font-size:1.2rem;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
+.modal-body{
+  padding:24px 26px 28px;
+}
+
+.modal-body h4{
+  color:#0c3b5e;
+  margin:18px 0 8px;
+  font-size:1.05rem;
+}
+
+.modal-body p{
+  color:#334155;
+  margin-bottom:12px;
+}
+
+.modal-body ul{
+  margin:0 0 12px 22px;
+  color:#334155;
+}
+
+.modal-body li{
+  margin-bottom:6px;
+}
+
+.modal-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:24px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:12px;
+  margin:16px 0;
+}
+
+.detail-item{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:14px;
+}
+
+.detail-item strong{
+  display:block;
+  color:#0f172a;
+  margin-bottom:4px;
+}
+
 @media(max-width:768px){
   header h1{ font-size:2.2rem; }
 
@@ -461,6 +559,7 @@ footer{
   .footer-container{
     grid-template-columns:1fr;
     text-align:center;
+    gap:15px;
   }
 
   .footer-logo,
@@ -470,6 +569,16 @@ footer{
 
   .footer-copy{
     order:2;
+  }
+
+  .modal-header,
+  .modal-body{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .modal-title{
+    font-size:1.35rem;
   }
 }
 </style>
@@ -487,6 +596,9 @@ const textos = {
     verTop10:'Ver os 10 melhores lugares',
     contato:'Entre em Contato',
     verValor:'Ver Valor',
+    verDetalhes:'Ver detalhes',
+    fechar:'Fechar',
+    reservarAgora:'Reservar agora',
     irAventura:'Reservar no WhatsApp',
     solicitarOrcamento:'Solicite um Orçamento',
     nome:'Seu nome',
@@ -528,7 +640,7 @@ const textos = {
       { nome:'Entardecer VIP', descricao:'Experiência especial no fim de tarde com visual privilegiado e clima exclusivo.' },
       { nome:'Trilha Capim Açu', descricao:'Trilha mais intensa e aventureira, ideal para quem busca natureza e vistas impressionantes.' },
       { nome:'Lancha Privativa', descricao:'Passeio exclusivo em lancha privativa para viver a ilha com mais conforto e liberdade.' },
-      { nome:'Ilha Tour privativo no Buggy', descricao:'Tour privativo de buggy pelos principais pontos da ilha com exclusividade.' },
+      { nome:'Ilha Tour privativo no Buggy', descricao:'Tour privativo pelos principais pontos da ilha com exclusividade.' },
       { nome:'Mergulho de batismo – naufrágio', descricao:'Primeira experiência de mergulho em cenário de naufrágio, com acompanhamento especializado.' },
       { nome:'Visita às piscinas naturais', descricao:'Conheça piscinas naturais em águas cristalinas com paisagens únicas.' },
       { nome:'Abreu', descricao:'Passeio para conhecer uma das áreas naturais mais procuradas da ilha.' },
@@ -547,6 +659,9 @@ const textos = {
     verTop10:'See the 10 best places',
     contato:'Contact Us',
     verValor:'See Price',
+    verDetalhes:'See details',
+    fechar:'Close',
+    reservarAgora:'Book now',
     irAventura:'Book on WhatsApp',
     solicitarOrcamento:'Request a Quote',
     nome:'Your name',
@@ -588,7 +703,7 @@ const textos = {
       { nome:'VIP Sunset', descricao:'Special late-afternoon experience with privileged views and an exclusive atmosphere.' },
       { nome:'Capim Açu Trail', descricao:'A more intense and adventurous trail, ideal for those seeking nature and impressive views.' },
       { nome:'Private Speedboat', descricao:'Exclusive private speedboat experience to enjoy the island with more comfort and freedom.' },
-      { nome:'Private Island Tour by Buggy', descricao:'Private buggy tour through the island’s main attractions with exclusivity.' },
+      { nome:'Private Island Tour', descricao:'Private tour through the island’s main attractions with exclusivity.' },
       { nome:'Discovery Dive – Shipwreck', descricao:'First diving experience in a shipwreck setting, with specialized guidance.' },
       { nome:'Visit to Natural Pools', descricao:'Discover natural pools in crystal-clear waters with unique landscapes.' },
       { nome:'Abreu', descricao:'Tour to visit one of the island’s most sought-after natural areas.' },
@@ -607,6 +722,9 @@ const textos = {
     verTop10:'Ver los 10 mejores lugares',
     contato:'Contáctanos',
     verValor:'Ver Precio',
+    verDetalhes:'Ver detalles',
+    fechar:'Cerrar',
+    reservarAgora:'Reservar ahora',
     irAventura:'Reservar por WhatsApp',
     solicitarOrcamento:'Solicitar Presupuesto',
     nome:'Su nombre',
@@ -648,7 +766,7 @@ const textos = {
       { nome:'Atardecer VIP', descricao:'Experiencia especial al final de la tarde con vista privilegiada y ambiente exclusivo.' },
       { nome:'Trilha Capim Açu', descricao:'Sendero más intenso y aventurero, ideal para quienes buscan naturaleza y vistas impresionantes.' },
       { nome:'Lancha Privativa', descricao:'Paseo exclusivo en lancha privada para disfrutar la isla con más comodidad y libertad.' },
-      { nome:'Tour privado por la isla en Buggy', descricao:'Tour privado en buggy por los principales puntos de la isla con exclusividad.' },
+      { nome:'Tour privado por la isla', descricao:'Tour privado por los principales puntos de la isla con exclusividad.' },
       { nome:'Buceo de bautismo – naufragio', descricao:'Primera experiencia de buceo en un escenario de naufragio, con acompañamiento especializado.' },
       { nome:'Visita a las piscinas naturales', descricao:'Conozca piscinas naturales en aguas cristalinas con paisajes únicos.' },
       { nome:'Abreu', descricao:'Paseo para conocer una de las áreas naturales más buscadas de la isla.' },
@@ -661,6 +779,291 @@ const textos = {
   }
 };
 
+const detalhesPasseios = {
+  1: {
+    titulo: 'Canoa Havaiana',
+    html: `
+      <p>Venha vivenciar a navegação das embarcações milenares do Triângulo Polinésio. A proposta da expedição é aventura e contemplação no cenário paradisíaco da ilha.</p>
+      <p>Você pode contar com a experiência de nossos instrutores na navegação e com seus conhecimentos sobre a cultura Polinésia.</p>
+      <p>A expedição tem saída na Praia do Porto. O roteiro tem 4 km, passando por Air France, Rugido do Leão, Praia do Cachorro, Praia do Meio e Conceição, com parada para banho e mergulho.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Duração</strong><span>2 horas</span></div>
+        <div class="detail-item"><strong>Saída</strong><span>Praia do Porto</span></div>
+        <div class="detail-item"><strong>Equipamentos</strong><span>Remos e coletes inclusos</span></div>
+        <div class="detail-item"><strong>Golfinhos</strong><span>Maior chance no nascer do sol e 2º horário</span></div>
+      </div>
+
+      <h4>Horários</h4>
+      <ul>
+        <li><strong>Nascer do Sol:</strong> encontro às 05h no Porto (transfer incluso).</li>
+        <li><strong>Segundo horário:</strong> 08h no Porto (transfer apenas ida).</li>
+        <li><strong>Terceiro horário:</strong> 10h no Porto (transfer incluso).</li>
+        <li><strong>Pôr do sol:</strong> 16h20 no Porto (transfer incluso).</li>
+      </ul>
+
+      <h4>Informações úteis</h4>
+      <ul>
+        <li>Temos local para deixar os pertences que não serão necessários na canoa.</li>
+        <li>Temos bolsa impermeável para emprestar.</li>
+        <li>Leve água, lanche, proteção solar, óculos escuros e boné com ajuste na cabeça.</li>
+        <li>Se tiver máscara, snorkel e nadadeira, vale levar, pois haverá parada para mergulho livre.</li>
+        <li>Se não tiver, nos avise.</li>
+      </ul>
+
+      <h4>Importante</h4>
+      <p>A Picos de Noronha não oferece transfer de volta no segundo horário do passeio de Canoa Havaiana devido a alteração logística interna.</p>
+    `
+  },
+  2: {
+    titulo: 'Trilha do Piquinho',
+    html: `
+      <p>Trilha cercada pela vegetação até a base do Morro do Piquinho.</p>
+      <p>Início na estrada da Conceição, a caminhada começa na parte baixa do relevo e sobe por trilha de terra e pedras até chegar ao Piquinho, onde se tem uma perfeita visão de 180 graus de Noronha.</p>
+      <p>Do alto você avista o Porto, as Ilhas Secundárias, a Capelinha de São Pedro, a Fortaleza dos Remédios, a Praia do Cachorro, o Mar de Fora e suas praias, a Cacimba do Padre, o Morro dos Dois Irmãos e o gigantesco Morro do Pico, ponto mais alto da ilha com 321 metros de altura.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Horário</strong><span>Amanhecer ou pôr do sol</span></div>
+        <div class="detail-item"><strong>Duração</strong><span>2 horas</span></div>
+        <div class="detail-item"><strong>Percurso</strong><span>Médio – 2,7 km</span></div>
+      </div>
+
+      <h4>Não esquecer de levar</h4>
+      <ul>
+        <li>Usar tênis ou calçado que prenda no calcanhar (indispensável).</li>
+        <li>Roupas confortáveis.</li>
+        <li>Proteção ao sol.</li>
+        <li>Máquina fotográfica.</li>
+      </ul>
+    `
+  },
+  3: {
+    titulo: 'Barco Tradicional',
+    html: `
+      <p>É o passeio mais tradicional da ilha e tem grande possibilidade de ver os golfinhos rotadores acompanharem o barco.</p>
+      <p>O passeio é realizado em embarcação com capacidade para até 30 pessoas e percorre a ilha de uma ponta a outra.</p>
+      <p>A saída é no Porto de Santo Antônio e o roteiro segue em direção às Ilhas Secundárias até a Ponta da Sapata, passando pelas praias do Mar de Dentro: Cachorro, Meio, Conceição, Boldró, Americanos, Bode, Cacimba, Porcos, Sancho e Baía dos Golfinhos.</p>
+      <p>No roteiro também está o famoso Rugido do Leão, uma gruta onde o mar força o ar a sair por uma pequena fenda, produzindo um som semelhante ao de um leão.</p>
+      <p>A parada para banho, de aproximadamente 40 minutos, é feita no Sancho, praia eleita várias vezes como uma das mais bonitas do mundo.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Horário</strong><span>A partir das 07h30</span></div>
+        <div class="detail-item"><strong>Duração</strong><span>3h a 4h</span></div>
+        <div class="detail-item"><strong>Percurso</strong><span>Leve</span></div>
+      </div>
+    `
+  },
+  4: {
+    titulo: 'Entardecer VIP',
+    html: `
+      <p>Uma das melhores escolhas para quem quer ver o pôr do sol no mar.</p>
+      <p>A embarcação sai do Porto de Santo Antônio e inicia com a atividade de planasub, também conhecida como pranchinha, na região portuária e Praia da Biboca.</p>
+      <p>Depois disso, o barco costeia as praias do Cachorro, Meio, Conceição, Boldró, Americano, Bode, Quixabinha e Cacimba do Padre, chegando ao Morro Dois Irmãos.</p>
+      <p>Na volta, faz uma parada na Praia da Conceição, ou em outra praia com melhor condição de mar, para o churrasco de peixe a bordo, onde você acompanha um belo pôr do sol embarcado.</p>
+      <p>O passeio não dá direito a bebidas, mas você pode levar ou comprar na embarcação.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Início</strong><span>14h30</span></div>
+        <div class="detail-item"><strong>Término</strong><span>No pôr do sol</span></div>
+      </div>
+
+      <h4>Cancelamento</h4>
+      <p>Até 30 dias antes do início dos serviços, multa de 10% por pessoa. De 29 a 20 dias, multa de 20%. Com 19 dias ou menos, não haverá reembolso em caso de alteração, cancelamento ou não utilização total ou parcial.</p>
+    `
+  },
+  5: {
+    titulo: 'Trilha Capim Açu',
+    html: `
+      <p>Localizada no extremo sudoeste de Fernando de Noronha, mostra a versão mais desconhecida e isolada do arquipélago.</p>
+      <p>É uma trilha de sete quilômetros, em forma de U, feita em média em seis horas de trekking leve a pesado, com lindas vistas para o Mar de Dentro e o Mar de Fora.</p>
+      <p>O início é na Vila da Quixaba, ao lado da entrada para o Sancho. O nome é referência aos imensos capins de até dois metros de altura. Logo no início há uma ladeira íngreme que leva até um desvio com acesso ao farol usado pela Marinha.</p>
+      <p>O terreno varia entre terra batida, mata, pedras, rochas à beira do mar e caminhada pela praia. É considerada a trilha mais selvagem e rústica de Fernando de Noronha.</p>
+      <p>Confira mais fotos em: <strong>@picosdenoronha</strong></p>
+
+      <h4>Programação</h4>
+      <ul>
+        <li>Ao adquirir esse passeio, você estará contratando o serviço de guia e o agendamento será realizado exclusivamente pelo turista.</li>
+        <li>A compra desse passeio não é garantia de agendamento.</li>
+        <li>Caso não consiga o agendamento, realizaremos o reembolso integral do valor pago.</li>
+      </ul>
+
+      <h4>Observações</h4>
+      <ul>
+        <li>É fundamental ter hospedagem de no mínimo 4 dias na ilha.</li>
+        <li>É muito importante retirar o ingresso físico do Parque Nacional Marinho no primeiro dia.</li>
+        <li>Após retirar o ingresso, envie foto do agendamento pelo WhatsApp: (81) 99165-4517.</li>
+      </ul>
+    `
+  },
+  7: {
+    titulo: 'Ilha Tour Privativo de Caminhonete',
+    html: `
+      <p>Nesse passeio nós te levaremos em nossa caminhonete 4x4 para conhecer as principais praias, pontos históricos e mirantes da ilha.</p>
+      <p>Você conhecerá cerca de 80% de Noronha, com paradas para banho e mergulho livre com máscara, snorkel, nadadeira e colete.</p>
+      <p>Ao final, o passeio termina no famoso Fortinho do Boldró, para curtir o pôr do sol com o Morro Dois Irmãos ao fundo.</p>
+      <p>Nosso guia credenciado pelo ICMBio explicará tudo sobre os locais visitados e dará suporte para o mergulho caso você tenha pouca experiência com mar.</p>
+      <p>Esse passeio é uma excelente escolha para seu primeiro dia completo em Noronha.</p>
+      <p>O Ilha Tour e o Passeio de Barco para ver os Golfinhos são considerados passeios imperdíveis.</p>
+      <p>Confira mais fotos em nosso Insta: <strong>@picosdenoronha</strong></p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Início</strong><span>08h30</span></div>
+        <div class="detail-item"><strong>Término</strong><span>18h30</span></div>
+        <div class="detail-item"><strong>Recolhimento</strong><span>Entre 08h00 e 09h</span></div>
+      </div>
+
+      <h4>Previsão de roteiro</h4>
+      <ul>
+        <li>Praia do Leão</li>
+        <li>Praia do Sueste</li>
+        <li>Ponta das Caracas</li>
+        <li>Praia do Sancho</li>
+        <li>Mirante da Praia do Sancho</li>
+        <li>Mirante dos Dois Irmãos</li>
+        <li>Cacimba do Padre</li>
+        <li>Baía dos Porcos</li>
+        <li>Região Portuária</li>
+        <li>Pôr do sol no Forte do Boldró</li>
+      </ul>
+
+      <h4>Cancelamento</h4>
+      <p>Até 30 dias antes do início dos serviços, multa de 10% por pessoa. De 29 a 20 dias, multa de 20%. Com 19 dias ou menos, não haverá reembolso em caso de alteração, cancelamento ou não utilização total ou parcial.</p>
+    `
+  },
+  8: {
+    titulo: 'Mergulho de batismo',
+    html: `
+      <p>O mergulho de cilindro é uma atividade para todos que amam a vida marinha e querem se encantar com a beleza do fundo do mar.</p>
+      <p>A Praia do Porto é referência no arquipélago por ser repleta de vida marinha. Prepare-se para encontrar arraias, tartarugas, tubarões, muitos peixinhos e incríveis naufrágios.</p>
+      <p>O batismo começa com uma fase de adaptação inicial em águas rasas. Durante todo o tempo o instrutor acompanhará você no mergulho.</p>
+      <p>O equipamento está incluso no valor do passeio. A atividade começa com uma instrução teórica e informações fundamentais, onde você aprenderá as técnicas básicas.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Profundidade máxima</strong><span>12 metros</span></div>
+        <div class="detail-item"><strong>Acompanhamento</strong><span>Instrutor credenciado o tempo todo</span></div>
+        <div class="detail-item"><strong>Equipamento</strong><span>Incluso</span></div>
+      </div>
+
+      <h4>Política de cancelamento</h4>
+      <p>Pedidos de cancelamento ou alteração implicam multas e penalidades. Até 30 dias antes, multa de 10% por pessoa. De 29 a 20 dias, multa de 20%. Com 19 dias ou menos, não haverá reembolso em caso de alteração, cancelamento ou não utilização total ou parcial.</p>
+    `
+  },
+  9: {
+    titulo: 'Visita às Piscinas Naturais',
+    html: `
+      <p>O passeio começa com a visita à piscina natural do Morro de Fora, na Praia da Conceição.</p>
+      <p>Em seguida, conduzimos você até o famoso Buraco do Galego, na Praia do Cachorro, e finalizamos na Lasca da Véia, uma piscina localizada em um poço depois do Buraco do Galego.</p>
+      <p>Atenção: só é possível visitar essas piscinas naturais na maré baixa. Por isso, o horário depende dessa condição, mas você pode deixar a data previamente reservada.</p>
+      <p>Confira mais fotos em nosso Instagram: <strong>@picosdenoronha</strong></p>
+
+      <h4>Programação</h4>
+      <ul>
+        <li>Ao adquirir esse passeio, entre em contato com nossa empresa para receber o horário e os procedimentos.</li>
+        <li>Não será necessário agendamento perante o ICMBio.</li>
+        <li>Não fornecemos transfer para essa atividade, pois o ponto de encontro é em área urbana.</li>
+        <li>O ponto de encontro será em frente ao famoso Bar do Cachorro.</li>
+        <li>A atividade pode ser cancelada caso as condições do mar ou clima não permitam a realização com segurança. Nesse caso, o valor será devolvido integralmente ou estornado.</li>
+      </ul>
+    `
+  },
+  11: {
+    titulo: 'Bike Aquática',
+    html: `
+      <p>O passeio tem horários disponíveis do nascer do sol ao pôr do sol. A duração varia de 1h a 1h20, com parada para banho.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Nascer do sol</strong><span>05h40 – R$ 200,00</span></div>
+        <div class="detail-item"><strong>Demais horários</strong><span>07h / 08h / 09h / 10h / 11h</span></div>
+        <div class="detail-item"><strong>Pôr do sol</strong><span>16h40</span></div>
+        <div class="detail-item"><strong>Local</strong><span>Praia do Porto</span></div>
+      </div>
+
+      <p>Com saída no Porto, o roteiro segue costeando a Biboca, o Rugido do Leão, a Praia do Meio e finaliza no Cachorro.</p>
+      <p>Durante todo o percurso o instrutor acompanha o cliente, dá suporte e conta histórias sobre a ilha.</p>
+      <p>O uso de colete é obrigatório e disponibilizado sem custo adicional.</p>
+
+      <h4>Importante</h4>
+      <p>Caso já tenha feito o passeio de canoa, avise para que o instrutor faça um percurso diferente.</p>
+    `
+  },
+  12: {
+    titulo: 'Caiaque Transparente',
+    html: `
+      <p>Já imaginou remar em um caiaque enquanto observa tudo o que acontece na vida marinha sob você?</p>
+      <p>Essa é a proposta do passeio de Caiaque Transparente: vivenciar Noronha pela água, observando tudo o que acontece no mar logo abaixo.</p>
+      <p>Você pode escolher o passeio em vários horários, sempre com guias credenciados, aula inicial em terra e atendimento com calma e profissionalismo.</p>
+      <p>A probabilidade de ver golfinhos passando por baixo do caiaque é enorme e a experiência é única.</p>
+      <p>O roteiro se inicia no Porto, passando por Air France, Praia da Biboca e Rugido do Leão. Disponibilizamos remos e coletes homologados pela Marinha.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Duração</strong><span>2 horas</span></div>
+        <div class="detail-item"><strong>Horários</strong><span>08h30, 10h30 ou 16h30</span></div>
+        <div class="detail-item"><strong>Transfer</strong><span>Não possui</span></div>
+      </div>
+
+      <p>Horários disponíveis mediante solicitação e verificação de vagas.</p>
+    `
+  },
+  13: {
+    titulo: 'Mergulho embarcado',
+    html: `
+      <p>O batismo é para quem nunca mergulhou, mas quer viver a experiência maravilhosa de mergulhar em Noronha e ver a rica vida marinha de perto.</p>
+      <p>O ponto de mergulho fica na região das Ilhas Secundárias. Por ser mais distante da área urbana, a geologia é diferente, com muitas rochas, corais, algas e maior chegada de nutrientes do mar de fora para o mar de dentro.</p>
+      <p>Isso significa maior possibilidade de encontrar animais de grande porte. Há também diversas cavernas durante o trajeto, finalizando na região onde há uma âncora.</p>
+      <p>Será um instrutor por pessoa, passando orientações sobre os equipamentos e sobre o mergulho em si.</p>
+      <p>No ponto de mergulho, você entra na água, faz exercícios de respiração e flutuabilidade e, quando estiver confortável, começa a descida.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Profundidade</strong><span>10 a 12 metros</span></div>
+        <div class="detail-item"><strong>Duração</strong><span>30 a 40 minutos</span></div>
+        <div class="detail-item"><strong>Horários</strong><span>07h30 ou 14h</span></div>
+        <div class="detail-item"><strong>Transfer</strong><span>Saída da pousada até o Porto</span></div>
+      </div>
+
+      <p>Confira mais fotos em nosso Insta: <strong>@picosdenoronha</strong></p>
+    `
+  },
+  14: {
+    titulo: 'Morro de São José',
+    html: `
+      <p>Nesta trilha será possível conhecer a piscina do Morro de São José, localizada em uma ilha secundária que compõe o Arquipélago de Fernando de Noronha.</p>
+      <p>Existem duas formas de chegar até ela: caminhando pelas pedras ou indo pelo mar, fazendo mergulho livre.</p>
+      <p>A piscina natural é um dos pontos mais bonitos da ilha e rende lembranças incríveis e belíssimas fotos.</p>
+      <p>Confira mais fotos no Insta: <strong>@picosdenoronha</strong></p>
+
+      <h4>Programação</h4>
+      <ul>
+        <li>Ao adquirir esse passeio, você estará contratando o serviço de guia e o agendamento será realizado exclusivamente pelo turista.</li>
+        <li>A compra desse passeio não é garantia de agendamento.</li>
+        <li>Caso não consiga realizar o agendamento, realizaremos o reembolso total pago por esse serviço.</li>
+      </ul>
+
+      <h4>Observações</h4>
+      <ul>
+        <li>É fundamental ter hospedagem programada de no mínimo 4 dias na ilha.</li>
+        <li>É de extrema importância retirar o ingresso físico do Parque Nacional Marinho no primeiro dia.</li>
+        <li>Após retirar o ingresso, entre em contato com nossa equipe e envie foto do seu agendamento pelo WhatsApp: (81) 99165-4517.</li>
+      </ul>
+    `
+  },
+  15: {
+    titulo: 'Ilha Tour em Grupo',
+    html: `
+      <p>Nesse passeio nós te levaremos nas principais praias, pontos turísticos históricos e mirantes que renderão ótimas lembranças e fotos incríveis. Você já conhecerá cerca de 80% da ilha.</p>
+      <p>Entre os pontos visitados estão Sancho, Cacimba do Padre com os Dois Irmãos, Baía dos Porcos, Sueste e Praia do Leão.</p>
+      <p>Serão realizadas paradas para banho e mergulho livre com máscara, snorkel, nadadeira e colete.</p>
+      <p>Ao final do dia, terminaremos o passeio no famoso Fortinho do Boldró, onde há barzinho com bebidas, petiscos e música ao vivo, para curtir o pôr do sol com o Morro Dois Irmãos ao fundo.</p>
+      <p>Nosso guia credenciado pelo ICMBio explicará tudo sobre cada local visitado e dará o suporte necessário para o mergulho, especialmente para quem tem pouca experiência com mar.</p>
+
+      <div class="detail-grid">
+        <div class="detail-item"><strong>Início</strong><span>08h30</span></div>
+        <div class="detail-item"><strong>Término</strong><span>18h30</span></div>
+        <div class="detail-item"><strong>Perfil</strong><span>Excelente escolha para o primeiro dia completo</span></div>
+      </div>
+    `
+  }
+};
+
 let idiomaAtual = 'pt';
 const moedaPorIdioma = { pt:'BRL', en:'USD', es:'EUR' };
 
@@ -668,12 +1071,12 @@ const passeiosBase = [
   { valor:200, img:'https://tse1.mm.bing.net/th/id/OIP.fjjB3bTSDTAwNy8mWf692QHaFj?pid=Api', destaque:false },
   { valor:220, img:'https://media-cdn.tripadvisor.com/media/photo-s/13/87/12/06/nascer-do-sol-da-canoa.jpg', destaque:false },
   { valor:200, img:'https://images.openai.com/static-rsc-3/8-OqYcYi2D1aWhAI4XgwCeQcN-gQhKHPdhrLXINe5_Q501Ie1LstlldifCaSOGLKPI1oPIWSzyDJqB1d5MZ-GRUVeSpmzeJJa1zzYvhECjM?purpose=fullsize&v=1', destaque:false },
-  { valor:275, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/21/08/87/caption.jpg?h=-1&s=1&w=1200', destaque:true },
+  { valor:275, img:'assets/img/passeio4.jpeg', destaque:true },
   { valor:285, img:'https://cdn2.veltra.com/ptr/20250327024644_1779657117_1253_0.jpg?impolicy=custom&imwidth=550', destaque:true },
   { valor:350, img:'https://noronhaguia.com.br/images/capimAcu/capim1.jpg', destaque:false },
   { valor:1700, img:'https://cdn.bombarco.com.br/cdn-cgi/image/format%3Dwebp%2Cquality%3D72%2Cdpr%3D1%2Cmetadata%3Dnone/https%3A//cdn.bombarco.com.br/ghost/images/DJI_0024.JPG', destaque:true },
   { valor:1300, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/bc/3c/18/caption.jpg?h=-1&s=1&w=1200', destaque:true },
-  { valor:500, img:'https://images.openai.com/static-rsc-3/T7dhLSiu5Of_dA-lty--LGkFA2yCuZvnI_0ND8oN_KQ5RgFjfKma2tXWDYLoTIJFpDeeoicmvSzx0NV7svF0rCV6KODLoRdmNqmLB-Myhuw?purpose=fullsize&v=1', destaque:true },
+  { valor:500, img:'assets/img/passeio9.jpeg', destaque:true },
   { valor:190, img:'https://imgmd.net/images/v1/guia/2663146/snorkeling.jpg', destaque:false },
   { valor:185, img:'https://freeway.tur.br/userfiles/roteiro-2390.jpg', destaque:false },
   { valor:155, img:'https://images3.motor-reserva.com.br/curl/motor_reserva/images/pagina_generica/cliente_3995/202309041693847694BIKE1.jpg', destaque:false },
@@ -733,14 +1136,7 @@ function atualizarIdioma(novoIdioma){
   gerarPasseios();
   atualizarBotaoFlutuante();
   atualizarTextoSucesso();
-  atualizarRodape();
-}
-
-function atualizarRodape(){
-  const footer = document.getElementById('footer-copy');
-  if(footer){
-    footer.innerText = `© ${new Date().getFullYear()} ${textos[idiomaAtual].footer}`;
-  }
+  atualizarTextoModal();
 }
 
 function atualizarTextoSucesso(){
@@ -748,6 +1144,13 @@ function atualizarTextoSucesso(){
   if(el){
     el.innerText = textos[idiomaAtual].sucessoEnvio;
   }
+}
+
+function atualizarTextoModal(){
+  const btnReservar = document.getElementById('modal-reservar');
+  const btnFechar = document.getElementById('modal-fechar');
+  if(btnReservar) btnReservar.innerText = textos[idiomaAtual].reservarAgora;
+  if(btnFechar) btnFechar.innerText = textos[idiomaAtual].fechar;
 }
 
 function alterarIdiomaMoeda(novoIdioma){
@@ -797,6 +1200,26 @@ function atualizarBotaoFlutuante(){
   btnFloat.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
 }
 
+function abrirDetalhes(indice){
+  const passeio = getPasseiosTraduzidos()[indice];
+  const detalhe = detalhesPasseios[indice];
+
+  document.getElementById('modal-title').innerText = detalhe ? detalhe.titulo : passeio.nome;
+  document.getElementById('modal-body').innerHTML = detalhe
+    ? detalhe.html
+    : '<p>Em breve adicionaremos a descrição completa deste passeio.</p>';
+
+  document.getElementById('modal-reservar').href = montarMensagemPasseio(passeio.nome);
+
+  document.getElementById('modal-detalhes').classList.add('show');
+  document.body.classList.add('modal-open');
+}
+
+function fecharDetalhes(){
+  document.getElementById('modal-detalhes').classList.remove('show');
+  document.body.classList.remove('modal-open');
+}
+
 function gerarPasseios(){
   const passeios = getPasseiosTraduzidos();
   const container = document.getElementById('cards-container');
@@ -813,10 +1236,10 @@ function gerarPasseios(){
       <p>${passeio.descricao}</p>
 
       <div class="card-actions">
-        <button class="btn" onclick="mostrarValor(${i + 1})">${textos[idiomaAtual].verValor}</button>
-        <div id="valor-${i + 1}" class="valor" data-brl="${passeio.valor}">R$ ${String(passeio.valor).replace('.', ',')}</div>
+        <button class="btn btn-outline" type="button" onclick="abrirDetalhes(${i})">${textos[idiomaAtual].verDetalhes}</button>
+        <button class="btn" type="button" onclick="mostrarValor(${i + 1})">${textos[idiomaAtual].verValor}</button>
+        <div id="valor-${i + 1}" class="valor">R$ ${String(passeio.valor).replace('.', ',')}</div>
         <a
-          id="btn-whatsapp-${i + 1}"
           class="btn btn-whatsapp"
           target="_blank"
           rel="noopener noreferrer"
@@ -831,6 +1254,22 @@ function gerarPasseios(){
   atualizarMoeda();
 }
 
+function controlarBotaoWhatsappFooter() {
+  const botao = document.getElementById('whatsapp-float');
+  const footer = document.querySelector('footer');
+
+  if (!botao || !footer) return;
+
+  const footerTop = footer.getBoundingClientRect().top;
+  const windowHeight = window.innerHeight;
+
+  if (footerTop <= windowHeight - 80) {
+    botao.classList.add('hide-on-footer');
+  } else {
+    botao.classList.remove('hide-on-footer');
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const idiomaSalvo = localStorage.getItem('siteLanguage') || 'pt';
   const moedaSalva = localStorage.getItem('siteCurrency') || moedaPorIdioma[idiomaSalvo] || 'BRL';
@@ -838,6 +1277,15 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('moeda').value = moedaSalva;
   atualizarIdioma(idiomaSalvo);
   atualizarMoeda();
+  controlarBotaoWhatsappFooter();
+});
+
+window.addEventListener('scroll', controlarBotaoWhatsappFooter);
+window.addEventListener('resize', controlarBotaoWhatsappFooter);
+window.addEventListener('load', controlarBotaoWhatsappFooter);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') fecharDetalhes();
 });
 </script>
 </head>
@@ -865,6 +1313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="#passeios" class="btn" data-text="verPasseios">Ver Passeios</a>
     <a href="top10/" class="btn" data-text="verTop10">Ver os 10 melhores lugares</a>
     <a href="contato/" class="btn" data-text="contato">Entre em Contato</a>
+    <a href="galeria/" class="btn" data-text="galeria">Galeria</a>
   </div>
 
   <div class="language-currency">
@@ -999,14 +1448,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="footer-logo">
       <a href="https://instagram.com/picosdenoronha" target="_blank">
-      <img src="assets/logo.png" alt="Picos de Noronha">
+        <img src="assets/logo.png" alt="Picos de Noronha">
       </a>
     </div>
 
     <div class="footer-copy">
       <span>© <?php echo date('Y'); ?> Picos de Noronha Turismo - Desenvolvido por</span>
       <a href="https://josdev.com.br" target="_blank">
-      <img src="assets/axion-logo.png" alt="Axion">
+        <img src="assets/axion-logo.png" alt="Axion">
       </a>
     </div>
 
@@ -1039,27 +1488,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <span data-text="whatsappFlutuante">Fale no WhatsApp</span>
 </a>
 
-<script>
-function controlarBotaoWhatsappFooter() {
-  const botao = document.getElementById('whatsapp-float');
-  const footer = document.querySelector('footer');
+<div class="modal-overlay" id="modal-detalhes" onclick="if(event.target === this) fecharDetalhes()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Detalhes do passeio</h3>
+      <button class="modal-close" type="button" onclick="fecharDetalhes()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
 
-  if (!botao || !footer) return;
+    <div class="modal-body" id="modal-body"></div>
 
-  const footerTop = footer.getBoundingClientRect().top;
-  const windowHeight = window.innerHeight;
-
-  if (footerTop <= windowHeight - 80) {
-    botao.classList.add('hide-on-footer');
-  } else {
-    botao.classList.remove('hide-on-footer');
-  }
-}
-
-window.addEventListener('scroll', controlarBotaoWhatsappFooter);
-window.addEventListener('resize', controlarBotaoWhatsappFooter);
-window.addEventListener('load', controlarBotaoWhatsappFooter);
-</script>
+    <div class="modal-body" style="padding-top:0;">
+      <div class="modal-actions">
+        <a id="modal-reservar" href="#" target="_blank" rel="noopener noreferrer" class="btn">Reservar agora</a>
+        <button id="modal-fechar" type="button" class="btn btn-outline" onclick="fecharDetalhes()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,14 @@
+# vídeos grandes
+*.MOV
+*.mov
+*.mp4
+
+# arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# logs
+*.log
